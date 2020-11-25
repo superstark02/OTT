@@ -1,12 +1,12 @@
 import './App.css';
-import video from './Videos/Post.mp4'
+import { theme } from './Theme/Theme';
+import MyAppBar from './Components/MyAppBar'
+
 
 function App() {
   return (
-    <div className="App">
-      <video controls width="100%" >
-        <source src={video} type="video/mp4" />
-      </video>
+    <div style={{backgroundColor:theme.palette.primary.dark, margin:"0px", height:"100vh", color:theme.palette.primary.light}} >
+        <MyAppBar/>
     </div>
   );
 }

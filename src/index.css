@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'mosaic';
+  src: local('mosaic'), url(./Fonts/goodtimes.ttf) format('truetype');
+}
