@@ -16,3 +16,8 @@ code {
   font-family: 'mosaic';
   src: local('mosaic'), url(./Fonts/goodtimes.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'darwin';
+  src: local('darwin'), url(./Fonts/darwin/regular.otf) format('truetype');
+}

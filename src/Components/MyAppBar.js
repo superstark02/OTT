@@ -22,7 +22,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -140,11 +140,10 @@ export default function MyAppBar(props) {
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={handleDrawerOpen}
                         edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
-                        <img alt="search" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABPklEQVRIie3UMUscQBDF8VFORLQSLCOY687SQtLFKlWqtPkEgtemsha5QhArv0GITSwtAl5jcY2lFkkRSAgISRODWNwvRcYgFw93T64JvmZZ9u3838DsRjxqVGEGbXRxgSt8xD5WHlp8FZ/9UQ+72MZb/EAfe5gatfgvnOPZHedzCevjHSZqis9k8jPM3+PdyA7XawDtTPZP8iH+I3xDoxTQRa8i0MvsYm2YZ3Jg34qIk1LALe9yKWA2Ii4rAD9znSsFfI2IpQrA01y/lAI+RMQLDE00oFcRISKOi9xYySnaLvA+wXe8Lwzz9+JeQjbuKX6KazRrAVM4yPE7ylFcwDRa2Mzk1+nZqQIkZALr+YgG1cchmtgZGZKgBp7nt/AGr7E44HkYpDDI1g2k6vOrhNx00hkLICEdfBob4P/Ub5SXe3tnR2ASAAAAAElFTkSuQmCC" />
+                        <img alt="search" src="https://img.icons8.com/fluent-systems-regular/24/000000/search.png"/>
                     </IconButton>
                 </Toolbar>
             </AppBar>

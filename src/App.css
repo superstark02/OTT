@@ -1,6 +1,7 @@
 body, html{
   margin: 0px;
   padding: 0px;
+  font-family: darwin;
 }
 
 .wrap{
@@ -8,4 +9,10 @@ body, html{
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.h7{
+  font-size: 15px;
+  padding: 0px 20px;
+  font-weight: 700;
 }
