@@ -17,14 +17,14 @@ export class MyList extends Component {
                 <div className="list-container" >
                     <div className="list-item wrap" >
                         <ButtonBase style={{ height: "100%" }}>
-                            <Link style={{ height: "100%" }}  >
+                            <Link  style={{ height: "100%" }}  >
                                 <img height="100%" width="100%" src={v} alt="i" />
                             </Link>
                         </ButtonBase>
                     </div>
                     <div className="list-item wrap" >
                         <ButtonBase style={{ height: "100%" }}>
-                            <Link style={{ height: "100%" }} >
+                            <Link to="/display" style={{ height: "100%" }} >
                                 <img height="100%" width="100%" src={mf} alt="i" />
                             </Link>
                         </ButtonBase>
