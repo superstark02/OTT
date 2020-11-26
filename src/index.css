@@ -21,3 +21,13 @@ code {
   font-family: 'darwin';
   src: local('darwin'), url(./Fonts/darwin/regular.otf) format('truetype');
 }
+
+@font-face {
+  font-family: 'din';
+  src: local('din'), url(./Fonts/din/din.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'karla';
+  src: local('karla'), url(./Fonts/karla/Karla-Regular.ttf) format('truetype');
+}
