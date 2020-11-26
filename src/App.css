@@ -4,6 +4,10 @@ body, html{
   font-family: darwin;
 }
 
+div{
+  font-family: darwin;
+}
+
 .wrap{
   display: flex;
   justify-content: center;
@@ -15,4 +19,5 @@ body, html{
   font-size: 15px;
   padding: 0px 20px;
   font-weight: 700;
+  font-family: darwin;
 }

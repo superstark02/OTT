@@ -4,12 +4,12 @@ import v from "../Images/MyList/vikings.jpg"
 import mf from "../Images/MyList/mf.jpg"
 import f from "../Images/MyList/flash.jpg"
 
-export class MyList extends Component {
+export class Popular extends Component {
     render() {
         return (
             <div>
                 <div className="h7" >
-                    My List
+                    Popular
                 </div>
 
                 <div className="list-container" >
@@ -28,4 +28,4 @@ export class MyList extends Component {
     }
 }
 
-export default MyList
+export default Popular
