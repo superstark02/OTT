@@ -1,77 +1,160 @@
 import React, { Component } from 'react'
-import mfc from "../Images/Cover/mfc.jpg"
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
 import { IconButton } from '@material-ui/core'
-import { PlayArrowRounded } from '@material-ui/icons'
-import ss1 from "../Images/SS/ss1.jpg"
-import ss2 from "../Images/SS/ss2.jpg"
-import ss3 from "../Images/SS/ss3.jpg"
+import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
+import getShow from '../Database/getShow'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
+import getSubCollection from '../Database/getSubCollection'
 
 export class Display extends Component {
+
+    state = {
+        mute: true,
+        cover: true,
+        show: null,
+        related: null
+    }
+
+    findRelated = (industry, platform, genre) => {
+        getSubCollection(industry, platform, genre).then(snap => {
+            this.setState({ related: snap })
+        })
+    }
+
+    componentDidMount() {
+        getShow(this.props.match.params.industry,
+            this.props.match.params.platform,
+            this.props.match.params.genre,
+            this.props.match.params.id).then(snap => {
+                this.setState({ show: snap })
+                this.findRelated(snap.industry, snap.platform, snap.genre);
+            })
+
+    }
+
+    handleMute = () => {
+        if (this.state.mute) {
+            this.setState({ mute: false })
+        }
+        else {
+            this.setState({ mute: true })
+        }
+    }
+
     render() {
         return (
-            <div style={{ color: theme.palette.primary.light}} >
-                <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
-                    <img width="110%" className="cover-image" src={mfc} alt="i" />
-                </div>
-                <div className="wrap" style={{ marginBottom: "30px" }} >
-                    <div className="wrap play-button" >
-                        <IconButton>
-                            <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
-                        </IconButton>
-                    </div>
-                </div>
-                <div className="display-name wrap" >
-                    MODERN FAMILY
-                </div>
-                <div className="wrap display-type" >
-                    Drama, Comedy, Family
-                </div>
+            <div style={{ color: theme.palette.primary.light }} >
+                {
+                    this.state.show ? (
+                        <div>
+                            <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
+                                <div className="mute">
+                                    <IconButton onClick={() => { console.log("Click") }} >
+                                        <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
+                                    </IconButton>
+                                    {
+                                        this.state.mute ? (
+                                            <IconButton onClick={this.handleMute} >
+                                                <VolumeMuteRounded style={{ color: "white", fontSize: "20px" }} />
+                                            </IconButton>
+                                        ) : (
+                                                <IconButton onClick={this.handleMute} >
+                                                    <VolumeUpRounded style={{ color: "white", fontSize: "20px" }} />
+                                                </IconButton>
+                                            )
+                                    }
+                                </div>
 
-                <div className="wrap" style={{ flexWrap: "nowrap", margin: "20px 0px" }} >
-                    <div style={{ margin: "0px 20px" }} >
-                        <div className="display-type wrap" >
-                            Year
-                        </div>
-                        <div className="wrap" >
-                            2018
-                        </div>
-                    </div>
-                    <div style={{ margin: "0px 20px" }}  >
-                        <div className="display-type wrap" >
-                            Country
-                        </div>
-                        <div className="wrap" >
-                            USA
-                        </div>
-                    </div>
-                    <div style={{ margin: "0px 20px" }}  >
-                        <div className="display-type wrap" >
-                            Length
-                        </div>
-                        <div className="wrap" >
-                            112 min
-                        </div>
-                    </div>
-                </div>
+                                <video
+                                    autoPlay
+                                    loop={false}
+                                    muted={this.state.mute}
+                                    className="cover-image">
+                                    <source src={this.state.show.trailer} className="cover-image" />
+                                </video>
+                            </div>
+                            <div className="wrap" style={{ marginBottom: "30px" }} >
+                                <div className="wrap play-button" >
+                                    <IconButton>
+                                        <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
+                                    </IconButton>
+                                </div>
+                            </div>
 
-                <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
-                    Modern Family is an American television mockumentary family sitcom created by Christopher Lloyd and Steven Levitan for the American Broadcasting Company. It ran for eleven seasons, from September 23, 2009, to April 8, 2020. It follows the lives of three diverse family set-ups in suburban Los Angeles, linked by patriarch Jay Pritchett.
-                    <br />
-                    Christopher Lloyd and Steven Levitan conceived the series while sharing stories of their own "modern families". Modern Family employs an ensemble cast and is presented in mockumentary style, with the characters frequently speaking directly to the camera in confessional interview segments.
-                </div>
+                            <div className="display-name wrap" >
+                                {this.state.show.name}
+                            </div>
+                            <div className="wrap display-type" >
+                                {this.state.show.keywords}
+                            </div>
 
-                <div>
-                    <div className="h7" >
-                        Screenshots
-                   </div>
-                    <div className="ss-container" >
-                        <img src={ss1} className="ss" alt="i" />
-                        <img src={ss2} className="ss" alt="i" />
-                        <img src={ss3} className="ss" alt="i" />
-                    </div>
-                </div>
+                            <div className="wrap" style={{ flexWrap: "nowrap", margin: "20px 0px" }} >
+                                <div style={{ margin: "0px 20px" }} >
+                                    <div className="display-type wrap" >
+                                        Year
+                                    </div>
+                                    <div className="wrap" >
+                                        {this.state.show.year}
+                                    </div>
+                                </div>
+                                <div style={{ margin: "0px 20px" }}  >
+                                    <div className="display-type wrap" >
+                                        Country
+                                    </div>
+                                    <div className="wrap" >
+                                        {this.state.show.country}
+                                    </div>
+                                </div>
+                                <div style={{ margin: "0px 20px" }}  >
+                                    <div className="display-type wrap" >
+                                        Length
+                                    </div>
+                                    <div className="wrap" >
+                                        {this.state.show.leng} mins
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
+                                {this.state.show.description}
+                            </div>
+
+                            {
+                                this.state.related ? (
+                                    <div>
+                                        <div className="h7" >
+                                            Related
+                                        </div>
+                                        <div className="ss-container" >
+                                            {
+                                                this.state.related.map(item => {
+                                                    return (
+                                                        <img src={item.poster} className="ss" alt="i" />
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
+                        </div>
+                    ) : (
+                            <div className="wrap" style={{ minHeight: "100vh" }} >
+                                <Loader
+                                    type="Audio"
+                                    color="#212121"
+                                    height={50}
+                                    width={50}
+                                    timeout={3000} //3 secs
+
+                                />
+                            </div>
+                        )
+                }
             </div>
         )
     }

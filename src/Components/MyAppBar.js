@@ -17,10 +17,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
+import { FavoriteBorderRounded, FolderSpecialRounded, InfoRounded, QuestionAnswerRounded, VerifiedUserRounded } from '@material-ui/icons';
+import StarRoundedIcon from '@material-ui/icons/StarRounded';
+import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
 
 const drawerWidth = 200;
 
@@ -163,19 +164,21 @@ export default function MyAppBar(props) {
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        {[{name:'SignIn', icon: <VerifiedUserRounded/> }, {name: 'Favourites', icon:<FavoriteBorderRounded/>}, 
+                            {name:'Premium', icon:<StarRoundedIcon/>},{name: "Trending", icon:<FaBolt/>}, {name:'Channels', icon:<FolderSpecialRounded/>},
+                             {name:'Genres', icon: <FaTheaterMasks size="20px" />}].map((text, index) => (
                             <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
+                                <ListItemIcon>{text.icon}</ListItemIcon>
+                                <ListItemText primary={text.name} />
                             </ListItem>
                         ))}
                     </List>
                     <Divider />
                     <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        {[{name:'About', icon:<InfoRounded/>}, {name:'Help', icon:<QuestionAnswerRounded/>}].map((text, index) => (
                             <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
+                                <ListItemIcon>{text.icon}</ListItemIcon>
+                                <ListItemText primary={text.name} />
                             </ListItem>
                         ))}
                     </List>

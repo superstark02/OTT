@@ -24,7 +24,7 @@ export class MyList extends Component {
                     </div>
                     <div className="list-item wrap" >
                         <ButtonBase style={{ height: "100%" }}>
-                            <Link to="/display" style={{ height: "100%" }} >
+                            <Link to="/display/Hollywood/TV/Family/modernfamily" style={{ height: "100%" }} >
                                 <img height="100%" width="100%" src={mf} alt="i" />
                             </Link>
                         </ButtonBase>
