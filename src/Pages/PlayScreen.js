@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
+import "../CSS/Pages/PlayScreen.css"
 import { IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
 import getShow from '../Database/getShow'
@@ -8,16 +9,17 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
-import { Link } from 'react-router-dom'
+import getEpisode from '../Database/getEpisode'
 
-export class Display extends Component {
+export class PlayScreen extends Component {
 
     state = {
         mute: true,
         cover: true,
         show: null,
         related: null,
-        seasons:null
+        seasons: null,
+        episode: null,
     }
 
     findRelated = (industry, platform, genre) => {
@@ -27,9 +29,9 @@ export class Display extends Component {
     }
 
     getSeason = (industry, platform, genre, id) => {
-       getSeasons(industry, platform, genre, id).then(snap=>{
-           this.setState({seasons:snap})
-       })
+        getSeasons(industry, platform, genre, id).then(snap => {
+            this.setState({ seasons: snap })
+        })
     }
 
     componentDidMount() {
@@ -39,11 +41,20 @@ export class Display extends Component {
             this.props.match.params.id).then(snap => {
                 this.setState({ show: snap })
                 this.findRelated(snap.industry, snap.platform, snap.genre);
-                if(snap.season){
+                if (snap.season) {
                     this.getSeason(snap.industry, snap.platform, snap.genre, snap.id)
                 }
             })
-
+        
+        getEpisode(this.props.match.params.industry,
+            this.props.match.params.platform,
+            this.props.match.params.genre,
+            this.props.match.params.id, 
+            this.props.match.params.season, 
+            this.props.match.params.episode).then(snap=>{
+                this.setState({episode:snap})
+            })
+        
     }
 
     handleMute = () => {
@@ -59,80 +70,41 @@ export class Display extends Component {
         return (
             <div style={{ color: theme.palette.primary.light }} >
                 {
-                    this.state.show ? (
+                    this.state.show && this.state.episode ? (
                         <div>
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
                                     <IconButton onClick={() => { console.log("Click") }} >
                                         <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
                                     </IconButton>
-                                    {
-                                        this.state.mute ? (
-                                            <IconButton onClick={this.handleMute} >
-                                                <VolumeMuteRounded style={{ color: "white", fontSize: "20px" }} />
-                                            </IconButton>
-                                        ) : (
-                                                <IconButton onClick={this.handleMute} >
-                                                    <VolumeUpRounded style={{ color: "white", fontSize: "20px" }} />
-                                                </IconButton>
-                                            )
-                                    }
                                 </div>
 
                                 <video
                                     autoPlay
                                     loop={false}
-                                    muted={this.state.mute}
-                                    className="cover-image">
-                                    <source src={this.state.show.trailer} className="cover-image" />
+                                    className="player"
+                                    controls
+                                >
+                                    <source src={this.state.episode.content} className="player" />
                                 </video>
                             </div>
-                            <div className="wrap" style={{ marginBottom: "30px" }} >
-                                <div className="wrap play-button" >
-                                    <Link to={"/play/"+this.state.show.industry+"/"+this.state.show.platform+"/"+this.state.show.genre+"/"+this.state.show.id+"/Season-1/episode-1"} >
-                                        <IconButton>
-                                            <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
-                                        </IconButton>
-                                    </Link>
-                                </div>
-                            </div>
 
-                            <div className="display-name wrap" >
-                                {this.state.show.name}
-                            </div>
-                            <div className="wrap display-type" >
-                                {this.state.show.keywords}
-                            </div>
+                            <div style={{ display: "flex", padding: "0px 10px", marginBottom:"20px" }} >
+                                <div>
+                                    <img src={this.state.show.poster} width="80px" style={{borderRadius:"5px", marginRight:'10px'}} />
+                                </div>
 
-                            <div className="wrap" style={{ flexWrap: "nowrap", margin: "20px 0px" }} >
-                                <div style={{ margin: "0px 20px" }} >
-                                    <div className="display-type wrap" >
-                                        Year
+                                <div>
+                                    <div className="display-name" style={{marginBottom:"0px"}} >
+                                        {this.state.show.name}
                                     </div>
-                                    <div className="wrap" >
-                                        {this.state.show.year}
+                                    <div className="display-type" >
+                                        {this.state.number} {this.state.episode.date}
                                     </div>
-                                </div>
-                                <div style={{ margin: "0px 20px" }}  >
-                                    <div className="display-type wrap" >
-                                        Country
-                                    </div>
-                                    <div className="wrap" >
-                                        {this.state.show.country}
+                                    <div className="display-type" >
+                                        {this.state.show.keywords}
                                     </div>
                                 </div>
-                                <div style={{ margin: "0px 20px" }}  >
-                                    <div className="display-type wrap" >
-                                        Length
-                                    </div>
-                                    <div className="wrap" >
-                                        {this.state.show.leng}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
-                                {this.state.show.description}
                             </div>
 
                             {
@@ -145,17 +117,15 @@ export class Display extends Component {
                                             {
                                                 this.state.seasons.map(item => {
                                                     return (
-                                                        <Link to={"/play/"+this.state.show.industry+"/"+this.state.show.platform+"/"+this.state.show.genre+"/"+this.state.show.id+"/Season-1/"+item.id} >
-                                                            <img src={item.image} className="ss" alt="i" />
-                                                        </Link>
+                                                        <img src={item.image} className="ss" alt="i" />
                                                     )
                                                 })
                                             }
                                         </div>
                                     </div>
                                 ) : (
-                                    <div></div>
-                                )
+                                        <div></div>
+                                    )
                             }
 
                             {
@@ -175,8 +145,8 @@ export class Display extends Component {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div></div>
-                                )
+                                        <div></div>
+                                    )
                             }
                         </div>
                     ) : (
@@ -197,4 +167,4 @@ export class Display extends Component {
     }
 }
 
-export default Display
+export default PlayScreen

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import MyAppBar from '../Components/MyAppBar'
 import Carousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
-import MyList from '../Components/MyList';
 import Popular from '../Components/Popular';
 //import { uploadData } from '../Database/uploadData';
 import HollywoodMovies from '../Components/HollywoodMovies';
 import TV from '../Components/tv';
+import WebSeries from '../Components/WebSeries';
 
 export class Home extends Component {
     constructor(){
@@ -21,6 +21,7 @@ export class Home extends Component {
                 <Categories />
                 <Popular />
                 <TV/>
+                <WebSeries />
                 <HollywoodMovies />
             </div>
         )

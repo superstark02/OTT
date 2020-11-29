@@ -4,19 +4,19 @@ export function uploadData() {
 
     var data = [
         {
-            name: "Extraction",
-            year: "2020",
-            keywords: "Action/Thriller",
-            leng: "1h 57m",
-            platform: "Movie",
-            industry: "Hollywood",
+            name: "TVF Tripling",
+            year: "2016",
+            keywords: "Drama",
+            leng: "2 seasons",
+            platform: "Web",
+            industry: "Bollywood",
             genre: "Family",
-            id: "extraction",
-            country: "USA",
-            on:"Netflix",
-            description:"A black-market mercenary who has nothing to lose is hired to rescue the kidnapped son of an imprisoned international crime lord. But in the murky underworld of weapons dealers and drug traffickers, an already deadly mission approaches the impossible.",
-            trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FMovies%2FExtraction%2FExtraction%20_%20Official%20Trailer%20_%20Screenplay%20by%20JOE%20RUSSO%20Directed%20by%20SAM%20HARGRAVE%20_%20Netflix.mp4?alt=media&token=9ab5c396-feda-4deb-9f97-a6ece0e15cfe",
-            poster:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRELEr5bWH1Z9ZlYjofDbRoW0ToFJop6YlcJuVU8lAYt2peph_n"
+            id: "tvftripling",
+            country: "India",
+            on:"TVF Play",
+            description:"TVF Tripling is an Indian web series created by The Viral Fever. It traces the story of three siblings Chandan, Chanchal & Chitvan. Together they start a hilarious journey, to find themselves and their relations. The season 2 of the web series came out on TVF PLAY and Sony Liv on 5 April 2019",
+            trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FWeb%2Ftvftripplingseason1%2FTVF%20Tripling%20Season%202%20_%20Official%20Trailer%20_%20All%20episodes%20streaming%20April%205th%20on%20TVFPLAY%20%26%20SONYLIV.mp4?alt=media&token=6d0cf995-3345-4940-9c29-2b295adf6f29",
+            poster:"https://pbs.twimg.com/media/D3XbccgXsAAcB9s.jpg"
         },
     ]
 
