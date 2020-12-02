@@ -9,6 +9,15 @@ import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
 import { Link } from 'react-router-dom'
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export class Display extends Component {
 
@@ -17,7 +26,9 @@ export class Display extends Component {
         cover: true,
         show: null,
         related: null,
-        seasons:null
+        seasons: null,
+        link: null,
+        open: null,
     }
 
     findRelated = (industry, platform, genre) => {
@@ -27,9 +38,9 @@ export class Display extends Component {
     }
 
     getSeason = (industry, platform, genre, id) => {
-       getSeasons(industry, platform, genre, id).then(snap=>{
-           this.setState({seasons:snap})
-       })
+        getSeasons(industry, platform, genre, id).then(snap => {
+            this.setState({ seasons: snap })
+        })
     }
 
     componentDidMount() {
@@ -39,8 +50,16 @@ export class Display extends Component {
             this.props.match.params.id).then(snap => {
                 this.setState({ show: snap })
                 this.findRelated(snap.industry, snap.platform, snap.genre);
-                if(snap.season){
+                if (snap.season) {
                     this.getSeason(snap.industry, snap.platform, snap.genre, snap.id)
+                }
+                if (snap.premium) {
+                    //check if bought
+                    //checkPaymnet(snap.id, series).then(result=>{if(result){setState({link:}; else{setState({link:pay} )})}})
+                    //if yes: link to episode.
+
+                    //if no: link to payment page.
+                    this.setState({ open: true })
                 }
             })
 
@@ -53,6 +72,10 @@ export class Display extends Component {
         else {
             this.setState({ mute: true })
         }
+    }
+
+    handleClose = () => {
+        this.setState({ open: false })
     }
 
     render() {
@@ -81,6 +104,7 @@ export class Display extends Component {
 
                                 <video
                                     autoPlay
+                                    //controls controlsList="nodownload"
                                     loop={false}
                                     muted={this.state.mute}
                                     className="cover-image">
@@ -90,7 +114,7 @@ export class Display extends Component {
                             <div className="wrap" style={{ marginBottom: "30px" }} >
                                 <div className="wrap play-button" >
                                     <Link to={"/play/"+this.state.show.industry+"/"+this.state.show.platform+"/"+this.state.show.genre+"/"+this.state.show.id+"/Season-1/episode-1"} >
-                                        <IconButton>
+                                        <IconButton >
                                             <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
                                         </IconButton>
                                     </Link>
@@ -145,7 +169,7 @@ export class Display extends Component {
                                             {
                                                 this.state.seasons.map(item => {
                                                     return (
-                                                        <Link to={"/play/"+this.state.show.industry+"/"+this.state.show.platform+"/"+this.state.show.genre+"/"+this.state.show.id+"/Season-1/"+item.id} >
+                                                        <Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/" + item.id} >
                                                             <img src={item.image} className="ss" alt="i" />
                                                         </Link>
                                                     )
@@ -154,8 +178,8 @@ export class Display extends Component {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div></div>
-                                )
+                                        <div></div>
+                                    )
                             }
 
                             {
@@ -175,8 +199,8 @@ export class Display extends Component {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div></div>
-                                )
+                                        <div></div>
+                                    )
                             }
                         </div>
                     ) : (
@@ -192,6 +216,30 @@ export class Display extends Component {
                             </div>
                         )
                 }
+
+                <Dialog fullScreen open={this.state.open} TransitionComponent={Transition} style={{ marginTop: "30%", boxShadow: "0px -10px 20px rgba(0,0,0,0.5)", backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light }} >
+                    <AppBar position="relative" elevation={0} style={{ backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light }} >
+                        <Toolbar>
+                            <IconButton edge="start" color="inherit" onClick={this.handleClose} aria-label="close">
+                                <CloseIcon />
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                    {
+                        this.state.show ? (
+                            <div>
+                                <div className="wrap" >
+                                    <img alt="poster" className="ss" src={this.state.show.poster} />
+                                </div>
+                                <div>
+                                    Subscribe to watch
+                                </div>
+                            </div>
+                        ) : (
+                                <div></div>
+                            )
+                    }
+                </Dialog>
             </div>
         )
     }

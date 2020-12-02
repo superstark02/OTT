@@ -22,6 +22,7 @@ import { theme as color } from '../Theme/Theme';
 import { FavoriteBorderRounded, FolderSpecialRounded, InfoRounded, QuestionAnswerRounded, VerifiedUserRounded } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
+import SearchIcon from '@material-ui/icons/Search';
 
 const drawerWidth = 200;
 
@@ -123,7 +124,7 @@ export default function MyAppBar(props) {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
-                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light,padding:"0px 10px" }}
+                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light,padding:"0px 10px", paddingTop:"10px" }}
             >
                 <Toolbar>
                     <IconButton
@@ -144,7 +145,7 @@ export default function MyAppBar(props) {
                         edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
-                        <img alt="search" src="https://img.icons8.com/fluent-systems-regular/24/000000/search.png"/>
+                        <SearchIcon />
                     </IconButton>
                 </Toolbar>
             </AppBar>

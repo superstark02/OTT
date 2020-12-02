@@ -1,8 +1,6 @@
 .cover-image{
-    border-bottom-left-radius: 50vw 20%;
-    border-bottom-right-radius: 50vw 20%;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-    width: 110%;
+    width: 100%;
 }
 
 .display-name{
@@ -55,4 +53,5 @@
     justify-content: space-between;
     width: 100%;
     background-image: linear-gradient(black, transparent);
+    padding-top: 20px;
 }
