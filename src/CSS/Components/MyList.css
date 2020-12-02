@@ -13,6 +13,23 @@
     overflow: hidden;
     border-radius: 10px;
     display: inline-block;
-    margin-right: 20px;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5) ;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo{
+    width: fit-content;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.app-logo{
+    border-radius: 5px;
+}
+
+.rate{
+    color: rgb(197,194,197);
 }

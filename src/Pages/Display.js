@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
-import { IconButton } from '@material-ui/core'
+import "../CSS/Components/MyList.css"
+import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
 import getShow from '../Database/getShow'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -59,7 +60,8 @@ export class Display extends Component {
                     //if yes: link to episode.
 
                     //if no: link to payment page.
-                    this.setState({ open: true })
+                    //this.setState({ open: true })
+                    //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
             })
 
@@ -86,9 +88,11 @@ export class Display extends Component {
                         <div>
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
-                                    <IconButton onClick={() => { console.log("Click") }} >
-                                        <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
-                                    </IconButton>
+                                    <Link to="/" >
+                                        <IconButton >
+                                            <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
+                                        </IconButton>
+                                    </Link>
                                     {
                                         this.state.mute ? (
                                             <IconButton onClick={this.handleMute} >
@@ -113,8 +117,8 @@ export class Display extends Component {
                             </div>
                             <div className="wrap" style={{ marginBottom: "30px" }} >
                                 <div className="wrap play-button" >
-                                    <Link to={"/play/"+this.state.show.industry+"/"+this.state.show.platform+"/"+this.state.show.genre+"/"+this.state.show.id+"/Season-1/episode-1"} >
-                                        <IconButton >
+                                    <Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
+                                        <IconButton>
                                             <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
                                         </IconButton>
                                     </Link>
@@ -129,7 +133,7 @@ export class Display extends Component {
                             </div>
 
                             <div className="wrap" style={{ flexWrap: "nowrap", margin: "20px 0px" }} >
-                                <div style={{ margin: "0px 20px" }} >
+                                <div style={{ margin: "0px 20px", width: "33%" }} >
                                     <div className="display-type wrap" >
                                         Year
                                     </div>
@@ -137,15 +141,17 @@ export class Display extends Component {
                                         {this.state.show.year}
                                     </div>
                                 </div>
-                                <div style={{ margin: "0px 20px" }}  >
-                                    <div className="display-type wrap" >
-                                        Country
-                                    </div>
-                                    <div className="wrap" >
-                                        {this.state.show.country}
+                                <div className="wrap" style={{ margin: "0px 20px", width: "33%" }}  >
+                                    <div>
+                                        <div className="display-type wrap" >
+                                            Country
+                                        </div>
+                                        <div className="wrap" >
+                                            {this.state.show.country}
+                                        </div>
                                     </div>
                                 </div>
-                                <div style={{ margin: "0px 20px" }}  >
+                                <div style={{ margin: "0px 20px", width: "33%" }}  >
                                     <div className="display-type wrap" >
                                         Length
                                     </div>
@@ -154,6 +160,25 @@ export class Display extends Component {
                                     </div>
                                 </div>
                             </div>
+
+                            <div>
+                                <div className="display-type wrap" >
+                                    A Product Of
+                                </div>
+                                <div className="wrap" >
+                                    <img alt="app" src={this.state.show.app} width="30px" style={{ marginRight: "10px", borderRadius: "5px" }} />
+                                    {this.state.show.appName}
+                                </div>
+                            </div>
+
+                            {/*<div className="wrap" style={{ margin: "20px 0px" }} >
+                                <ButtonBase>
+                                    <div className="rent-button">
+                                        <div className="wrap display-type" style={{ color: "white" }} >Rent</div>
+                                        <div className="wrap " >&#8377;20 /month</div>
+                                    </div>
+                                </ButtonBase>
+                            </div>*/}
 
                             <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
                                 {this.state.show.description}
@@ -192,7 +217,14 @@ export class Display extends Component {
                                             {
                                                 this.state.related.map(item => {
                                                     return (
-                                                        <img src={item.poster} className="ss" alt="i" />
+                                                        <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
+                                                            <a href={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
+                                                                style={{ height: "100%" }}  >
+                                                                <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
+
+                                                                </div>
+                                                            </a>
+                                                        </ButtonBase>
                                                     )
                                                 })
                                             }
@@ -228,12 +260,40 @@ export class Display extends Component {
                     {
                         this.state.show ? (
                             <div>
-                                <div className="wrap" >
-                                    <img alt="poster" className="ss" src={this.state.show.poster} />
-                                </div>
                                 <div>
-                                    Subscribe to watch
+                                    <div className="wrap" >
+                                        <div className="list-item wrap" style={{ backgroundImage: "url(" + this.state.show.poster + ")", margin: '15px' }} >
+
+                                        </div>
+                                    </div>
+                                    <div >
+                                        <div>
+                                            <div className="wrap" >
+                                                <div style={{ marginRight: "10px" }} >
+                                                    <img className="app-logo" alt="logo" src={this.state.show.app} width="30px" />
+                                                </div>
+                                                <div>
+                                                    {this.state.show.appName}
+                                                </div>
+                                            </div>
+                                            <div className="wrap" style={{ margin: "20px 0px" }} >
+                                                <ButtonBase>
+                                                    <div className="rent-button">
+                                                        <div className="wrap display-type" style={{ color: "white" }} >Rent</div>
+                                                        <div className="wrap " >&#8377;20 /month</div>
+                                                    </div>
+                                                </ButtonBase>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div className="wrap display-type" style={{ textAlign: "center", marginBottom: "20px" }} >
+                                    Why buy expensive yearly or monthly packages and subscriptions. When you can rent for less?
+                                </div>
+                                <div className="h7" >
+                                    Recommended Plans
+                                </div>
+
                             </div>
                         ) : (
                                 <div></div>

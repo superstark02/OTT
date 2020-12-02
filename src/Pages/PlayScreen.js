@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
 import "../CSS/Pages/PlayScreen.css"
-import { IconButton } from '@material-ui/core'
+import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded } from '@material-ui/icons'
 import getShow from '../Database/getShow'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -152,7 +152,14 @@ export class PlayScreen extends Component {
                                             {
                                                 this.state.related.map(item => {
                                                     return (
-                                                        <img src={item.poster} className="ss" alt="i" />
+                                                        <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
+                                                            <a href={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
+                                                                style={{ height: "100%" }}  >
+                                                                <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
+
+                                                                </div>
+                                                            </a>
+                                                        </ButtonBase>
                                                     )
                                                 })
                                             }

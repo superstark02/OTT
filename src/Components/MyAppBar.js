@@ -19,7 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
-import { FavoriteBorderRounded, FolderSpecialRounded, InfoRounded, QuestionAnswerRounded, VerifiedUserRounded } from '@material-ui/icons';
+import { FolderSpecialRounded, InfoRounded, } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
 import SearchIcon from '@material-ui/icons/Search';
@@ -124,7 +124,7 @@ export default function MyAppBar(props) {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
-                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light,padding:"0px 10px", paddingTop:"10px" }}
+                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light,padding:"0px 10px"}}
             >
                 <Toolbar>
                     <IconButton
@@ -165,7 +165,7 @@ export default function MyAppBar(props) {
                     </div>
                     <Divider />
                     <List>
-                        {[{name:'SignIn', icon: <VerifiedUserRounded/> }, {name: 'Favourites', icon:<FavoriteBorderRounded/>}, 
+                        {[
                             {name:'Premium', icon:<StarRoundedIcon/>},{name: "Trending", icon:<FaBolt/>}, {name:'Channels', icon:<FolderSpecialRounded/>},
                              {name:'Genres', icon: <FaTheaterMasks size="20px" />}].map((text, index) => (
                             <ListItem button key={text}>
@@ -176,7 +176,7 @@ export default function MyAppBar(props) {
                     </List>
                     <Divider />
                     <List>
-                        {[{name:'About', icon:<InfoRounded/>}, {name:'Help', icon:<QuestionAnswerRounded/>}].map((text, index) => (
+                        {[{name:'About', icon:<InfoRounded/>}].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{text.icon}</ListItemIcon>
                                 <ListItemText primary={text.name} />

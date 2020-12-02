@@ -9,9 +9,9 @@ export class TV extends Component {
         data: null
     }
 
-    componentDidMount(){
+    componentDidMount() {
         getSubCollection("Hollywood", "TV", "Family").then(snap => {
-            this.setState({data:snap})
+            this.setState({ data: snap })
         });
     }
 
@@ -22,20 +22,36 @@ export class TV extends Component {
                     this.state.data ? (
                         <div>
                             <div className="h7" >
-                                TV Series 
+                                TV Series
                             </div>
 
                             <div className="list-container" >
                                 {
                                     this.state.data.map(item => {
                                         return (
-                                            <div className="list-item wrap" >
-                                                <ButtonBase style={{ height: "100%" }}>
-                                                    <Link to={"/display/"+item.industry+"/"+item.platform+"/"+item.genre+"/"+item.id} 
-                                                    style={{ height: "100%" }}  >
-                                                        <img height="100%" width="100%" src={item.poster} alt="i" />
+                                            <div style={{ display: "inline-block" }} >
+
+                                                <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
+                                                    <Link to={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
+                                                        style={{ height: "100%" }}  >
+                                                        <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
+
+                                                        </div>
                                                     </Link>
                                                 </ButtonBase>
+                                                <div style={{ margin: "10px 0px", display: "flex" }} >
+                                                    <div>
+                                                        <img src={item.app} className="app-logo" alt="app" width="30px" />
+                                                    </div>
+                                                    <div style={{ marginLeft: "5px" }} >
+                                                        <div>
+                                                            {item.name}
+                                                        </div>
+                                                        <div style={{ fontSize: "10px" }} className="rate" >
+                                                            {item.year}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         )
                                     })
