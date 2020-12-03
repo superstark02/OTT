@@ -4,6 +4,7 @@ import { ButtonBase } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import getSubCollection from '../Database/getSubCollection'
 
+
 export class TV extends Component {
     state = {
         data: null
@@ -12,6 +13,7 @@ export class TV extends Component {
     componentDidMount() {
         getSubCollection("Hollywood", "TV", "Family").then(snap => {
             this.setState({ data: snap })
+            
         });
     }
 
@@ -39,7 +41,7 @@ export class TV extends Component {
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>
-                                                <div style={{ margin: "10px 0px", display: "flex" }} >
+                                                {/*<div style={{ margin: "10px 0px", display: "flex" }} >
                                                     <div>
                                                         <img src={item.app} className="app-logo" alt="app" width="30px" />
                                                     </div>
@@ -51,7 +53,7 @@ export class TV extends Component {
                                                             {item.year}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         )
                                     })

@@ -23,6 +23,7 @@ import { FolderSpecialRounded, InfoRounded, } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 200;
 
@@ -124,7 +125,7 @@ export default function MyAppBar(props) {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
-                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light,padding:"0px 10px"}}
+                style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light, padding: "0px 10px" }}
             >
                 <Toolbar>
                     <IconButton
@@ -136,55 +137,59 @@ export default function MyAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap className="wrap" style={{fontFamily: "mosaic"}} >
+                    <Typography variant="h6" noWrap className="wrap" style={{ fontFamily: "mosaic" }} >
                         MOSAIC
                     </Typography>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <SearchIcon />
-                    </IconButton>
+
+                    <Link to="/search" style={{color:"inherit"}} >
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <SearchIcon />
+                        </IconButton>
+                    </Link>
+
                 </Toolbar>
             </AppBar>
-                <Drawer
-                    className={classes.drawer}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                >
-                    <div className={classes.drawerHeader}>
-                        <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>
-                        {[
-                            {name:'Premium', icon:<StarRoundedIcon/>},{name: "Trending", icon:<FaBolt/>}, {name:'Channels', icon:<FolderSpecialRounded/>},
-                             {name:'Genres', icon: <FaTheaterMasks size="20px" />}].map((text, index) => (
+            <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+                <List>
+                    {[
+                        { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
+                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{text.icon}</ListItemIcon>
                                 <ListItemText primary={text.name} />
                             </ListItem>
                         ))}
-                    </List>
-                    <Divider />
-                    <List>
-                        {[{name:'About', icon:<InfoRounded/>}].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{text.icon}</ListItemIcon>
-                                <ListItemText primary={text.name} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Drawer>
-                <Toolbar />
+                </List>
+                <Divider />
+                <List>
+                    {[{ name: 'About', icon: <InfoRounded /> }].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{text.icon}</ListItemIcon>
+                            <ListItemText primary={text.name} />
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
+            <Toolbar />
         </React.Fragment>
     );
 }

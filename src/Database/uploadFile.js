@@ -11,6 +11,7 @@ export function uploadFile(industry, platform, id, files) {
                 ref.child(industry+"/"+platform+"/"+id+"/"+files[i].name).put(files[i])
                 .then(snap=>{
                     console.log("Uploaded")
+                    console.log(snap)
                     resolve(1);
                 }).catch(err=>{
                     console.log(err)

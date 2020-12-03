@@ -55,7 +55,6 @@ export class PlayScreen extends Component {
             this.props.match.params.episode).then(snap => {
                 this.setState({ episode: snap })
             })
-
     }
 
     handleMute = () => {

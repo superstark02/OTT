@@ -161,7 +161,7 @@ export class Display extends Component {
                                 </div>
                             </div>
 
-                            <div>
+                            {/*<div>
                                 <div className="display-type wrap" >
                                     A Product Of
                                 </div>
@@ -169,7 +169,7 @@ export class Display extends Component {
                                     <img alt="app" src={this.state.show.app} width="30px" style={{ marginRight: "10px", borderRadius: "5px" }} />
                                     {this.state.show.appName}
                                 </div>
-                            </div>
+                            </div>*/}
 
                             {/*<div className="wrap" style={{ margin: "20px 0px" }} >
                                 <ButtonBase>

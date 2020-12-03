@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Display from './Pages/Display';
 import FileUpload from './Pages/FileUpload';
 import PlayScreen from './Pages/PlayScreen';
+import SearchPage from './Pages/SearchPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path='/play/:industry/:platform/:genre/:id/:season/:episode' component={PlayScreen} />
 
             <Route exact path='/fileUpload' component={FileUpload} />
+            <Route exact path='/search' component={SearchPage} />
           </Switch>
       </Router>
     </div>

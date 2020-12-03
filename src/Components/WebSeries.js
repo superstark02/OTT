@@ -3,6 +3,7 @@ import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import getSubCollection from '../Database/getSubCollection'
+//import {makeIndex} from "../Database/makeIndex"
 
 export class WebSeries extends Component {
     state = {
@@ -12,6 +13,21 @@ export class WebSeries extends Component {
     componentDidMount() {
         getSubCollection("Bollywood", "Web", "Family").then(snap => {
             this.setState({ data: snap })
+            /*for( var i = 0; i < snap.length; i++){
+                var data = {
+                    id: snap[i].id,
+                    industry: snap[i].industry,
+                    platform: snap[i].platform,
+                    genre: snap[i].genre,
+                    poster: snap[i].poster,
+                    name: snap[i].name
+                }
+                makeIndex(snap[i].id, data).then(result=>{
+                    if(result>0){
+                        console.log("Done")
+                    }
+                })
+            }*/
         });
     }
 
@@ -39,7 +55,7 @@ export class WebSeries extends Component {
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>
-                                                <div style={{ margin: "10px 0px", display: "flex" }} >
+                                                {/*<div style={{ margin: "10px 0px", display: "flex" }} >
                                                     <div>
                                                         <img className="app-logo" src={item.app} alt="app" width="30px" />
                                                     </div>
@@ -51,7 +67,7 @@ export class WebSeries extends Component {
                                                             {item.year}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         )
                                     })

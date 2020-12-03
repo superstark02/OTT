@@ -21,3 +21,14 @@ div{
   font-weight: 700;
   font-family: darwin;
 }
+
+.search-input{
+  width: 85%;
+  border: none;
+  margin: 10px 0px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: grey;
+  outline: none;
+}

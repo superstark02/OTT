@@ -23,14 +23,3 @@ export function addSubDoc(collection,doc,sub_collection,sub_doc,data){
         })
     });
 }
-
-export default function addToList(collection,doc,data){
-    return new Promise((resolve, reject) => {
-        
-        db.collection(collection).doc(doc).collection("List").doc(data.id).set(data).then(result=>{
-            resolve(1);
-        }).catch(error=>{
-            reject(error)
-        })
-    });
-}

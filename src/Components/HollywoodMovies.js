@@ -12,6 +12,7 @@ export class HollywoodMovies extends Component {
     componentDidMount() {
         getSubCollection("Hollywood", "Movie", "Family").then(snap => {
             this.setState({ data: snap })
+            
         });
     }
 
@@ -39,7 +40,7 @@ export class HollywoodMovies extends Component {
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>
-                                                <div style={{ margin: "10px 0px", display: "flex" }} >
+                                                {/*<div style={{ margin: "10px 0px", display: "flex" }} >
                                                     <div>
                                                         <img className="app-logo" src={item.app} alt="app" width="30px" />
                                                     </div>
@@ -51,7 +52,7 @@ export class HollywoodMovies extends Component {
                                                             {item.year}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         )
                                     })
