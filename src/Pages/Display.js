@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export class Display extends Component {
 
     state = {
-        mute: true,
+        mute: false,
         cover: true,
         show: null,
         related: null,
@@ -107,8 +107,7 @@ export class Display extends Component {
                                 </div>
 
                                 <video
-                                    autoPlay
-                                    //controls controlsList="nodownload"
+                                    autoPlay={true}
                                     loop={false}
                                     muted={this.state.mute}
                                     className="cover-image">

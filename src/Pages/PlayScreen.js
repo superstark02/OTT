@@ -83,6 +83,7 @@ export class PlayScreen extends Component {
                                     autoPlay
                                     loop={false} 
                                     controls controlsList="nodownload"
+                                    poster={this.state.episode.vidPoster}
                                     className="player" >
                                     <source src={this.state.episode.content} className="player"  />
                                 </video>
