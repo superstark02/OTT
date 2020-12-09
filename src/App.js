@@ -6,6 +6,9 @@ import Display from './Pages/Display';
 import FileUpload from './Pages/FileUpload';
 import PlayScreen from './Pages/PlayScreen';
 import SearchPage from './Pages/SearchPage';
+import About from './Pages/About';
+import Help from './Pages/Help';
+import Feedback from './Pages/Feedback';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
 
             <Route exact path='/fileUpload' component={FileUpload} />
             <Route exact path='/search' component={SearchPage} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/help' component={Help} />
+            <Route exact path='/feedback' component={Feedback} />
           </Switch>
       </Router>
     </div>

@@ -9,7 +9,8 @@ const images = [
 ];
 
 const settings = {
-    arrows: false
+    arrows: false,
+    autoplay: true
 };
 
 export function Carousel() {

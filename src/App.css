@@ -32,3 +32,9 @@ div{
   color: grey;
   outline: none;
 }
+
+Link, a , link {
+  text-decoration: none;
+  text-emphasis: none;
+  color: inherit;
+}

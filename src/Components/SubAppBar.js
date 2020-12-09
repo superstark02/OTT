@@ -103,7 +103,7 @@ HideOnScroll.propTypes = {
     window: PropTypes.func,
 };
 
-export default function MyAppBar(props) {
+export default function SubAppBar(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -137,21 +137,6 @@ export default function MyAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap className="wrap" style={{ fontFamily: "mosaic" }} >
-                        MOSAIC
-                    </Typography>
-
-                    <Link to="/search" style={{ color: "inherit" }} >
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            className={clsx(classes.menuButton, open && classes.hide)}
-                        >
-                            <SearchIcon />
-                        </IconButton>
-                    </Link>
-
                 </Toolbar>
             </AppBar>
             <Drawer
