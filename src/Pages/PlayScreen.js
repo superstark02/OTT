@@ -83,7 +83,8 @@ export class Adapter extends Component {
 
                                 <video
                                     loop={false}
-                                    controls controlsList="nodownload"
+                                    controls
+                                    controlsList="nodownload"
                                     poster={this.state.episode.vidPoster}
                                     className="player" >
                                     <source src={this.state.episode.content} className="player" />
@@ -128,7 +129,7 @@ export class Adapter extends Component {
                                     <div className="display-type" >
                                         {this.state.show.keywords}
                                     </div>
-                                    <div className="display-type" style={{ width: "50vw"}} >
+                                    <div className="display-type" style={{ width: "50vw" }} >
                                         <ReadMoreAndLess
                                             ref={this.ReadMore}
                                             className="display-type"
@@ -152,7 +153,12 @@ export class Adapter extends Component {
                                             {
                                                 this.state.seasons.map(item => {
                                                     return (
-                                                        <img src={item.image} className="ss" alt="i" />
+                                                        <div>
+                                                            <img src={item.image} className="ss" alt="i" />
+                                                            <div style={{ height: '2px', backgroundColor: "white", width: "50%" }} >
+
+                                                            </div>
+                                                        </div>
                                                     )
                                                 })
                                             }
@@ -210,7 +216,7 @@ export class Adapter extends Component {
     }
 }
 
-export default function PlayScreen(){
+export default function PlayScreen() {
     const { industry } = useParams();
     const { platform } = useParams();
     const { genre } = useParams();
@@ -219,9 +225,9 @@ export default function PlayScreen(){
     const { episode } = useParams();
 
     React.useEffect(() => {
-      }, [industry]);
+    }, [industry]);
 
-    return(
+    return (
         <Adapter industry={industry} platform={platform} genre={genre} id={id} season={season} episode={episode} />
     )
 }

@@ -6,52 +6,29 @@ import Categories from '../Components/Categories';
 import HollywoodMovies from '../Components/HollywoodMovies';
 import TV from '../Components/tv';
 import WebSeries from '../Components/WebSeries';
-import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Latest from '../Components/Latest';
+import MyList from '../Components/MyList';
 
 export class Home extends Component {
     constructor() {
         super();
         //uploadData();
-        this.state = {
-            show: true
-        };
-        this.trigger = this.trigger.bind(this);
     }
-
-    trigger() {
-        setInterval(() => {
-            this.setState({ show: true })
-        }, 2000);
-    }
-
 
     render() {
         return (
             <div>
-                {
-                    this.state.show ? (
-                        <div>
-                            <MyAppBar />
-                            <Carousel />
-                            <Categories />
-                            <TV />
-                            <WebSeries />
-                            <HollywoodMovies />
-                        </div>
-                    ) : (
-                            <div className="wrap" style={{height:"100vh"}} >
-                                <Loader
-                                    type="TailSpin"
-                                    color="#FFFFFF"
-                                    height={50}
-                                    width={50}
-                                    timeout={3000} //3 secs
-
-                                />
-                            </div>
-                        )
-                }
+                <MyAppBar />
+                <Carousel />
+                <Categories />
+                <Latest title="Latest" filter="2014" />
+                <MyList title="Popular In Action" filter="Action" />
+                <MyList title="Series To Watch" filter="Series" />
+                <MyList title="Comedy" filter="Comedy" />
+                <MyList title="Drama" filter="Drama" />
+                <MyList title="Fiction" filter="Fiction" />
+                <MyList title="By Netflix" filter="Netflix" />
             </div>
         )
     }

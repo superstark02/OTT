@@ -1,12 +1,35 @@
 import { db } from "../firebase";
+import { addDoc } from "./addDoc";
+import getSeasons from "./getSeason";
+import getCollection from "./getCollection"
 
-export function uploadData(data) {
+export function uploadData() {
 
     var i = 0;
 
-    for (i; i < data.length; i++) {
+    getCollection("Content").then(snap=>{
 
-        db.collection(data[i].industry).doc(data[i].platform).collection(data[i].genre).doc(data[i].id)
+        for (i = 0; i < snap.length; i++) {
+    
+            getSeasons("Bollywood", "Web", "Family", "tvftripling" ).then(s => {
+                if(s.length>0){
+                    for( var j = 0; j < s.length; j++){
+                        db.collection("Content").doc("tvftripling").collection("Season-1").doc("episode-"+(j+1)).set(s[j]).then(i=>{
+                            console.log(j + "- Done")
+                        })
+                    }
+                    
+                }
+            })
+        }
+        console.log("Complete")
+    })
+
+    
+
+    //for (i; i < data.length; i++) {
+
+    {/*db.collection(data[i].industry).doc(data[i].platform).collection(data[i].genre).doc(data[i].id)
             .set(data[i]).then(result => {
                 console.log(" Done")
 
@@ -37,9 +60,9 @@ export function uploadData(data) {
 
             }).catch(error => {
                 console.log(error)
-            })
+            })*/}
 
-    }
+    //}
 
 
 }
