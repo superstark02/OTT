@@ -4,7 +4,6 @@ import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
@@ -22,7 +21,6 @@ import { theme as color } from '../Theme/Theme';
 import { CommentRounded, FolderSpecialRounded, Help, InfoRounded, } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
-import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 200;

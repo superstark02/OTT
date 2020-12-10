@@ -5,7 +5,7 @@
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
     font-weight: 700;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 2pxpx;
 }
 
 .categories-div-container{
@@ -14,7 +14,7 @@
     background: url(../../Images/Categories/discover.png) 0 0 no-repeat;
     background-position: center;
     background-size: cover;
-    border-radius: 10px;
+    border-radius: 2px;
     margin-right: 10px;
 }
 

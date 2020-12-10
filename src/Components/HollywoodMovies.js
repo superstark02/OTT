@@ -12,7 +12,6 @@ export class HollywoodMovies extends Component {
     componentDidMount() {
         getSubCollection("Hollywood", "Movie", "Family").then(snap => {
             this.setState({ data: snap })
-            
         });
     }
 

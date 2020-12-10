@@ -11,6 +11,7 @@ import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
 import getEpisode from '../Database/getEpisode'
 import "../../node_modules/video-react/dist/video-react.css";
+import ReadMoreAndLess from 'react-read-more-less';
 
 export class PlayScreen extends Component {
 
@@ -80,12 +81,11 @@ export class PlayScreen extends Component {
                                 </div>
 
                                 <video
-                                    autoPlay
-                                    loop={false} 
+                                    loop={false}
                                     controls controlsList="nodownload"
                                     poster={this.state.episode.vidPoster}
                                     className="player" >
-                                    <source src={this.state.episode.content} className="player"  />
+                                    <source src={this.state.episode.content} className="player" />
                                 </video>
 
                                 {/*<Player poster={this.state.show.cover} >
@@ -100,12 +100,18 @@ export class PlayScreen extends Component {
                                         <VolumeMenuButton disabled />
                                     </ControlBar>
                             </Player>*/}
-                                
+
                             </div>
 
                             <div style={{ display: "flex", padding: "0px 10px", marginBottom: "20px" }} >
-                                <div>
-                                    <img alt="ii" src={this.state.show.poster} width="80px" style={{ borderRadius: "5px", marginRight: '10px' }} />
+                                <div className="list-item"
+                                    style={{
+                                        backgroundImage: "url(" + this.state.show.poster + ")",
+                                        width: "90px",
+                                        height: "120px",
+                                        marginRight: "10px"
+                                    }} >
+                                    {/*<img alt="ii" src={this.state.show.poster} width="80px" style={{ borderRadius: "5px", marginRight: '10px' }} />*/}
                                 </div>
 
                                 <div>
@@ -113,10 +119,24 @@ export class PlayScreen extends Component {
                                         {this.state.show.name}
                                     </div>
                                     <div className="display-type" >
+                                        Episode Name
+                                    </div>
+                                    <div className="display-type" >
                                         {this.state.number} {this.state.episode.date}
                                     </div>
                                     <div className="display-type" >
                                         {this.state.show.keywords}
+                                    </div>
+                                    <div className="display-type" style={{ width: "50vw"}} >
+                                        <ReadMoreAndLess
+                                            ref={this.ReadMore}
+                                            className="display-type"
+                                            charLimit={50}
+                                            readMoreText="Read more"
+                                            readLessText="Read less"
+                                        >
+                                            {this.state.show.description}
+                                        </ReadMoreAndLess>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +203,7 @@ export class PlayScreen extends Component {
                             </div>
                         )
                 }
-                
+
             </div>
         )
     }
