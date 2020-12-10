@@ -38,3 +38,7 @@ Link, a , link {
   text-emphasis: none;
   color: inherit;
 }
+
+.navigation {
+  height: 100vh;
+}

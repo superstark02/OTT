@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import {Link } from "react-tiger-transition";
 import getSubCollection from '../Database/getSubCollection'
+import "react-tiger-transition/styles/main.min.css";
 //import {makeIndex} from "../Database/makeIndex"
+
+
 
 export class WebSeries extends Component {
     state = {
@@ -33,7 +36,7 @@ export class WebSeries extends Component {
 
     render() {
         return (
-            <div>
+            <div >
                 {
                     this.state.data ? (
                         <div>
@@ -48,7 +51,7 @@ export class WebSeries extends Component {
                                             <div style={{ display: "inline-block" }} >
 
                                                 <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
-                                                    <Link to={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
+                                                    <Link transition='glide-left' to={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
                                                         style={{ height: "100%" }}  >
                                                         <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 

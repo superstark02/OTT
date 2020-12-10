@@ -9,18 +9,19 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import {Link } from "react-tiger-transition";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export class Display extends Component {
+export class Adapter extends Component {
 
     state = {
         mute: false,
@@ -30,6 +31,11 @@ export class Display extends Component {
         seasons: null,
         link: null,
         open: null,
+    }
+
+    constructor(props){
+        super(props);
+        console.log(this.props)
     }
 
     findRelated = (industry, platform, genre) => {
@@ -45,10 +51,10 @@ export class Display extends Component {
     }
 
     componentDidMount() {
-        getShow(this.props.match.params.industry,
-            this.props.match.params.platform,
-            this.props.match.params.genre,
-            this.props.match.params.id).then(snap => {
+        getShow(this.props.industry,
+            this.props.platform,
+            this.props.genre,
+            this.props.id).then(snap => {
                 this.setState({ show: snap })
                 this.findRelated(snap.industry, snap.platform, snap.genre);
                 if (snap.season) {
@@ -64,7 +70,6 @@ export class Display extends Component {
                     //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
             })
-
     }
 
     handleMute = () => {
@@ -82,13 +87,13 @@ export class Display extends Component {
 
     render() {
         return (
-            <div style={{ color: theme.palette.primary.light }} >
+            <div style={{ color: theme.palette.primary.light }}  className="transition-item detail-page" >
                 {
                     this.state.show ? (
                         <div>
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
-                                    <Link to="/" >
+                                    <Link to="/" transition='glide-left'  >
                                         <IconButton >
                                             <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
                                         </IconButton>
@@ -304,4 +309,16 @@ export class Display extends Component {
     }
 }
 
-export default Display
+export default function Display(){
+    const { industry } = useParams();
+    const { platform } = useParams();
+    const { genre } = useParams();
+    const { id } = useParams();
+
+    React.useEffect(() => {
+      }, [industry]);
+
+    return(
+        <Adapter industry={industry} platform={platform} genre={genre} id={id}  />
+    )
+}

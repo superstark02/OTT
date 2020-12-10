@@ -10,10 +10,11 @@ import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
 import getEpisode from '../Database/getEpisode'
-import "../../node_modules/video-react/dist/video-react.css";
 import ReadMoreAndLess from 'react-read-more-less';
+import { useParams } from 'react-router-dom'
+import "react-tiger-transition/styles/main.min.css";
 
-export class PlayScreen extends Component {
+export class Adapter extends Component {
 
     state = {
         mute: true,
@@ -37,10 +38,10 @@ export class PlayScreen extends Component {
     }
 
     componentDidMount() {
-        getShow(this.props.match.params.industry,
-            this.props.match.params.platform,
-            this.props.match.params.genre,
-            this.props.match.params.id).then(snap => {
+        getShow(this.props.industry,
+            this.props.platform,
+            this.props.genre,
+            this.props.id).then(snap => {
                 this.setState({ show: snap })
                 this.findRelated(snap.industry, snap.platform, snap.genre);
                 if (snap.season) {
@@ -48,12 +49,12 @@ export class PlayScreen extends Component {
                 }
             })
 
-        getEpisode(this.props.match.params.industry,
-            this.props.match.params.platform,
-            this.props.match.params.genre,
-            this.props.match.params.id,
-            this.props.match.params.season,
-            this.props.match.params.episode).then(snap => {
+        getEpisode(this.props.industry,
+            this.props.platform,
+            this.props.genre,
+            this.props.id,
+            this.props.season,
+            this.props.episode).then(snap => {
                 this.setState({ episode: snap })
             })
     }
@@ -209,4 +210,18 @@ export class PlayScreen extends Component {
     }
 }
 
-export default PlayScreen
+export default function PlayScreen(){
+    const { industry } = useParams();
+    const { platform } = useParams();
+    const { genre } = useParams();
+    const { id } = useParams();
+    const { season } = useParams();
+    const { episode } = useParams();
+
+    React.useEffect(() => {
+      }, [industry]);
+
+    return(
+        <Adapter industry={industry} platform={platform} genre={genre} id={id} season={season} episode={episode} />
+    )
+}

@@ -14,7 +14,7 @@ export class FileUpload extends Component {
 
     upload = () => {
         var data = [
-    
+            
         ]
 
         //uploadFile(data[0].industry, data[0].platform, data[0].id, this.state.files);

@@ -1,7 +1,8 @@
 import './App.css';
 import Home from './Pages/Home';
 import { theme } from './Theme/Theme';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
+import { Navigation, Route, glide } from "react-tiger-transition";
 import Display from './Pages/Display';
 import FileUpload from './Pages/FileUpload';
 import PlayScreen from './Pages/PlayScreen';
@@ -9,24 +10,110 @@ import SearchPage from './Pages/SearchPage';
 import About from './Pages/About';
 import Help from './Pages/Help';
 import Feedback from './Pages/Feedback';
+import "react-tiger-transition/styles/main.min.css";
+
+glide({
+  name: 'glide-left'
+});
+
+glide({
+  name: 'glide-right',
+  direction: 'right'
+});
+
+const screenStyle = {
+  backgroundColor: theme.palette.primary.dark,
+  color: theme.palette.primary.light
+};
+
+document.getElementById("root").style.height = "100vh";
 
 function App() {
   return (
-    <div style={{ backgroundColor: theme.palette.primary.dark, margin: "0px", color: theme.palette.primary.light, minHeight:"100vh" }} >
-      <Router>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/display/:industry/:platform/:genre/:id' component={Display} />
-            <Route exact path='/play/:industry/:platform/:genre/:id/:season/:episode' component={PlayScreen} />
 
-            <Route exact path='/fileUpload' component={FileUpload} />
-            <Route exact path='/search' component={SearchPage} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/help' component={Help} />
-            <Route exact path='/feedback' component={Feedback} />
-          </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Navigation>
+        <Route exact path='/'
+          screen // shorthand to wrap children with screen
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }}>
+          <Home />
+        </Route>
+        <Route exact path='/display/:industry/:platform/:genre/:id'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Display />
+        </Route>
+
+        <Route exact path='/about'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <About />
+        </Route>
+
+        <Route exact path='/play/:industry/:platform/:genre/:id/:season/:episode'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <PlayScreen />
+        </Route>
+
+        <Route exact path='/fileUpload'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <FileUpload />
+        </Route>
+
+        <Route exact path='/search'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <SearchPage />
+        </Route>
+
+        <Route exact path='/help'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Help />
+        </Route>
+
+        <Route exact path='/feedback'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Feedback />
+        </Route>
+
+      </Navigation>
+    </Router>
   );
 }
 
