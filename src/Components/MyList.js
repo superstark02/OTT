@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import getCollectionQuery from '../Database/getCollectionQuery'
+//import { Link } from 'react-router-dom'
+import {Link } from "react-tiger-transition";
+import getCollectionQuery, {getByWord} from '../Database/getCollectionQuery'
 import shuffleArray from '../Database/shuffleArray'
 
 export class MyList extends Component {
@@ -13,9 +14,15 @@ export class MyList extends Component {
 
     constructor(props) {
         super(props);
-        getCollectionQuery("Index", props.filter).then(result => {
-            this.setState({ data: shuffleArray(result) })
-        })
+        if(props.filter.length > 2){
+            getByWord("Index", props.filter).then(result=>{
+                this.setState({ data: shuffleArray(result) })
+            })
+        }else{
+            getCollectionQuery("Index", props.filter).then(result => {
+                this.setState({ data: shuffleArray(result) })
+            })
+        }
     }
 
     render() {
@@ -36,7 +43,8 @@ export class MyList extends Component {
                                             <div style={{ display: "inline-block" }} >
 
                                                 <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
-                                                    <Link to={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
+                                                    <Link to={"/display/"+item.id} 
+                                                        transition='glide-left'
                                                         style={{ height: "100%" }}  >
                                                         <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 

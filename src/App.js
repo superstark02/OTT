@@ -42,7 +42,7 @@ function App() {
           }}>
           <Home />
         </Route>
-        <Route exact path='/display/:industry/:platform/:genre/:id'
+        <Route exact path='/display/:id'
           screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
           screenProps={{
             style: {
@@ -62,7 +62,7 @@ function App() {
           <About />
         </Route>
 
-        <Route exact path='/play/:industry/:platform/:genre/:id/:season/:episode'
+        <Route exact path='/play/:id/:season/:episode'
           screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
           screenProps={{
             style: {

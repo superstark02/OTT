@@ -1,22 +1,26 @@
 import { db } from '../firebase'
 
-export default function getSeasons(industry , platform, genre, id){
+export default function getSeasons(id, number) {
     return new Promise((resolve, reject) => {
 
         var data = [];
 
-        db.collection(industry).doc(platform).collection(genre).doc(id).collection("Season-1")
-            .get()
-            .then(snapshot => {
+        for (var i = 0; i < parseInt(number); i++) {
+            db.collection("Content").doc(id).collection("Season-" + (i+1))
+                .get()
+                .then(snapshot => {
 
-                snapshot.forEach(doc => {
-                    data.push(doc.data())
+                    snapshot.forEach(doc => {
+                        data.push(doc.data())
+                    });
+
+                    resolve(data);
+                })
+                .catch(reason => {
+                    reject(reason);
                 });
-
-                resolve(data);
-            })
-            .catch(reason => {
-                reject(reason);
-            });
+        }
     });
 }
+
+        

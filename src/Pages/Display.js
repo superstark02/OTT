@@ -4,7 +4,7 @@ import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
 import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
-import getShow from '../Database/getShow'
+import getDoc from '../Database/getDoc'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
@@ -35,7 +35,6 @@ export class Adapter extends Component {
 
     constructor(props){
         super(props);
-        console.log(this.props)
     }
 
     findRelated = (industry, platform, genre) => {
@@ -44,21 +43,17 @@ export class Adapter extends Component {
         })
     }
 
-    getSeason = (industry, platform, genre, id) => {
-        getSeasons(industry, platform, genre, id).then(snap => {
-            this.setState({ seasons: snap })
+    getSeason = (id, season) => {
+        getSeasons(id, season).then(snap => {
+            this.setState({seasons:snap})
         })
     }
 
     componentDidMount() {
-        getShow(this.props.industry,
-            this.props.platform,
-            this.props.genre,
-            this.props.id).then(snap => {
-                this.setState({ show: snap })
-                this.findRelated(snap.industry, snap.platform, snap.genre);
+        getDoc("Content" , this.props.id).then(snap => {
+                    this.setState({ show: snap })
                 if (snap.season) {
-                    this.getSeason(snap.industry, snap.platform, snap.genre, snap.id)
+                    this.getSeason(snap.id, snap.season)
                 }
                 if (snap.premium) {
                     //check if bought
@@ -121,7 +116,7 @@ export class Adapter extends Component {
                             </div>
                             <div className="wrap" style={{ marginBottom: "30px" }} >
                                 <div className="wrap play-button" >
-                                    <Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
+                                    <Link to={"/play/" + this.state.show.id + "/Season-1/episode-1"} >
                                         <IconButton>
                                             <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
                                         </IconButton>

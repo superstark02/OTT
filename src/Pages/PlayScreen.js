@@ -10,6 +10,7 @@ import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import getSeasons from '../Database/getSeason'
 import getEpisode from '../Database/getEpisode'
+import getDoc from '../Database/getDoc'
 import ReadMoreAndLess from 'react-read-more-less';
 import { useParams } from 'react-router-dom'
 import "react-tiger-transition/styles/main.min.css";
@@ -38,21 +39,15 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        getShow(this.props.industry,
-            this.props.platform,
-            this.props.genre,
-            this.props.id).then(snap => {
+        getDoc("Content",this.props.id).then(snap => {
                 this.setState({ show: snap })
-                this.findRelated(snap.industry, snap.platform, snap.genre);
+                //this.findRelated(snap.industry, snap.platform, snap.genre);
                 if (snap.season) {
-                    this.getSeason(snap.industry, snap.platform, snap.genre, snap.id)
+                    this.getSeason(snap.id, snap.season)
                 }
             })
 
-        getEpisode(this.props.industry,
-            this.props.platform,
-            this.props.genre,
-            this.props.id,
+        getEpisode(this.props.id,
             this.props.season,
             this.props.episode).then(snap => {
                 this.setState({ episode: snap })

@@ -1,10 +1,9 @@
 import { db } from '../firebase'
 
-export default function getEpisode(industry , platform, genre, id, season, episode){
+export default function getEpisode( id, season, episode){
     return new Promise((resolve, reject) => {
 
-
-        db.collection(industry).doc(platform).collection(genre).doc(id).collection(season).doc(episode)
+        db.collection("Content").doc(id).collection(season).doc(episode)
         .get()
         .then(snapshot => {
             if(snapshot.exists){

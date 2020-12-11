@@ -10,7 +10,7 @@ const images = [
 
 const settings = {
     arrows: false,
-    autoplay: true
+    autoplay: true,
 };
 
 export function Carousel() {

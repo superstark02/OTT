@@ -21,7 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
 import { CommentRounded, FolderSpecialRounded, Help, InfoRounded, } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
-import { FaBolt, FaTheaterMasks } from 'react-icons/fa';
+import { FaBolt, FaTheaterMasks, FaUser } from 'react-icons/fa';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 
@@ -172,7 +172,7 @@ export default function MyAppBar(props) {
                 <List>
                     {[
                         { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
-                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
+                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }, {name: "Sign In", icon: <FaUser />}].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{text.icon}</ListItemIcon>
                                 <ListItemText primary={text.name} />
