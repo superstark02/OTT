@@ -15,6 +15,7 @@
     "popmotion": "^9.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-google-login": "^5.1.25",
     "react-icons": "^3.11.0",
     "react-insta-stories": "^2.1.2",
     "react-loader-spinner": "^3.1.14",
