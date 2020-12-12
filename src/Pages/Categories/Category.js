@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import SubAppBar from '../Components/SubAppBar'
+import SubAppBar from '../../Components/SubAppBar'
 import { useParams } from 'react-router-dom'
-import MyList from '../Components/MyList';
+import MyList from '../../Components/MyList';
 
 class Adapter extends Component {
 

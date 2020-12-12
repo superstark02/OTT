@@ -10,8 +10,11 @@ import SearchPage from './Pages/SearchPage';
 import About from './Pages/About';
 import Help from './Pages/Help';
 import Feedback from './Pages/Feedback';
-import Category from './Pages/Category';
+import Category from './Pages/Categories/Category';
 import "react-tiger-transition/styles/main.min.css";
+import Discover from './Pages/Categories/Discover';
+import Anime from './Pages/Categories/Anime';
+import Signin from './Pages/Signin';
 
 glide({
   name: 'glide-left'
@@ -52,6 +55,26 @@ function App() {
             }
           }} >
           <Display />
+        </Route>
+
+        <Route exact path='/discover'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Discover />
+        </Route>
+
+        <Route exact path='/anime'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Anime />
         </Route>
 
         <Route exact path='/category/:id'
@@ -122,6 +145,16 @@ function App() {
             }
           }} >
           <Feedback />
+        </Route>
+
+        <Route exact path='/sign-in'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Signin />
         </Route>
 
       </Navigation>

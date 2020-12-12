@@ -13,7 +13,9 @@ export function getLatest(name, filter) {
             }
             else {
                 snapshot.forEach(doc => {
-                    data.push(doc.data())
+                    if(notAnime(search(doc.data().keywords)) ){
+                        data.push(doc.data())
+                    }
                 });
 
                 resolve(data)
@@ -36,7 +38,9 @@ export function getByWord(name, filter) {
             }
             else {
                 snapshot.forEach(doc => {
-                    data.push(doc.data())
+                    if(notAnime(search(doc.data().keywords)) ){
+                        data.push(doc.data())
+                    }
                 });
 
                 resolve(data)
@@ -61,7 +65,9 @@ export default function getCollectionQuery(name, filter) {
             else {
                 snapshot.forEach(doc => {
                     if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1]) ) {
-                        data.push(doc.data())
+                        if(notAnime(doc.data().keywords)){
+                            data.push(doc.data())
+                        }
                     }
                 });
                 resolve(data)
@@ -79,4 +85,13 @@ function search(array, filter){
         }
     }
     return false
+}
+
+function notAnime(array){
+    for(var k = 0; k < array.length; k++){
+        if(array[k]==="Anime"){
+            return false
+        }
+    }
+    return true
 }

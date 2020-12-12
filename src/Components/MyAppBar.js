@@ -171,12 +171,14 @@ export default function MyAppBar(props) {
                 <Divider />
                 <List>
                     {[
-                        { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
-                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }, {name: "Sign In", icon: <FaUser />}].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{text.icon}</ListItemIcon>
-                                <ListItemText primary={text.name} />
-                            </ListItem>
+                        { name: "Sign In", icon: <FaUser />, to:"/sign-in" }, { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
+                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
+                            <Link to={text.to} >
+                                <ListItem button key={text}>
+                                    <ListItemIcon>{text.icon}</ListItemIcon>
+                                    <ListItemText primary={text.name} />
+                                </ListItem>
+                            </Link>
                         ))}
                 </List>
                 <Divider />

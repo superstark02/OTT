@@ -6,69 +6,43 @@ export function uploadData() {
 
     var data = [
         {
-            id:"strangerthings",
-            name:"Stranger Things",
-            country:"USA",
-            app:"Netflix",
-            poster:"https://images-na.ssl-images-amazon.com/images/M/MV5BMjEzMDAxOTUyMV5BMl5BanBnXkFtZTgwNzAxMzYzOTE@._V1_.jpg",
-            year:"2016",
-            keywords:["Horror", "Hollywood", "Drama", "Series" ],
-            leng:"3 seasons",
+            id:"deathnote",
+            name:"Death Note",
+            country:"Japan",
+            app:"",
+            poster:"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTbBAVvPYT50Isa3xKRTi9J3BVH20H6qPOk2Hd_CzX2Wwfx7eEo",
+            year:"2006",
+            keywords:["Anime", "Mystery", "Thriller", "Crime", "Psycology", "Series"],
+            leng:"1 season",
             rate:"0",
-            season: 3,
-            description:"This thrilling Netflix original drama stars Golden Globe-winning actress Winona Ryder as Joyce Byers, who lives in a small Indiana town in 1983 -- inspired by a time when tales of science fiction captivated audiences. When Joyce's 12-year-old son, Will, goes missing, she launches a terrifying investigation into his disappearance with local authorities. As they search for answers, they unravel a series of extraordinary mysteries involving secret government experiments, unnerving supernatural forces, and a very unusual little girl."
+            season: 1,
+            description:"A high school student discovers a supernatural notebook that grants its user the ability to kill."
         },
         {
-            id:"boJackhorseman",
-            name:"BoJack Horseman",
-            country:"USA",
-            app:"Netflix",
-            poster:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6ntIAH4kgUFNe8ar6QZLfuEOqMH9SnmwSwBu_hdkK2MATd4uT",
-            year:"2014",
-            keywords:["Animation", "Comedy", "Series" ],
-            leng:"6 seasons",
-            rate:"0",
-            season: 6,
-            description:"A humanoid horse, BoJack Horseman -- lost in a sea of self-loathing and booze -- decides it's time for a comeback. Once the star of a '90s sitcom, in which he was the adoptive father of three orphaned kids (two girls and a boy). The show was the hottest thing around, then suddenly, was canceled. Now 18 years later, BoJack wants to regain his dignity. With the aid of a human sidekick and a feline ex-girlfriend who is his agent, he sets out to make it happen. But Hollywood is vastly different from those days, and getting used to stuff like Twitter may take some time. This first animated series from Netflix -- with plenty of references to sex, drugs and alcohol -- is not for the little ones."
-        },
-        {
-            id:"ozark",
-            name:"Ozark",
-            country:"USA",
-            app:"Netflix",
-            poster:"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbOV027cTJsx6Vl3JYv_CMuMFr502l7zMZ4pCkhOGC64WAohfX",
-            year:"2017",
-            keywords:["Crime", "Drama", "Series" ],
-            leng:"3 seasons",
-            rate:"0",
-            season: 3,
-            description:"Created by Bill Dubuque (The Accountant, The Judge), this drama series stars Jason Bateman as Marty Byrde, a financial planner who relocates his family from Chicago to a summer resort community in the Ozarks. With wife Wendy and their two kids in tow, Marty is on the move after a money-laundering scheme goes wrong, forcing him to pay off a substantial debt to a Mexican drug lord in order to keep his family safe. While the Byrdes' fate hangs in the balance, the dire circumstances force the fractured family to reconnect."
-        },
-        {
-            id:"barry",
-            name:"Barry",
-            country:"USA",
-            app:"Dinsney+Hotstar",
-            poster:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSXae9x5wwyckaAH6rnyC4PQVoT7Ja-nXvYfKbDgwKUH5Py9S4g",
-            year:"2018",
-            keywords:["Crime", "Comedy", "Series" ],
+            id:"onepunchman",
+            name:"One Punch Man",
+            country:"Japan",
+            app:"",
+            poster:"https://m.media-amazon.com/images/M/MV5BMTNmZDE2NDEtNTg3MS00OTE1LThlZGUtOGZkZTg0NTUyNGVmXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_UY1200_CR85,0,630,1200_AL_.jpg",
+            year:"2015",
+            keywords:["Anime", "Action", "Shounen", "Comedy", "Series" ],
             leng:"2 seasons",
             rate:"0",
             season: 2,
-            description:"Barry, who kills to earn a living, discovers the joy of acting while he is looking for his target. Surprisingly, he loves it so much that he is ready to leave his old life behind."
+            description:"One-Punch Man is a Japanese superhero franchise created by the artist ONE. It tells the story of Saitama, a superhero who can defeat any opponent with a single punch but seeks to find a worthy foe after growing bored by a lack of challenge due to his overwhelming strength."
         },
         {
-            id:"siliconvalley",
-            name:"Silicon Valley",
-            country:"USA",
-            app:"Dinsney+Hotstar",
-            poster:"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRUcIP4OB7aPVFeFZnF0qjEyYHvnOHKAok3Ml76d8NhMaOYyDAA",
-            year:"2014",
-            keywords:["Comedy", "Series" ],
-            leng:"6 seasons",
+            id:"greatteacheronizuka",
+            name:"Great Teacher Onizuka",
+            country:"Japan",
+            app:"",
+            poster:"https://m.media-amazon.com/images/M/MV5BNzZmYjBjMGYtNzk1Zi00MzZiLWI1MzgtNGYwZTZhMTRhNjMzXkEyXkFqcGdeQXVyMTA3OTEyODI1._V1_.jpg",
+            year:"",
+            keywords:["Anime", "Slice Of Life", "Comedy", "Series" ],
+            leng:"1 season",
             rate:"0",
-            season: 6,
-            description:"Richard, a programmer, creates an app called the Pied Piper and tries to get investors for it. Meanwhile, five other programmers struggle to make their mark in Silicon Valley."
+            season: 1,
+            description:"Twenty-two-year-old Eikichi Onizuka—ex-biker gang leader, conqueror of Shonan, and virgin—has a dream: to become the greatest high school teacher in all of Japan. This isn't because of a passion for teaching, but because he wants a loving teenage wife when he's old and gray. Still, for a perverted, greedy, and lazy delinquent, there is more to Onizuka than meets the eye. So when he lands a job as the homeroom teacher of the Class 3-4 at the prestigious Holy Forest Academy—despite suplexing the Vice Principal—all of his talents are put to the test, as this class is particularly infamous."
         }
     ]
 
