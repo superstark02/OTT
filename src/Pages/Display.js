@@ -16,6 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import {Link } from "react-tiger-transition";
+import SeasonTabs from '../Components/SeasonTabs'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -52,9 +53,6 @@ export class Adapter extends Component {
     componentDidMount() {
         getDoc("Content" , this.props.id).then(snap => {
                     this.setState({ show: snap })
-                if (snap.season) {
-                    this.getSeason(snap.id, snap.season)
-                }
                 if (snap.premium) {
                     //check if bought
                     //checkPaymnet(snap.id, series).then(result=>{if(result){setState({link:}; else{setState({link:pay} )})}})
@@ -184,9 +182,9 @@ export class Adapter extends Component {
                             </div>
 
                             {
-                                this.state.seasons ? (
+                                this.state.show.season ? (
                                     <div>
-                                        <div className="h7" >
+                                        {/*<div className="h7" >
                                             Season - 1
                                         </div>
                                         <div className="ss-container" >
@@ -199,7 +197,8 @@ export class Adapter extends Component {
                                                     )
                                                 })
                                             }
-                                        </div>
+                                        </div>*/}
+                                        <SeasonTabs seasons={this.state.show.season} id={this.state.show.id} />
                                     </div>
                                 ) : (
                                         <div></div>

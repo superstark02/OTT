@@ -4,7 +4,6 @@ import "../CSS/Pages/Display.css"
 import "../CSS/Pages/PlayScreen.css"
 import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded } from '@material-ui/icons'
-import getShow from '../Database/getShow'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'

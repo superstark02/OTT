@@ -10,6 +10,7 @@ import SearchPage from './Pages/SearchPage';
 import About from './Pages/About';
 import Help from './Pages/Help';
 import Feedback from './Pages/Feedback';
+import Category from './Pages/Category';
 import "react-tiger-transition/styles/main.min.css";
 
 glide({
@@ -42,6 +43,7 @@ function App() {
           }}>
           <Home />
         </Route>
+
         <Route exact path='/display/:id'
           screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
           screenProps={{
@@ -50,6 +52,16 @@ function App() {
             }
           }} >
           <Display />
+        </Route>
+
+        <Route exact path='/category/:id'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Category />
         </Route>
 
         <Route exact path='/about'
