@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import MyAppBar from '../Components/MyAppBar'
 import Carousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
-import { uploadData } from '../Database/uploadData';
+//import { uploadData } from '../Database/uploadData';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Latest from '../Components/Latest';
 import MyList from '../Components/MyList';
-//import {updateUser} from "../Database/logIn"
+import {updateUser} from "../Database/logIn"
 
 export class Home extends Component {
 
@@ -22,10 +22,10 @@ export class Home extends Component {
     componentDidMount() {
         
 
-        /*if(window.Android.getUid()){
+        if(window.Android.getUid()){
             this.setState({ uid: window.Android.getUid() })
             updateUser(window.Android.getUid(),window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId() );
-        }*/
+        }
         
     }
 

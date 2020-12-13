@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import { theme as color } from '../Theme/Theme'
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import getSeasons from '../Database/getSeason';
 import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
 import { Link } from "react-tiger-transition";
+import getSubCollection from '../Database/getSubCollection';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -95,8 +95,8 @@ export default function SeasonTabs(props) {
             tabs.push(
                 <StyledTab label={"Season " + (i + 1)} />
             )
-            getSeasons(props.id, props.seasons).then(result => {
-                s.push(result)
+            getSubCollection("Content", props.id, "Season-"+(i+1)).then(r=>{
+                s.push(r)
             })
         }
 

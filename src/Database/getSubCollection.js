@@ -1,11 +1,11 @@
 import { db } from '../firebase'
 
-export default function getSubCollection(industry , platform, genre){
+export default function getSubCollection(collection , doc, sub_collection){
     return new Promise((resolve, reject) => {
 
         var data = [];
 
-        db.collection(industry).doc(platform).collection(genre)
+        db.collection(collection).doc(doc).collection(sub_collection)
             .get()
             .then(snapshot => {
 
