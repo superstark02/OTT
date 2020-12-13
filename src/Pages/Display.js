@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export class Adapter extends Component {
 
     state = {
-        mute: false,
+        mute: true,
         cover: true,
         show: null,
         related: null,

@@ -13,16 +13,20 @@ import getDoc from '../Database/getDoc'
 import ReadMoreAndLess from 'react-read-more-less';
 import { useParams } from 'react-router-dom'
 import "react-tiger-transition/styles/main.min.css";
+import SeasonTabs from '../Components/SeasonTabs'
+import { saveTime } from '../Database/logIn'
 
 export class Adapter extends Component {
 
     state = {
-        mute: true,
+        mute: false,
         cover: true,
         show: null,
         related: null,
         seasons: null,
         episode: null,
+        time: null,
+        duration: null
     }
 
     findRelated = (industry, platform, genre) => {
@@ -38,13 +42,13 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        getDoc("Content",this.props.id).then(snap => {
-                this.setState({ show: snap })
-                //this.findRelated(snap.industry, snap.platform, snap.genre);
-                if (snap.season) {
-                    this.getSeason(snap.id, snap.season)
-                }
-            })
+        getDoc("Content", this.props.id).then(snap => {
+            this.setState({ show: snap })
+            //this.findRelated(snap.industry, snap.platform, snap.genre);
+            if (snap.season) {
+                this.getSeason(snap.id, snap.season)
+            }
+        })
 
         getEpisode(this.props.id,
             this.props.season,
@@ -60,6 +64,16 @@ export class Adapter extends Component {
         else {
             this.setState({ mute: true })
         }
+    }
+
+    handlevideoMount = (e) => {
+        if(e){
+            this.setState({ duration: e.duration })
+        }
+    }
+
+    componentWillUnmount() {
+        saveTime((this.state.time / this.state.duration) * 100, this.state.show.id)
     }
 
     render() {
@@ -78,10 +92,13 @@ export class Adapter extends Component {
                                 <video
                                     loop={false}
                                     controls
+                                    autoPlay={true}
+                                    ref={this.handlevideoMount}
+                                    onTimeUpdate={(e) => { this.setState({ time: e.target.currentTime }) }}
                                     controlsList="nodownload"
                                     poster={this.state.episode.vidPoster}
                                     className="player" >
-                                    <source src={this.state.episode.content} className="player" />
+                                    <source src={this.state.episode.content} type="video/mp4" />
                                 </video>
 
                                 {/*<Player poster={this.state.show.cover} >
@@ -115,7 +132,7 @@ export class Adapter extends Component {
                                         {this.state.show.name}
                                     </div>
                                     <div className="display-type" >
-                                        Episode Name
+                                        {this.state.episode.name}
                                     </div>
                                     <div className="display-type" >
                                         {this.state.number} {this.state.episode.date}
@@ -140,23 +157,7 @@ export class Adapter extends Component {
                             {
                                 this.state.seasons ? (
                                     <div>
-                                        <div className="h7" >
-                                            Season - 1
-                                        </div>
-                                        <div className="ss-container" >
-                                            {
-                                                this.state.seasons.map(item => {
-                                                    return (
-                                                        <div>
-                                                            <img src={item.image} className="ss" alt="i" />
-                                                            <div style={{ height: '2px', backgroundColor: "white", width: "50%" }} >
-
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
+                                        <SeasonTabs seasons={this.state.show.season} id={this.state.show.id} />
                                     </div>
                                 ) : (
                                         <div></div>

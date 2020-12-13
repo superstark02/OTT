@@ -19,7 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
-import { CommentRounded, FolderSpecialRounded, Help, InfoRounded, } from '@material-ui/icons';
+import { CommentRounded, FolderSpecialRounded, Help, InfoRounded, PowerOff, } from '@material-ui/icons';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import { FaBolt, FaTheaterMasks, FaUser } from 'react-icons/fa';
 import SearchIcon from '@material-ui/icons/Search';
@@ -107,6 +107,8 @@ export default function MyAppBar(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [signin, setSignin] = React.useState({})
+    const [logOut, setLogOut] = React.useState({})
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -115,6 +117,16 @@ export default function MyAppBar(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    React.useEffect(() => {
+        if (!props.uid) {
+            setSignin({ name: "Sign In", icon: <FaUser />, to: "/sign-in" })
+            setLogOut({})
+        } else {
+            setLogOut({ name: "Logout", icon: <PowerOff /> })
+            setSignin({})
+        }
+    }, [signin])
 
     return (
         <React.Fragment>
@@ -170,9 +182,32 @@ export default function MyAppBar(props) {
                 </div>
                 <Divider />
                 <List>
+                    {
+                        props.uid ? (
+                            <ListItem button key={"signin1"}>
+                                <ListItemText primary={props.email} />
+                            </ListItem>
+                        ) : (
+                                <div></div>
+                            )
+                    }
+                    {
+                        !props.uid ? (
+                            <div onClick={()=>{
+                                //window.Android.signin();
+                            }} >
+                                <ListItem button key={"signin"}>
+                                    <ListItemIcon><FaUser /></ListItemIcon>
+                                    <ListItemText primary="Sign In" />
+                                </ListItem>
+                            </div>
+                        ) : (
+                                <div></div>
+                            )
+                    }
                     {[
-                        { name: "Sign In", icon: <FaUser />, to:"/sign-in" }, { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
-                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
+                        { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
+                        { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }, logOut].map((text, index) => (
                             <Link to={text.to} >
                                 <ListItem button key={text}>
                                     <ListItemIcon>{text.icon}</ListItemIcon>

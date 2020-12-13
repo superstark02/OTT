@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import getSeasons from '../Database/getSeason';
 import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
-import {Link } from "react-tiger-transition";
+import { Link } from "react-tiger-transition";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -23,7 +23,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
+                <Box p={3} style={{padding:"10px 0px"}} >
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -122,10 +122,35 @@ export default function SeasonTabs(props) {
                                 <div className="ss-container" >
                                     {
                                         s[index] &&
-                                        s[index].map(i => {
+                                        s[index].map((i, episode) => {
                                             return (
-                                                <Link to={"/play/"} >
-                                                    <img src={i.image} className="ss" alt="i" />
+                                                <Link to={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-" + (episode + 1)} >
+                                                    <div style={{
+                                                        background:"url("+i.image+")",
+                                                        backgroundSize:"cover", 
+                                                        backgroundPosition:"center", 
+                                                        height:"30vw", 
+                                                        width:"45vw",
+                                                        marginRight:"10px",
+                                                        borderRadius:"2px",
+                                                        boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
+                                                        display:"flex",
+                                                        flexDirection:"column",
+                                                        justifyContent:"flex-end"
+                                                        }} >
+                                                        <div style={{ bottom:"0", width:'20%', padding:"1px 0px", backgroundColor:"white"}} >
+
+                                                        </div>
+                                                    </div>
+                                                    <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
+                                                       {i.name} 
+                                                    </div>
+                                                    <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                       Season-{(index+1)} Episode-{(episode+1)} 
+                                                    </div>
+                                                    <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                       {i.date}
+                                                    </div>
                                                 </Link>
                                             )
                                         })
