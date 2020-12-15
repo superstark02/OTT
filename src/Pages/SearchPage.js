@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom'
 import getCollection from '../Database/getCollection'
 
 var filteredClass = null
+
 export class SearchPage extends Component {
 
     state = {
-        shows: null,
+        shows: [],
         search: null
     }
 
@@ -40,14 +41,15 @@ export class SearchPage extends Component {
                     />
                 </div>
 
-                <div style={{ display: "flex", flexWrap: "wrap", padding: "10px", justifyContent: "space-evenly" }} >
+                <div style={{ display: "flex", flexWrap: "wrap", padding: "10px", justifyContent: 'space-evenly' }} >
+
                     {
                         filteredClass &&
                         filteredClass.map(item => {
                             return (
                                 <div style={{ width: "fit-content", margin: "10px 0px" }} className="wrap" >
                                     <ButtonBase style={{ height: "100%" }}>
-                                        <Link to={"/display/"+ item.id}
+                                        <Link to={"/display/" + DataTransferItem.id}
                                             style={{ height: "100%" }}  >
                                             <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 

@@ -126,7 +126,7 @@ export default function MyAppBar(props) {
             setLogOut({ name: "Logout", icon: <PowerOff /> })
             setSignin({})
         }
-    }, [signin])
+    }, [props])
 
     return (
         <React.Fragment>

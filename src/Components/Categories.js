@@ -5,7 +5,7 @@ import "../CSS/Components/Categories.css"
 
 const categories = [
     {
-        img: "https://www.discoverboating.com/sites/default/files/inline-images/best-boat-movies.png",
+        img: "https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg",
         title: "DISCOVER",
         to: "/discover"
     },

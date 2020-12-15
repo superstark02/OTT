@@ -108,6 +108,7 @@ export class Adapter extends Component {
                                     autoPlay={true}
                                     loop={false}
                                     muted={this.state.mute}
+                                    style={{height:"100%"}}
                                     className="cover-image">
                                     <source src={this.state.show.trailer} className="cover-image" />
                                 </video>

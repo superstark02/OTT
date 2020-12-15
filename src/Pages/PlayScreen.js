@@ -6,10 +6,8 @@ import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded } from '@material-ui/icons'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
-import getSubCollection from '../Database/getSubCollection'
-import getSeasons from '../Database/getSeason'
 import getEpisode from '../Database/getEpisode'
-import getDoc from '../Database/getDoc'
+import getDoc, { getTime } from '../Database/getDoc'
 import ReadMoreAndLess from 'react-read-more-less';
 import { useParams } from 'react-router-dom'
 import "react-tiger-transition/styles/main.min.css";
@@ -26,35 +24,34 @@ export class Adapter extends Component {
         seasons: null,
         episode: null,
         time: null,
-        duration: null
-    }
+        duration: null,
 
-    findRelated = (industry, platform, genre) => {
-        getSubCollection(industry, platform, genre).then(snap => {
-            this.setState({ related: snap })
-        })
-    }
+        season_id: null,
+        episode_id: null,
 
-    getSeason = (industry, platform, genre, id) => {
-        getSeasons(industry, platform, genre, id).then(snap => {
-            this.setState({ seasons: snap })
-        })
+        currentTime: 0
     }
 
     componentDidMount() {
         getDoc("Content", this.props.id).then(snap => {
             this.setState({ show: snap })
             //this.findRelated(snap.industry, snap.platform, snap.genre);
-            if (snap.season) {
-                this.getSeason(snap.id, snap.season)
-            }
         })
 
-        getEpisode(this.props.id,
-            this.props.season,
-            this.props.episode).then(snap => {
-                this.setState({ episode: snap })
-            })
+        /*getTime(this.props.id, this.props.season, this.props.episode).then(time => {
+            if(time.time){
+                this.setState({ currentTime: time.time })
+            }
+
+            getEpisode(this.props.id,
+                this.props.season,
+                this.props.episode).then(snap => {
+                    this.setState({ episode: snap })
+                })
+        })*/
+
+
+        this.setState({ episode_id: this.props.episode, season_id: this.props.season })
     }
 
     handleMute = () => {
@@ -67,13 +64,25 @@ export class Adapter extends Component {
     }
 
     handlevideoMount = (e) => {
-        if(e){
-            this.setState({ duration: e.duration })
+        if (e) {
+            if (e.duration) {
+                this.setState({ duration: e.duration })
+                console.log(e.duration)
+            }
+            if (this.state.currentTime > 0) {
+                e.currentTime = this.state.currentTime
+            }
         }
     }
 
+    componentCleanup = () => {
+        saveTime(this.state.time, this.state.show.id, this.state.season_id, this.state.episode_id).then(r => {
+            window.alert("Done")
+        })
+    }
+
     componentWillUnmount() {
-        saveTime((this.state.time / this.state.duration) * 100, this.state.show.id)
+        //this.componentCleanup();
     }
 
     render() {
@@ -155,7 +164,7 @@ export class Adapter extends Component {
                             </div>
 
                             {
-                                this.state.seasons ? (
+                                this.state.show.season ? (
                                     <div>
                                         <SeasonTabs seasons={this.state.show.season} id={this.state.show.id} />
                                     </div>
@@ -212,17 +221,11 @@ export class Adapter extends Component {
 }
 
 export default function PlayScreen() {
-    const { industry } = useParams();
-    const { platform } = useParams();
-    const { genre } = useParams();
     const { id } = useParams();
     const { season } = useParams();
     const { episode } = useParams();
 
-    React.useEffect(() => {
-    }, [industry]);
-
     return (
-        <Adapter industry={industry} platform={platform} genre={genre} id={id} season={season} episode={episode} />
+        <Adapter id={id} season={season} episode={episode} />
     )
 }

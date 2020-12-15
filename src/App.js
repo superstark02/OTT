@@ -15,6 +15,7 @@ import "react-tiger-transition/styles/main.min.css";
 import Discover from './Pages/Categories/Discover';
 import Anime from './Pages/Categories/Anime';
 import Signin from './Pages/Signin';
+import Temp from './Pages/Temp';
 
 glide({
   name: 'glide-left'
@@ -155,6 +156,16 @@ function App() {
             }
           }} >
           <Signin />
+        </Route>
+
+        <Route exact path='/temp'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Temp />
         </Route>
 
       </Navigation>

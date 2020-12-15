@@ -81,7 +81,7 @@ export default function SeasonTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [tabs, setTabs] = React.useState([])
-    const [s, setS] = React.useState([])
+    const [s] = React.useState([])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -101,7 +101,7 @@ export default function SeasonTabs(props) {
         }
 
         setTabs(tabs)
-    }, [props]);
+    }, [props.seasons]);
 
     return (
         <div className={classes.root}>

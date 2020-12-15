@@ -1,4 +1,4 @@
-import firebase, {db} from '../firebase'
+import firebase, { db } from '../firebase'
 export default function LogIn() {
 
     return new Promise((resolve, reject) => {
@@ -27,30 +27,31 @@ export default function LogIn() {
     });
 }
 
-export function updateUser(uid, name, mail, device){
+export function updateUser(uid, name, mail, device) {
     return new Promise((resolve, reject) => {
 
         db.collection("Users").doc(uid).set({
             name: name,
             uid: uid,
             mail: mail
-        }).then(r=>{
+        }).then(r => {
             db.collection("Users").doc(uid).collection("Devices").doc(device).set(
-                {device:device}
+                { device: device }
             )
         })
 
     });
 }
 
-export function saveTime(time, series_id, season, episode){
+export function saveTime(time, series_id, season, episode) {
     return new Promise((resolve, reject) => {
 
-        var uid = window.Android.getUid();
-
-        db.collection("Users").doc(uid).collection(series_id+"-"+season).doc(episode).update({
-            time:time
-        })
+        var uid =  window.Android.getUid();
+        if (uid) {
+            db.collection("Users").doc(uid).collection(series_id + "-" + season).doc(episode).set({
+                time: time
+            })
+        }
 
     });
 }
