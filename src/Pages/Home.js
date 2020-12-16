@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MyAppBar from '../Components/MyAppBar'
 import Carousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
-import { uploadData } from '../Database/uploadData';
+//import { uploadData } from '../Database/uploadData';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Latest from '../Components/Latest';
 import MyList from '../Components/MyList';
@@ -10,7 +10,7 @@ import getCollectionQuery, { getByWord } from '../Database/getCollectionQuery'
 import shuffleArray from '../Database/shuffleArray'
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import {updateUser} from "../Database/logIn"
+import { updateUser } from "../Database/logIn"
 
 const list = [
     {

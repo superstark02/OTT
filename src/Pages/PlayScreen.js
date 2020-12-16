@@ -38,7 +38,7 @@ export class Adapter extends Component {
             //this.findRelated(snap.industry, snap.platform, snap.genre);
         })
 
-        /*getTime(this.props.id, this.props.season, this.props.episode).then(time => {
+        getTime(this.props.id, this.props.season, this.props.episode).then(time => {
             if(time.time){
                 this.setState({ currentTime: time.time })
             }
@@ -48,7 +48,7 @@ export class Adapter extends Component {
                 this.props.episode).then(snap => {
                     this.setState({ episode: snap })
                 })
-        })*/
+        })
 
 
         this.setState({ episode_id: this.props.episode, season_id: this.props.season })
@@ -82,7 +82,7 @@ export class Adapter extends Component {
     }
 
     componentWillUnmount() {
-        //this.componentCleanup();
+        this.componentCleanup();
     }
 
     render() {

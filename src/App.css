@@ -28,6 +28,14 @@ div{
   font-family: darwin;
 }
 
+input{
+  outline: none;
+}
+
+video{
+  outline: none;
+}
+
 .wrap{
   display: flex;
   justify-content: center;

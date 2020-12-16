@@ -5,22 +5,22 @@ import "../CSS/Components/Categories.css"
 
 const categories = [
     {
-        img: "https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg",
+        img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc1.jpg?alt=media&token=abd87229-51ca-4a8d-9092-b07dea0de5b2",
         title: "DISCOVER",
         to: "/discover"
     },
     {
-        img: "https://in.bmscdn.com/iedb/artist/images/website/poster/large/emily-blunt-4134-24-03-2017-12-41-22.jpg",
+        img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc2.jpg?alt=media&token=5f885ece-cea9-4278-9a5b-dad89965491b",
         title: "HOLLYWOOD",
         to: "/category/Hollywood"
     },
     {
-        img: "https://m.media-amazon.com/images/M/MV5BNGFlYzAyYjgtNzRjNS00NmE4LTliOGYtYzBkYzU5MzRhMDM0XkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_UX214_CR0,0,214,317_AL_.jpg",
+        img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc3.jpg?alt=media&token=90f43aea-da39-469c-9ca0-c17d4fafa892",
         title: "BOLLYWOOD",
         to: "/category/Bollywood"
     },
     {
-        img: "https://merchdope.com/wp-content/uploads/2018/10/death-note.jpg",
+        img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc4.jpg?alt=media&token=164231b1-8f0e-4ba5-84f4-1efdc44d5b41",
         title: "ANIME",
         to: "/anime"
     }
