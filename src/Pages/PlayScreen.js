@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom'
 import "react-tiger-transition/styles/main.min.css";
 import SeasonTabs from '../Components/SeasonTabs'
 import { saveTime } from '../Database/logIn'
+import axios from 'axios'
 
 export class Adapter extends Component {
 
@@ -33,24 +34,43 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        getDoc("Content", this.props.id).then(snap => {
-            this.setState({ show: snap })
-            //this.findRelated(snap.industry, snap.platform, snap.genre);
+        axios.post('http://localhost:4000/get-doc', {
+            name:"Content",
+            doc_name: this.props.id
+        }).then(snap => {
+            this.setState({ show: snap.data })
         })
 
-        getTime(this.props.id, this.props.season, this.props.episode).then(time => {
-            if(time.time){
-                this.setState({ currentTime: time.time })
+        //get time
+        axios.post('http://localhost:4000/get-time', {
+            id: this.props.id,
+            season: this.props.season,
+            episode: this.props.episode,
+            uid:"oN2qdG93XwY0Nt5GU97q4HhNO7r1" //window.Android.getUid()
+        }).then(snap => {
+            if (snap.data.time) {
+                this.setState({currentTime: snap.data.time})
             }
+            
+            axios.post('http://localhost:4000/get-episode',{
+                id: this.props.id,
+                season: this.props.season,
+                episode: this.props.episode
+            }).then(snap=>{
+                this.setState({episode:snap.data})
+            })
 
-            getEpisode(this.props.id,
-                this.props.season,
-                this.props.episode).then(snap => {
-                    this.setState({ episode: snap })
-                })
         })
 
-
+        /*getTime(this.props.id , this.props.season, this.props.episode).then(time => {
+            if (time.time) {
+                this.setState({currentTime: time})
+            }
+            getEpisode(this.props.id, this.props.season, this.props.episode).then(result=>{
+                this.setState({episode:result})
+            })
+        })*/
+        
         this.setState({ episode_id: this.props.episode, season_id: this.props.season })
     }
 
@@ -65,10 +85,6 @@ export class Adapter extends Component {
 
     handlevideoMount = (e) => {
         if (e) {
-            if (e.duration) {
-                this.setState({ duration: e.duration })
-                console.log(e.duration)
-            }
             if (this.state.currentTime > 0) {
                 e.currentTime = this.state.currentTime
             }
@@ -76,9 +92,7 @@ export class Adapter extends Component {
     }
 
     componentCleanup = () => {
-        saveTime(this.state.time, this.state.show.id, this.state.season_id, this.state.episode_id).then(r => {
-            window.alert("Done")
-        })
+        saveTime(this.state.time, this.state.show.id, this.state.season_id, this.state.episode_id).then(r => {})
     }
 
     componentWillUnmount() {
@@ -107,6 +121,7 @@ export class Adapter extends Component {
                                     controlsList="nodownload"
                                     poster={this.state.episode.vidPoster}
                                     className="player" >
+                                    <track label="English" kind="captions" srclang="en" src={this.state.episode.sub} default />
                                     <source src={this.state.episode.content} type="video/mp4" />
                                 </video>
 

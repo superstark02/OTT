@@ -6,8 +6,7 @@ import Categories from '../Components/Categories';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Latest from '../Components/Latest';
 import MyList from '../Components/MyList';
-import getCollectionQuery, { getByWord } from '../Database/getCollectionQuery'
-import shuffleArray from '../Database/shuffleArray'
+import axios from 'axios';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { updateUser } from "../Database/logIn"
@@ -39,9 +38,6 @@ const list = [
     }
 ]
 
-var data = []
-
-
 export class Home extends Component {
 
     state = {
@@ -61,19 +57,9 @@ export class Home extends Component {
             updateUser(window.Android.getUid(),window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId() );
         }*/
 
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].filter.length > 2) {
-                getByWord("Index", list[i].filter).then(result => {
-                    data.push(shuffleArray(result))
-                    this.setState({ data: data })
-                })
-            } else {
-                getCollectionQuery("Index", list[i].filter).then(result => {
-                    data.push(shuffleArray(result))
-                    this.setState({ data: data })
-                })
-            }
-        }
+        axios.get("http://localhost:4000/").then(result=>{
+            this.setState({data:result.data})
+        })
 
     }
 

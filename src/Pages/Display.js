@@ -15,8 +15,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import {Link } from "react-tiger-transition";
+import { Link } from "react-tiger-transition";
 import SeasonTabs from '../Components/SeasonTabs'
+import axios from 'axios'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +35,7 @@ export class Adapter extends Component {
         open: null,
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -46,12 +47,12 @@ export class Adapter extends Component {
 
     getSeason = (id, season) => {
         getSeasons(id, season).then(snap => {
-            this.setState({seasons:snap})
+            this.setState({ seasons: snap })
         })
     }
 
     componentDidMount() {
-        getDoc("Content" , this.props.id).then(snap => {
+        /*getDoc("Content" , this.props.id).then(snap => {
                     this.setState({ show: snap })
                 if (snap.premium) {
                     //check if bought
@@ -62,7 +63,13 @@ export class Adapter extends Component {
                     //this.setState({ open: true })
                     //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
-            })
+            })*/
+        axios.post('http://localhost:4000/get-doc', {
+            name:"Content",
+            doc_name: this.props.id
+        }).then(snap => {
+            this.setState({ show: snap.data })
+        })
     }
 
     handleMute = () => {
@@ -80,7 +87,7 @@ export class Adapter extends Component {
 
     render() {
         return (
-            <div style={{ color: theme.palette.primary.light }}  className="transition-item detail-page" >
+            <div style={{ color: theme.palette.primary.light }} className="transition-item detail-page" >
                 {
                     this.state.show ? (
                         <div>
@@ -108,7 +115,7 @@ export class Adapter extends Component {
                                     autoPlay={true}
                                     loop={false}
                                     muted={this.state.mute}
-                                    style={{height:"100%"}}
+                                    style={{ height: "100%" }}
                                     className="cover-image">
                                     <source src={this.state.show.trailer} className="cover-image" />
                                 </video>
@@ -304,16 +311,16 @@ export class Adapter extends Component {
     }
 }
 
-export default function Display(){
+export default function Display() {
     const { industry } = useParams();
     const { platform } = useParams();
     const { genre } = useParams();
     const { id } = useParams();
 
     React.useEffect(() => {
-      }, [industry]);
+    }, [industry]);
 
-    return(
-        <Adapter industry={industry} platform={platform} genre={genre} id={id}  />
+    return (
+        <Adapter industry={industry} platform={platform} genre={genre} id={id} />
     )
 }

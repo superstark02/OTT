@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import SubAppBar from '../Components/SubAppBar'
 import emailjs from 'emailjs-com';
+import axios from 'axios';
 
 export class Feedback extends Component {
 
     state = {
         sent: null
+    }   
+
+    componentDidMount(){
+        axios.post('http://localhost:4000/get-time', {uid: "someuid"}).then(result=>{
+            console.log(result)
+        })
     }
 
     sendMail = (e) => {

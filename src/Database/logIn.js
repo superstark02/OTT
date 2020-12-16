@@ -46,7 +46,7 @@ export function updateUser(uid, name, mail, device) {
 export function saveTime(time, series_id, season, episode) {
     return new Promise((resolve, reject) => {
 
-        var uid =  window.Android.getUid();
+        var uid =  "oN2qdG93XwY0Nt5GU97q4HhNO7r1"//window.Android.getUid();
         if (uid) {
             db.collection("Users").doc(uid).collection(series_id + "-" + season).doc(episode).set({
                 time: time

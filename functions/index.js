@@ -1,13 +1,21 @@
 const functions = require('firebase-functions');
-const firebase = require("firebase");
+//const admin = require('firebase-admin');
+const firebase = require("firebase-admin");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require("body-parser");
+const app = express();
+
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
+const port = process.env.PORT || 4000;
+app.listen(port, () => { console.log("Listening at " + port) })
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Initialize Cloud Firestore through Firebase
-firebase.initializeApp({
-    apiKey: 'AIzaSyBr6TmUxKkRcpXAb9euN3CqSDbRJ3pCsyw',
-    authDomain: 'project-ott-d883c.firebaseapp.com',
-    projectId: 'project-ott-d883c'
-});
-
+firebase.initializeApp();
 
 ///////////////////////////////////////////////////////////////////////////--------------------->HOME
 var db = firebase.firestore();
@@ -41,21 +49,162 @@ const list = [
     }
 ]
 
-exports.api = functions.https.onCall((data, context) => {
+app.get('/', (req, res) => {
 
-    for (var i = 0; i < list.length; i++) {
-        if (list[i].filter.length > 2) {
-            getByWord("Index", list[i].filter).then(result => {
+    getCollectionQuery("Index", list[0].filter).then(result => {
+
+        data.push(shuffleArray(result))
+
+        getCollectionQuery("Index", list[1].filter).then(result => {
+            data.push(shuffleArray(result))
+
+            getCollectionQuery("Index", list[2].filter).then(result => {
                 data.push(shuffleArray(result))
+
+                getCollectionQuery("Index", list[3].filter).then(result => {
+                    data.push(shuffleArray(result))
+
+                    getCollectionQuery("Index", list[4].filter).then(result => {
+                        data.push(shuffleArray(result))
+
+                        getCollectionQuery("Index", list[5].filter).then(result => {
+                            data.push(shuffleArray(result))
+                            res.send(data)
+
+                            return "null"
+
+                        }).catch(e=>{
+                            return e
+                        })
+
+                        return "null"
+
+                    }).catch(e=>{
+                        return e
+                    })
+
+                    return "null"
+
+                }).catch(e=>{
+                    return e
+                })
+
+                return "null"
+
+            }).catch(e=>{
+                return e
             })
-        } else {
-            getCollectionQuery("Index", list[i].filter).then(result => {
-                data.push(shuffleArray(result))
-            })
+
+            return "null";
+
+        }).catch(e => {
+            return e
+        })
+
+        return "null"
+
+    }).catch(e => {
+        return e
+    })
+
+})
+
+app.post('/get-time', (req, res) => {
+
+    var uid = "oN2qdG93XwY0Nt5GU97q4HhNO7r1"
+    uid = req.body.uid
+
+    getTime(req.body.id, req.body.season, req.body.episode, req.body.uid).then(time => {
+        if (time) {
+            res.send(time)
         }
-    }
+        return "null"
+    }).catch(e=>{
+        return e
+    })
 
-});
+})
+
+app.post('/save-time', (req, res) => {
+    var uid = "oN2qdG93XwY0Nt5GU97q4HhNO7r1"
+    uid = req.body.uid
+    
+    saveTime(req.body.time, req.body.series_id, req.body.season, req.body.episode, req.body.uid).then(r => { return "null" })
+    .catch(e=>{
+        return e
+    })
+})
+
+app.post('/get-doc', (req, res) => {
+    
+    getDoc(req.body.name, req.body.doc_name).then(result => {
+        res.send(result)
+        return "null"
+    }).catch(e=>{
+        return e
+    })
+})
+
+app.post('/get-episode', (req, res) => {
+
+    getEpisode(req.body.id, req.body.season, req.body.episode).then(snap => {
+        res.send(snap)
+        return "null"
+    }).catch(e=>{
+        return e
+    })
+})
+
+exports.widgets = functions.https.onRequest(app);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////Functions///////////////////////////////
+
+function getDoc(name, doc_name) {
+
+    return new Promise((resolve, reject) => {
+
+        db.collection(name).doc(doc_name)
+            .get()
+            .then(snapshot => {
+                if (snapshot.exists) {
+                    resolve(snapshot.data());
+                }
+                else {
+                    resolve("Empty")
+                }
+                return "null"
+            })
+            .catch(reason => {
+                reject(reason);
+                return reason
+            });
+    });
+}
 
 function getCollectionQuery(name, filter) {
 
@@ -66,39 +215,110 @@ function getCollectionQuery(name, filter) {
 
         collection.get().then(snapshot => {
             if (snapshot.empty) {
-                reject("Empty")
+                reject(new Error("Empty"))
             }
             else {
                 snapshot.forEach(doc => {
-                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1]) ) {
-                        if(notAnime(doc.data().keywords)){
+                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
+                        if (notAnime(doc.data().keywords)) {
                             data.push(doc.data())
                         }
                     }
                 });
                 resolve(data)
             }
+
+            return "null"
+
         }).catch(e => {
             reject(e)
+            return e
         })
     });
 }
 
-function search(array, filter){
-    for(var k = 0; k < array.length; k++){
-        if(array[k]===filter){
+function getTime(searies_id, season, episode, uid) {
+
+    return new Promise((resolve, reject) => {
+
+        db.collection("Users").doc(uid).collection(searies_id + "-" + season).doc(episode)
+            .get()
+            .then(snapshot => {
+                if (snapshot.exists) {
+                    resolve(snapshot.data());
+                }
+                else {
+                    resolve("Empty")
+                }
+
+                return "null"
+            })
+            .catch(reason => {
+                reject(reason);
+            });
+    });
+}
+
+function getEpisode(id, season, episode) {
+    return new Promise((resolve, reject) => {
+
+        db.collection("Content").doc(id).collection(season).doc(episode)
+            .get()
+            .then(snapshot => {
+                if (snapshot.exists) {
+                    resolve(snapshot.data());
+                }
+                else {
+                    resolve("Empty")
+                }
+                return "null"
+            })
+            .catch(reason => {
+                reject(reason);
+            });
+    });
+}
+
+function saveTime(time, series_id, season, episode, uid) {
+    return new Promise((resolve, reject) => {
+
+        if (uid) {
+            db.collection("Users").doc(uid).collection(series_id + "-" + season).doc(episode).set({
+                time: time
+            })
+        }
+
+        return "null"
+
+    });
+}
+
+
+function search(array, filter) {
+    for (var k = 0; k < array.length; k++) {
+        if (array[k] === filter) {
             return true
         }
     }
     return false
 }
 
-function notAnime(array){
-    for(var k = 0; k < array.length; k++){
-        if(array[k]==="Anime"){
+function notAnime(array) {
+    for (var k = 0; k < array.length; k++) {
+        if (array[k] === "Anime") {
             return false
         }
     }
     return true
 }
-////////////////////////////////////////////////////////////////
+
+function shuffleArray(array) {
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
