@@ -6,11 +6,8 @@ import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded } from '@material-ui/icons'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
-import getEpisode from '../Database/getEpisode'
-import getDoc, { getTime } from '../Database/getDoc'
 import ReadMoreAndLess from 'react-read-more-less';
 import { useParams } from 'react-router-dom'
-import "react-tiger-transition/styles/main.min.css";
 import SeasonTabs from '../Components/SeasonTabs'
 import { saveTime } from '../Database/logIn'
 import axios from 'axios'
@@ -34,7 +31,7 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        axios.post('http://localhost:4000/get-doc', {
+        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name:"Content",
             doc_name: this.props.id
         }).then(snap => {
@@ -42,17 +39,17 @@ export class Adapter extends Component {
         })
 
         //get time
-        axios.post('http://localhost:4000/get-time', {
+        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-time', { //get-time
             id: this.props.id,
             season: this.props.season,
             episode: this.props.episode,
-            uid:"oN2qdG93XwY0Nt5GU97q4HhNO7r1" //window.Android.getUid()
+            uid: window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
                 this.setState({currentTime: snap.data.time})
             }
             
-            axios.post('http://localhost:4000/get-episode',{
+            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-episode',{ //get-episode
                 id: this.props.id,
                 season: this.props.season,
                 episode: this.props.episode

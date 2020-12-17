@@ -22,3 +22,5 @@ const firebaseConfig = {
   export const storage = firebase.storage();
 
   export default firebase;
+
+  export const url = "https://us-central1-project-ott-d883c.cloudfunctions.net/widgets"

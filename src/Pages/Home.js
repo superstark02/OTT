@@ -4,11 +4,9 @@ import Carousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
 //import { uploadData } from '../Database/uploadData';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import Latest from '../Components/Latest';
 import MyList from '../Components/MyList';
 import axios from 'axios';
 import Loader from 'react-loader-spinner'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { updateUser } from "../Database/logIn"
 
 const list = [
@@ -33,7 +31,7 @@ const list = [
         filter: 'Netflix'
     },
     {
-        title: 'Animated For Kids',
+        title: 'Animated',
         filter: 'Animated'
     }
 ]
@@ -57,7 +55,7 @@ export class Home extends Component {
             updateUser(window.Android.getUid(),window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId() );
         }*/
 
-        axios.get("http://localhost:4000/").then(result=>{
+        axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result=>{
             this.setState({data:result.data})
         })
 
@@ -70,21 +68,14 @@ export class Home extends Component {
                     <MyAppBar uid={this.state.uid} />
                     <Carousel />
                     <Categories />
-                    <Latest title="Latest" filter="2014" />
+                    
 
                     <MyList title={list[0].title} data={this.state.data[0]} />
                     <MyList title={list[1].title} data={this.state.data[1]} />
                     <MyList title={list[2].title} data={this.state.data[2]} />
-                    <MyList title={list[3].title} data={this.state.data[3]} />
-                    <MyList title={list[4].title} data={this.state.data[4]} />
+                    
                     <MyList title={list[5].title} data={this.state.data[5]} />
 
-                    {/*<MyList title="Comedy Series To Watch" filter={["Comedy", "Series"]} />
-                    <MyList title="Action Films" filter={["Action", "Movie"]} />
-                    <MyList title="Drama Series" filter={["Drama", "Series"]} />
-                    <MyList title="Fiction Series" filter="Fiction" />
-                    <MyList title="By Netflix" filter="Netflix" />
-                    <MyList title="Animated For Kids" filter="Animated" />*/}
                 </div>
             )
         } else {

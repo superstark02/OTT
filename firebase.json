@@ -8,7 +8,7 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/**",
         "destination": "/index.html"
       }
     ]

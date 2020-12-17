@@ -1,21 +1,28 @@
 const functions = require('firebase-functions');
 //const admin = require('firebase-admin');
-const firebase = require("firebase-admin");
+const firebase = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const app = express();
 
-// Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
-const port = process.env.PORT || 4000;
-app.listen(port, () => { console.log("Listening at " + port) })
+const config = {
+    apiKey: 'AIzaSyBr6TmUxKkRcpXAb9euN3CqSDbRJ3pCsyw',
+    authDomain: 'project-ott-d883c.firebaseapp.com',
+    projectId: 'project-ott-d883c',
+    databaseURL: 'https://project-ott-d883c.firebaseio.com',
+}
 
+firebase.initializeApp(config);
+
+// Automatically allow cross-origin requests 
+const port = process.env.PORT || 4000;
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.listen(port, () => { console.log("Listening at " + port) })
 // Initialize Cloud Firestore through Firebase
-firebase.initializeApp();
+
 
 ///////////////////////////////////////////////////////////////////////////--------------------->HOME
 var db = firebase.firestore();
@@ -45,7 +52,7 @@ const list = [
     },
     {
         title: 'Animated For Kids',
-        filter: 'Animated'
+        filter: ['Animated', "Movie"]
     }
 ]
 
@@ -73,25 +80,25 @@ app.get('/', (req, res) => {
 
                             return "null"
 
-                        }).catch(e=>{
+                        }).catch(e => {
                             return e
                         })
 
                         return "null"
 
-                    }).catch(e=>{
+                    }).catch(e => {
                         return e
                     })
 
                     return "null"
 
-                }).catch(e=>{
+                }).catch(e => {
                     return e
                 })
 
                 return "null"
 
-            }).catch(e=>{
+            }).catch(e => {
                 return e
             })
 
@@ -111,36 +118,38 @@ app.get('/', (req, res) => {
 
 app.post('/get-time', (req, res) => {
 
-    var uid = "oN2qdG93XwY0Nt5GU97q4HhNO7r1"
-    uid = req.body.uid
-
-    getTime(req.body.id, req.body.season, req.body.episode, req.body.uid).then(time => {
-        if (time) {
-            res.send(time)
-        }
-        return "null"
-    }).catch(e=>{
-        return e
-    })
+    if (req.body.uid) {
+        getTime(req.body.id, req.body.season, req.body.episode, req.body.uid).then(time => {
+            if (time) {
+                res.send(time)
+            }
+            return "null"
+        }).catch(e => {
+            return e
+        })
+    } else {
+        res.send(null)
+    }
 
 })
 
 app.post('/save-time', (req, res) => {
-    var uid = "oN2qdG93XwY0Nt5GU97q4HhNO7r1"
-    uid = req.body.uid
-    
-    saveTime(req.body.time, req.body.series_id, req.body.season, req.body.episode, req.body.uid).then(r => { return "null" })
-    .catch(e=>{
-        return e
-    })
+    if (req.body.uid) {
+        saveTime(req.body.time, req.body.series_id, req.body.season, req.body.episode, req.body.uid).then(r => { return "null" })
+            .catch(e => {
+                return e
+            })
+    } else {
+        req.body.uid
+    }
 })
 
 app.post('/get-doc', (req, res) => {
-    
+
     getDoc(req.body.name, req.body.doc_name).then(result => {
         res.send(result)
         return "null"
-    }).catch(e=>{
+    }).catch(e => {
         return e
     })
 })
@@ -150,7 +159,7 @@ app.post('/get-episode', (req, res) => {
     getEpisode(req.body.id, req.body.season, req.body.episode).then(snap => {
         res.send(snap)
         return "null"
-    }).catch(e=>{
+    }).catch(e => {
         return e
     })
 })

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
-import { Link } from "react-tiger-transition";
 import getSubCollection from '../Database/getSubCollection';
 
 function TabPanel(props) {
@@ -89,7 +88,6 @@ export default function SeasonTabs(props) {
 
     React.useEffect(() => {
         var i = 0;
-        var tabs = []
 
         for (i; i < parseInt(props.seasons); i++) {
             tabs.push(
@@ -101,7 +99,7 @@ export default function SeasonTabs(props) {
         }
 
         setTabs(tabs)
-    }, [props.seasons]);
+    },[tabs]);
 
     return (
         <div className={classes.root}>
@@ -117,47 +115,81 @@ export default function SeasonTabs(props) {
                 </StyledTabs>
                 {
                     tabs.map((item, index) => {
-                        return (
-                            <TabPanel value={value} index={index}>
-                                <div className="ss-container" >
-                                    {
-                                        s[index] &&
-                                        s[index].map((i, episode) => {
-                                            return (
-                                                <Link to={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-" + (episode + 1)} >
-                                                    <div style={{
-                                                        background:"url("+i.image+")",
-                                                        backgroundSize:"cover", 
-                                                        backgroundPosition:"center", 
-                                                        height:"30vw", 
-                                                        width:"45vw",
-                                                        marginRight:"10px",
-                                                        borderRadius:"2px",
-                                                        boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
-                                                        display:"flex",
-                                                        flexDirection:"column",
-                                                        justifyContent:"flex-end"
-                                                        }} >
-                                                        <div style={{ bottom:"0", width:'20%', padding:"1px 0px", backgroundColor:"white"}} >
+                        if(index < 9 ){
+                            return (
+                                <TabPanel value={value} index={index}>
+                                    <div className="ss-container" >
+                                        {
+                                            s[index] &&
+                                            s[index].map((i, episode) => {
+                                                if(episode < 9){
+                                                    return (
+                                                        <a href={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-0" + (episode + 1 )} >
+                                                            <div style={{
+                                                                background:"url("+i.image+")",
+                                                                backgroundSize:"cover", 
+                                                                backgroundPosition:"center", 
+                                                                height:"30vw", 
+                                                                width:"45vw",
+                                                                marginRight:"10px",
+                                                                borderRadius:"2px",
+                                                                boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
+                                                                display:"flex",
+                                                                flexDirection:"column",
+                                                                justifyContent:"flex-end"
+                                                                }} >
+                                                                <div style={{ bottom:"0", width:'20%', padding:"1px 0px", backgroundColor:"white"}} >
+        
+                                                                </div>
+                                                            </div>
+                                                            <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
+                                                               {i.name} 
+                                                            </div>
+                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                               Season-{(index+1)} Episode-{(episode+1)} 
+                                                            </div>
+                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                               {i.date}
+                                                            </div>
+                                                        </a>
+                                                    )
+                                                }else{
+                                                    return (
+                                                        <a href={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-" + (episode + 1 )} >
+                                                            <div style={{
+                                                                background:"url("+i.image+")",
+                                                                backgroundSize:"cover", 
+                                                                backgroundPosition:"center", 
+                                                                height:"30vw", 
+                                                                width:"45vw",
+                                                                marginRight:"10px",
+                                                                borderRadius:"2px",
+                                                                boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
+                                                                display:"flex",
+                                                                flexDirection:"column",
+                                                                justifyContent:"flex-end"
+                                                                }} >
+                                                            </div>
+                                                            <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
+                                                               {i.name} 
+                                                            </div>
+                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                               Season-{(index+1)} Episode-{(episode+1)} 
+                                                            </div>
+                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
+                                                               {i.date}
+                                                            </div>
+                                                        </a>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </div>
+                                </TabPanel>
+                            )
+                        }else{
 
-                                                        </div>
-                                                    </div>
-                                                    <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
-                                                       {i.name} 
-                                                    </div>
-                                                    <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                       Season-{(index+1)} Episode-{(episode+1)} 
-                                                    </div>
-                                                    <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                       {i.date}
-                                                    </div>
-                                                </Link>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </TabPanel>
-                        )
+                        }
                     })
                 }
                 <Typography className={classes.padding} />

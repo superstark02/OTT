@@ -64,7 +64,7 @@ export class Adapter extends Component {
                     //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
             })*/
-        axios.post('http://localhost:4000/get-doc', {
+        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name:"Content",
             doc_name: this.props.id
         }).then(snap => {
@@ -122,7 +122,7 @@ export class Adapter extends Component {
                             </div>
                             <div className="wrap" style={{ marginBottom: "30px" }} >
                                 <div className="wrap play-button" >
-                                    <Link to={"/play/" + this.state.show.id + "/Season-1/episode-1"} >
+                                    <Link to={"/play/" + this.state.show.id + "/Season-1/episode-01"} >
                                         <IconButton>
                                             <PlayArrowRounded style={{ fontSize: "40px", color: "black" }} />
                                         </IconButton>

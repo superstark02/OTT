@@ -1,0 +1,21 @@
+[debug] [2020-12-17T07:48:21.084Z] ----------------------------------------------------------------------
+[debug] [2020-12-17T07:48:21.105Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\super\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions:widgets
+[debug] [2020-12-17T07:48:21.106Z] CLI Version:   8.19.0
+[debug] [2020-12-17T07:48:21.106Z] Platform:      win32
+[debug] [2020-12-17T07:48:21.106Z] Node Version:  v12.16.1
+[debug] [2020-12-17T07:48:21.352Z] Time:          Thu Dec 17 2020 13:18:21 GMT+0530 (India Standard Time)
+[debug] [2020-12-17T07:48:21.353Z] ----------------------------------------------------------------------
+[debug] [2020-12-17T07:48:21.353Z] 
+[debug] [2020-12-17T07:48:21.503Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-17T07:48:21.505Z] > authorizing via signed-in user
+[debug] [2020-12-17T07:48:21.506Z] [iam] checking project project-ott-d883c for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-12-17T07:48:21.514Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-12-17T07:48:21.515Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-12-17T07:48:22.085Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Thu, 17 Dec 2020 07:48:21 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-17T07:48:22.460Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-ott-d883c:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2020-12-17T07:48:24.339Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 17 Dec 2020 07:48:23 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1589","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-17T07:48:24.341Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/project-ott-d883c/serviceAccounts/project-ott-d883c@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-12-17T07:48:26.223Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 17 Dec 2020 07:48:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
