@@ -22,7 +22,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3} style={{padding:"10px 0px"}} >
+                <Box p={3} style={{ padding: "10px 0px" }} >
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -76,125 +76,126 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SeasonTabs(props) {
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
-    const [tabs, setTabs] = React.useState([])
-    const [s] = React.useState([])
+export default class SeasonTabs extends React.Component {
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    state = {
+        value: 0,
+        tabs: [],
+        s: []
+    }
+
+    handleChange = (event, newValue) => {
+        this.setState({ value: newValue });
     };
 
-    React.useEffect(() => {
+    componentDidMount() {
         var i = 0;
 
-        for (i; i < parseInt(props.seasons); i++) {
-            tabs.push(
+        for (i; i < parseInt(this.props.seasons); i++) {
+            this.state.tabs.push(
                 <StyledTab label={"Season " + (i + 1)} />
             )
-            getSubCollection("Content", props.id, "Season-"+(i+1)).then(r=>{
-                s.push(r)
+            getSubCollection("Content", this.props.id, "Season-" + (i + 1)).then(r => {
+                this.state.s.push(r)
             })
         }
 
-        setTabs(tabs)
-    },[tabs]);
+    }
 
-    return (
-        <div className={classes.root}>
-            <div className={classes.demo2}>
-                <StyledTabs value={value} variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="styled tabs example">
+    render() {
+        return (
+            <div>
+                <div>
+                    <StyledTabs value={this.state.value} variant="scrollable" scrollButtons="auto" onChange={this.handleChange} aria-label="styled tabs example">
+                        {
+                            this.state.tabs.map(item => {
+                                return (
+                                    item
+                                )
+                            })
+                        }
+                    </StyledTabs>
                     {
-                        tabs.map(item => {
-                            return (
-                                item
-                            )
+                        this.state.tabs &&
+                        this.state.tabs.map((item, index) => {
+                            if (index < 9) {
+                                return (
+                                    <TabPanel value={this.state.value} index={index}>
+                                        <div className="ss-container" >
+                                            {
+                                                this.state.s[index] &&
+                                                this.state.s[index].map((i, episode) => {
+                                                    if (episode < 9) {
+                                                        return (
+                                                            <a href={"/play/" + this.props.id + "/Season-" + (index + 1) + "/episode-0" + (episode + 1)} >
+                                                                <div style={{
+                                                                    background: "url(" + i.image + ")",
+                                                                    backgroundSize: "cover",
+                                                                    backgroundPosition: "center",
+                                                                    height: "30vw",
+                                                                    width: "45vw",
+                                                                    marginRight: "10px",
+                                                                    borderRadius: "2px",
+                                                                    boxShadow: "0px 10px 10px  rgba(0, 0, 0, 0.5)",
+                                                                    display: "flex",
+                                                                    flexDirection: "column",
+                                                                    justifyContent: "flex-end"
+                                                                }} >
+                                                                </div>
+                                                                <div style={{ fontSize: "12px", textOverflow: "ellipsis", width: "40vw", whiteSpace: "nowrap", overflow: "hidden", marginTop: "10px" }} >
+                                                                    {i.name}
+                                                                </div>
+                                                                <div style={{ fontSize: "10px", color: "grey", textTransform: "uppercase" }} >
+                                                                    Season-{(index + 1)} Episode-{(episode + 1)}
+                                                                </div>
+                                                                <div style={{ fontSize: "10px", color: "grey", textTransform: "uppercase" }} >
+                                                                    {i.date}
+                                                                </div>
+                                                            </a>
+                                                        )
+                                                    } else {
+                                                        return (
+                                                            <a href={"/play/" + this.props.id + "/Season-" + (index + 1) + "/episode-" + (episode + 1)} >
+                                                                <div style={{
+                                                                    background: "url(" + i.image + ")",
+                                                                    backgroundSize: "cover",
+                                                                    backgroundPosition: "center",
+                                                                    height: "30vw",
+                                                                    width: "45vw",
+                                                                    marginRight: "10px",
+                                                                    borderRadius: "2px",
+                                                                    boxShadow: "0px 10px 10px  rgba(0, 0, 0, 0.5)",
+                                                                    display: "flex",
+                                                                    flexDirection: "column",
+                                                                    justifyContent: "flex-end"
+                                                                }} >
+                                                                </div>
+                                                                <div style={{ fontSize: "12px", textOverflow: "ellipsis", width: "40vw", whiteSpace: "nowrap", overflow: "hidden", marginTop: "10px" }} >
+                                                                    {i.name}
+                                                                </div>
+                                                                <div style={{ fontSize: "10px", color: "grey", textTransform: "uppercase" }} >
+                                                                    Season-{(index + 1)} Episode-{(episode + 1)}
+                                                                </div>
+                                                                <div style={{ fontSize: "10px", color: "grey", textTransform: "uppercase" }} >
+                                                                    {i.date}
+                                                                </div>
+                                                            </a>
+                                                        )
+                                                    }
+                                                })
+                                            }
+                                        </div>
+                                    </TabPanel>
+                                )
+                            } else {
+
+                            }
                         })
                     }
-                </StyledTabs>
-                {
-                    tabs.map((item, index) => {
-                        if(index < 9 ){
-                            return (
-                                <TabPanel value={value} index={index}>
-                                    <div className="ss-container" >
-                                        {
-                                            s[index] &&
-                                            s[index].map((i, episode) => {
-                                                if(episode < 9){
-                                                    return (
-                                                        <a href={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-0" + (episode + 1 )} >
-                                                            <div style={{
-                                                                background:"url("+i.image+")",
-                                                                backgroundSize:"cover", 
-                                                                backgroundPosition:"center", 
-                                                                height:"30vw", 
-                                                                width:"45vw",
-                                                                marginRight:"10px",
-                                                                borderRadius:"2px",
-                                                                boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
-                                                                display:"flex",
-                                                                flexDirection:"column",
-                                                                justifyContent:"flex-end"
-                                                                }} >
-                                                                <div style={{ bottom:"0", width:'20%', padding:"1px 0px", backgroundColor:"white"}} >
-        
-                                                                </div>
-                                                            </div>
-                                                            <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
-                                                               {i.name} 
-                                                            </div>
-                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                               Season-{(index+1)} Episode-{(episode+1)} 
-                                                            </div>
-                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                               {i.date}
-                                                            </div>
-                                                        </a>
-                                                    )
-                                                }else{
-                                                    return (
-                                                        <a href={"/play/" + props.id + "/Season-" + (index + 1) + "/episode-" + (episode + 1 )} >
-                                                            <div style={{
-                                                                background:"url("+i.image+")",
-                                                                backgroundSize:"cover", 
-                                                                backgroundPosition:"center", 
-                                                                height:"30vw", 
-                                                                width:"45vw",
-                                                                marginRight:"10px",
-                                                                borderRadius:"2px",
-                                                                boxShadow:"0px 10px 10px  rgba(0, 0, 0, 0.5)",
-                                                                display:"flex",
-                                                                flexDirection:"column",
-                                                                justifyContent:"flex-end"
-                                                                }} >
-                                                            </div>
-                                                            <div style={{fontSize:"12px", textOverflow:"ellipsis", width:"40vw", whiteSpace:"nowrap", overflow:"hidden", marginTop:"10px"}} >
-                                                               {i.name} 
-                                                            </div>
-                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                               Season-{(index+1)} Episode-{(episode+1)} 
-                                                            </div>
-                                                            <div style={{fontSize:"10px",color:"grey",textTransform:"uppercase"}} >
-                                                               {i.date}
-                                                            </div>
-                                                        </a>
-                                                    )
-                                                }
-                                            })
-                                        }
-                                    </div>
-                                </TabPanel>
-                            )
-                        }else{
-
-                        }
-                    })
-                }
-                <Typography className={classes.padding} />
+                    <Typography />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 

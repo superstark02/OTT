@@ -26,6 +26,7 @@ export class Adapter extends Component {
 
         season_id: null,
         episode_id: null,
+        show_id:null,
 
         currentTime: 0
     }
@@ -43,7 +44,7 @@ export class Adapter extends Component {
             id: this.props.id,
             season: this.props.season,
             episode: this.props.episode,
-            uid: "a"//window.Android.getUid()
+            uid: window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
                 this.setState({currentTime: snap.data.time})
@@ -55,21 +56,18 @@ export class Adapter extends Component {
                 episode: this.props.episode
             }).then(snap=>{
                 this.setState({episode:snap.data})
-                console.log(snap.data)
             })
 
         })
 
-        /*getTime(this.props.id , this.props.season, this.props.episode).then(time => {
-            if (time.time) {
-                this.setState({currentTime: time})
-            }
-            getEpisode(this.props.id, this.props.season, this.props.episode).then(result=>{
-                this.setState({episode:result})
-            })
-        })*/
+        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching',{
+            uid: window.Android.getUid(),
+            series_id: this.props.id,
+            episode: this.props.episode,
+            season: this.props.season
+        })
         
-        this.setState({ episode_id: this.props.episode, season_id: this.props.season })
+        this.setState({ episode_id: this.props.episode, season_id: this.props.season, show_id: this.props.id })
     }
 
     handleMute = () => {
@@ -90,7 +88,7 @@ export class Adapter extends Component {
     }
 
     componentCleanup = () => {
-        saveTime(this.state.time, this.state.show.id, this.state.season_id, this.state.episode_id).then(r => {})
+        saveTime(this.state.time, this.state.show_id, this.state.season_id, this.state.episode_id).then(r => {})
     }
 
     componentWillUnmount() {

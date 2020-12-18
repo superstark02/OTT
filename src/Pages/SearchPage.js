@@ -49,7 +49,7 @@ export class SearchPage extends Component {
                             return (
                                 <div style={{ width: "fit-content", margin: "10px 0px" }} className="wrap" >
                                     <ButtonBase style={{ height: "100%" }}>
-                                        <Link to={"/display/" + DataTransferItem.id}
+                                        <Link to={"/display/" + item.id}
                                             style={{ height: "100%" }}  >
                                             <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 

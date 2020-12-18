@@ -9,12 +9,6 @@ export class Feedback extends Component {
         sent: null
     }   
 
-    componentDidMount(){
-        axios.post('http://localhost:4000/get-time', {uid: "someuid"}).then(result=>{
-            console.log(result)
-        })
-    }
-
     sendMail = (e) => {
         e.preventDefault();
 

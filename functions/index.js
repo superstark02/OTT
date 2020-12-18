@@ -12,6 +12,7 @@ var db = firebase.firestore();
 app.use(cors({ origin: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.listen(4000, () => { console.log("Listening at " + 4000) })
 
 app.get('/', (req, res) => {
     var data = []
@@ -48,7 +49,7 @@ app.post('/get-doc', (req, res) => {
 
 app.post('/get-episode', (req, res) => {
 
-    if(req.body.id && req.body.season && req.body.episode){
+    if (req.body.id && req.body.season && req.body.episode) {
         getEpisode(req.body.id, req.body.season, req.body.episode).then(snap => {
             res.send(snap)
             return "null"
@@ -74,9 +75,62 @@ app.post('/get-time', (req, res) => {
     }
 })
 
+app.post('/continue-watching', (req, res) => {
+    var list = []
+    var store = []
+    if (req.body.uid) {
+        getWatching("Users", req.body.uid, "Watching").then(snap=>{
+            store.push(snap.length)
+            for(var i = 0; i < snap.length ; i++){
+                getDoc("Index", snap[i].id).then(sna=>{
+                    list.push(sna);
+                    if(i === store[0]){
+                        res.send(list)
+                    }
+                })
+            }
+        }).catch(e=>{
+            console.log(e)
+        })
+    } else {
+        res.send(null)
+    }
+})
+
+app.post('/add-watching', (req, res) => {
+    if (req.body.uid) {
+        addSubDoc("Users", req.body.uid, "Watching", req.body.series_id, {
+            id: req.body.series_id,
+            episode: req.body.episode,
+            season: req.body.season,
+            date: Date.now()
+        })
+    } else {
+        res.send(null)
+    }
+})
+
 exports.widgets = functions.https.onRequest(app);
 
 
+
+
+function getWatching(collection , doc, sub_collection){
+    return new Promise((resolve, reject) => {
+        var data = [];
+        db.collection(collection).doc(doc).collection(sub_collection).orderBy("time").limit(5)
+            .get()
+            .then(snapshot => {
+                snapshot.forEach(doc => {
+                    data.push(doc.data())
+                });
+                resolve(data);
+            })
+            .catch(reason => {
+                reject(reason);
+            });
+    });
+}
 
 function getDoc(name, doc_name) {
 
@@ -140,6 +194,18 @@ function getCollectionQuery(name, filter) {
             return "null"
         }).catch(e => {
             reject(e)
+        })
+    });
+}
+
+function addSubDoc(collection,doc,sub_collection,sub_doc,data){
+
+    return new Promise((resolve, reject) => {
+
+        db.collection(collection).doc(doc).collection(sub_collection).doc(sub_doc).set(data).then(result=>{
+            resolve(1);
+        }).catch(error=>{
+            reject(error)
         })
     });
 }

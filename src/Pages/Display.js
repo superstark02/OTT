@@ -185,20 +185,6 @@ export class Adapter extends Component {
                             {
                                 this.state.show.season ? (
                                     <div>
-                                        {/*<div className="h7" >
-                                            Season - 1
-                                        </div>
-                                        <div className="ss-container" >
-                                            {
-                                                this.state.seasons.map(item => {
-                                                    return (
-                                                        <Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/" + item.id} >
-                                                            <img src={item.image} className="ss" alt="i" />
-                                                        </Link>
-                                                    )
-                                                })
-                                            }
-                                        </div>*/}
                                         <SeasonTabs seasons={this.state.show.season} id={this.state.show.id} />
                                     </div>
                                 ) : (
