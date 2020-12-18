@@ -4,11 +4,9 @@ import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
 import { ButtonBase, IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
-import getDoc from '../Database/getDoc'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
-import getSeasons from '../Database/getSeason'
 import { useParams } from 'react-router-dom'
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
@@ -45,12 +43,6 @@ export class Adapter extends Component {
         })
     }
 
-    getSeason = (id, season) => {
-        getSeasons(id, season).then(snap => {
-            this.setState({ seasons: snap })
-        })
-    }
-
     componentDidMount() {
         /*getDoc("Content" , this.props.id).then(snap => {
                     this.setState({ show: snap })
@@ -64,6 +56,7 @@ export class Adapter extends Component {
                     //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
             })*/
+            
         axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name:"Content",
             doc_name: this.props.id

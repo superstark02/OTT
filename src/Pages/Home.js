@@ -50,7 +50,7 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        /*if(window.Android.getUid()){
+        /*if(window.Android.getUid()){  https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/
             this.setState({ uid: window.Android.getUid() })
             updateUser(window.Android.getUid(),window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId() );
         }*/

@@ -43,7 +43,7 @@ export class Adapter extends Component {
             id: this.props.id,
             season: this.props.season,
             episode: this.props.episode,
-            uid: window.Android.getUid()
+            uid: "a"//window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
                 this.setState({currentTime: snap.data.time})
@@ -55,6 +55,7 @@ export class Adapter extends Component {
                 episode: this.props.episode
             }).then(snap=>{
                 this.setState({episode:snap.data})
+                console.log(snap.data)
             })
 
         })

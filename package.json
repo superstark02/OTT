@@ -1,7 +1,6 @@
 {
   "name": "ott",
   "version": "0.1.0",
-  "proxy": "https://us-central1-project-ott-d883c.cloudfunctions.net/widgets",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.2",

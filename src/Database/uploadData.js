@@ -240,31 +240,25 @@ export function uploadData() {
     }*/
 
 
-    for (i = 0; i < result.length; i++) {
+    for (i = 0; i < barry.length; i++) {
         var temp
-        temp = {
-            content: result[i].content,
-            id: "episode-0" + (i + 1),
-            image: result[i].image,
-            name: "Episode " + (1 + i)
-        }
 
         if (i < 9) {
             temp = {
-                content: result[i].content,
-                date: result[i].date,
+                content: barry[i].content,
+                date: barry[i].date,
                 id: "episode-0" + (i + 1),
-                image: result[i].image,
-                name: result[i].name
+                image: barry[i].image,
+                name: barry[i].name
             }
         }
         else {
             temp = {
-                content: result[i].content,
+                content: barry[i].content,
                 date: "1998",
                 id: "episode-" + (i + 1),
                 image: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Anime%2FGTO%2Fgto.jpg?alt=media&token=6f85b484-7f8a-408c-b24e-99136cfe9a2a",
-                name: result[i].name
+                name: barry[i].name
             }
         }
         db.collection("Content").doc("tvftripling").collection("Season-1").doc(temp.id).set(temp).then(r => {
