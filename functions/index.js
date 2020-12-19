@@ -17,15 +17,18 @@ app.listen(4000, () => { console.log("Listening at " + 4000) })
 app.get('/', (req, res) => {
     var data = []
     getCollectionQuery("Index", ["Comedy", "Series"]).then(snap => {
-        data.push(snap)
+        data.push(shuffleArray(snap))
         getCollectionQuery("Index", ["Action", "Movie"]).then(sna => {
-            data.push(sna)
+            data.push(shuffleArray(sna))
             getCollectionQuery("Index", ["Drama", "Series"]).then(sn => {
-                data.push(sn)
+                data.push(shuffleArray(sn))
                 getCollectionQuery("Index", ['Animated', "Movie"]).then(s => {
-                    data.push(s)
-                    res.send(data)
-                    return null
+                    data.push(shuffleArray(s))
+                    getCollectionQuery("Index", ['Adventure', "Movie"]).then(s_ => {
+                        data.push(shuffleArray(s_))
+                        res.send(data)
+                        return null
+                    })
                 })
             })
         })
@@ -83,8 +86,13 @@ app.post('/continue-watching', (req, res) => {
             store.push(snap.length)
             for(var i = 0; i < snap.length ; i++){
                 getDoc("Index", snap[i].id).then(sna=>{
-                    list.push(sna);
-                    if(i === store[0]){
+                    list.push({
+                        poster: sna.poster,
+                        id: snap[i].id,
+                        season: snap[i].season,
+                        episode: snap[i].episode
+                    });
+                    if(list.length === store[0]){
                         res.send(list)
                     }
                 })
@@ -118,7 +126,7 @@ exports.widgets = functions.https.onRequest(app);
 function getWatching(collection , doc, sub_collection){
     return new Promise((resolve, reject) => {
         var data = [];
-        db.collection(collection).doc(doc).collection(sub_collection).orderBy("time").limit(5)
+        db.collection(collection).doc(doc).collection(sub_collection).orderBy("date")
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
@@ -212,7 +220,7 @@ function addSubDoc(collection,doc,sub_collection,sub_doc,data){
 
 function getTime(searies_id, season, episode, uid) {
     return new Promise((resolve, reject) => {
-        db.collection("Users").doc(uid).collection(searies_id + "-" + season).doc(episode)
+        db.collection("Users").doc(uid).collection("Times").doc(searies_id + "-" + season + "-" + episode)
             .get()
             .then(snapshot => {
                 if (snapshot.exists) {
@@ -229,6 +237,17 @@ function getTime(searies_id, season, episode, uid) {
             });
     });
 }
+
+function shuffleArray(array) {
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
 
 function search(array, filter) {
     for (var k = 0; k < array.length; k++) {

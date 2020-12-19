@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { ArrowBackRounded } from '@material-ui/icons'
 import { ButtonBase } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import getCollection from '../Database/getCollection'
+import SubAppBar from '../Components/SubAppBar'
 
 var filteredClass = null
 
@@ -32,8 +32,8 @@ export class SearchPage extends Component {
 
         return (
             <div>
-                <div style={{ display: "flex", padding: "10px", alignItems: "center" }} >
-                    <ArrowBackRounded style={{ margin: "0px 5px" }} onClick={() => { window.history.back() }} />
+                <SubAppBar/>
+                <div className="wrap" >
                     <input placeholder="Search by name, date, genre..."
                         className="search-input"
                         onChange={(e) => { this.setState({ search: e.target.value }) }}

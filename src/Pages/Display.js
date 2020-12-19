@@ -56,9 +56,9 @@ export class Adapter extends Component {
                     //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
                 }
             })*/
-            
+
         axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
-            name:"Content",
+            name: "Content",
             doc_name: this.props.id
         }).then(snap => {
             this.setState({ show: snap.data })
@@ -221,20 +221,19 @@ export class Adapter extends Component {
                             }
                         </div>
                     ) : (
-                            <div className="wrap" style={{ minHeight: "100vh" }} >
+                            <div className="wrap" style={{ minHeight: "90vh" }} >
                                 <Loader
-                                    type="Audio"
-                                    color="#212121"
+                                    type="TailSpin"
+                                    color={theme.palette.primary.light}
                                     height={50}
                                     width={50}
                                     timeout={3000} //3 secs
-
                                 />
                             </div>
                         )
                 }
 
-                <Dialog fullScreen open={this.state.open} TransitionComponent={Transition} style={{ marginTop: "30%", boxShadow: "0px -10px 20px rgba(0,0,0,0.5)", backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light }} >
+                {/*<Dialog fullScreen open={this.state.open} TransitionComponent={Transition} style={{ marginTop: "30%", boxShadow: "0px -10px 20px rgba(0,0,0,0.5)", backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light }} >
                     <AppBar position="relative" elevation={0} style={{ backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light }} >
                         <Toolbar>
                             <IconButton edge="start" color="inherit" onClick={this.handleClose} aria-label="close">
@@ -284,7 +283,7 @@ export class Adapter extends Component {
                                 <div></div>
                             )
                     }
-                </Dialog>
+                </Dialog>*/}
             </div>
         )
     }

@@ -26,14 +26,14 @@ export class Adapter extends Component {
 
         season_id: null,
         episode_id: null,
-        show_id:null,
+        show_id: null,
 
         currentTime: 0
     }
 
     componentDidMount() {
         axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
-            name:"Content",
+            name: "Content",
             doc_name: this.props.id
         }).then(snap => {
             this.setState({ show: snap.data })
@@ -47,26 +47,26 @@ export class Adapter extends Component {
             uid: window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
-                this.setState({currentTime: snap.data.time})
+                this.setState({ currentTime: snap.data.time })
             }
-            
-            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-episode',{ //get-episode
+
+            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-episode', { //get-episode
                 id: this.props.id,
                 season: this.props.season,
                 episode: this.props.episode
-            }).then(snap=>{
-                this.setState({episode:snap.data})
+            }).then(snap => {
+                this.setState({ episode: snap.data })
             })
 
         })
 
-        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching',{
+        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
             uid: window.Android.getUid(),
             series_id: this.props.id,
             episode: this.props.episode,
             season: this.props.season
         })
-        
+
         this.setState({ episode_id: this.props.episode, season_id: this.props.season, show_id: this.props.id })
     }
 
@@ -88,7 +88,7 @@ export class Adapter extends Component {
     }
 
     componentCleanup = () => {
-        saveTime(this.state.time, this.state.show_id, this.state.season_id, this.state.episode_id).then(r => {})
+        saveTime(this.state.time, this.state.show_id, this.state.season_id, this.state.episode_id).then(r => { })
     }
 
     componentWillUnmount() {
@@ -103,7 +103,7 @@ export class Adapter extends Component {
                         <div>
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
-                                    <IconButton onClick={() => { console.log("Click") }} >
+                                    <IconButton onClick={() => { window.history.back() }} >
                                         <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
                                     </IconButton>
                                 </div>
@@ -214,14 +214,15 @@ export class Adapter extends Component {
                         </div>
                     ) : (
                             <div className="wrap" style={{ minHeight: "100vh" }} >
-                                <Loader
-                                    type="Audio"
-                                    color="#212121"
-                                    height={50}
-                                    width={50}
-                                    timeout={3000} //3 secs
-
-                                />
+                                <div className="wrap" style={{ minHeight: "90vh" }} >
+                                    <Loader
+                                        type="TailSpin"
+                                        color={theme.palette.primary.light}
+                                        height={50}
+                                        width={50}
+                                        timeout={3000} //3 secs
+                                    />
+                                </div>
                             </div>
                         )
                 }

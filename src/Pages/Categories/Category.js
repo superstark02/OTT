@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import getCollectionQuery from '../../Database/getCollectionQuery'
 import shuffleArray from '../../Database/shuffleArray'
 import MyList from '../../Components/MyList';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 const list = [
     {
@@ -28,7 +30,7 @@ class Adapter extends Component {
         data: null
     }
 
-    componentDidMount(){
+    componentDidMount() {
         for (var i = 0; i < list.length; i++) {
             getCollectionQuery("Index", [this.props.id, list[i].title]).then(result => {
                 data.push(shuffleArray(result))
@@ -38,7 +40,7 @@ class Adapter extends Component {
     }
 
     render() {
-        if(this.state.data){
+        if (this.state.data) {
             return (
                 <div>
                     <SubAppBar name={this.props.id} />
@@ -48,10 +50,19 @@ class Adapter extends Component {
                 </div>
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <div>
-                    Loading
+                    <SubAppBar name={this.props.id} />
+                    <div className="wrap" style={{ minHeight: "90vh" }} >
+                        <Loader
+                            type="TailSpin"
+                            color="#FFFF"
+                            height={50}
+                            width={50}
+                            timeout={3000} //3 secs
+                        />
+                    </div>
                 </div>
             )
         }
@@ -62,7 +73,7 @@ class Adapter extends Component {
 export default function Category() {
     const { id } = useParams();
 
-    return(
+    return (
         <Adapter id={id} />
     )
 }

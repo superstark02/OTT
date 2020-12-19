@@ -40,7 +40,7 @@ export class Help extends Component {
                     </p>
                     <p className="wrap" >
                         <div>
-                            <Link>
+                            <Link to="https://www.facebook.com/profile.php?id=100048674124424" >
                                 <Facebook style={{ fontSize: "50px", margin: "10px" }} />
                             </Link>
                         </div>
@@ -48,14 +48,14 @@ export class Help extends Component {
                             |
                         </div>
                         <div>
-                            <Link>
+                            <Link to="https://www.instagram.com/my_mosaic.ind/?igshid=1lv2b0bpxcup5" >
                                 <Instagram style={{ fontSize: "50px", margin: "10px" }} />
                             </Link>
                         </div>
                     </p>
 
                     <div className="wrap" >
-                        <div className="width-change">
+                        <div className="width-change" style={{marginTop:"0px"}} >
                             <h1>
                                 Contact Us
                             </h1>

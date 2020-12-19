@@ -51,11 +51,10 @@ video{
 }
 
 .search-input{
-  width: 85%;
+  width: 90%;
   border: none;
-  margin: 10px 0px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 15px;
   background-color: rgba(0, 0, 0, 0.5);
   color: grey;
   outline: none;
