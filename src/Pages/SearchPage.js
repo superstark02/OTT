@@ -47,7 +47,7 @@ export class SearchPage extends Component {
                         filteredClass &&
                         filteredClass.map(item => {
                             return (
-                                <div style={{ width: "fit-content", margin: "10px 0px" }} className="wrap" >
+                                <div style={{ width: "fit-content", margin: "10px 0px" }} className="wrap w3-animate-opacity" >
                                     <ButtonBase style={{ height: "100%" }}>
                                         <Link to={"/display/" + item.id}
                                             style={{ height: "100%" }}  >

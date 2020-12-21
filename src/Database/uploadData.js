@@ -7,17 +7,17 @@ export function uploadData() {
 
     var data = [
         {
-            id: "thjudge",
-            name: "The Judge",
+            id: "thewolfofwallstreet",
+            name: "The Wolf of Wall Street",
             country: "USA",
             app: "",
-            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FMovies%2FTheJudge%2Ftj.jpg?alt=media&token=cbd0fbef-6bd0-445c-a168-bd3fcecfff9e",
-            year: "2014 ",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FMovies%2FTheWolfOfWallStreet%2Ftwows.jpg?alt=media&token=c7e1e81d-9ec5-47de-a518-c19dfb5c7194",
+            year: "2013",
             keywords: ["Movie", "Hollywood", "Comedy", "Drama"],
-            leng: "2h 22m",
+            leng: "3h",
             rate: "0",
             season: 0,
-            description: "Years after he returns to his hometown, Chicago-based lawyer Hank Palmer decides to fight the case for his father, Joseph, an adjudicator, who is accused of murder."
+            description: "Introduced to life in the fast lane through stockbroking, Jordan Belfort takes a hit after a Wall Street crash. He teams up with Donnie Azoff, cheating his way to the top as his relationships slide."
         }
     ]
 
@@ -180,17 +180,257 @@ export function uploadData() {
         }
     ]
 
+    const cast = [
+        {
+            id: "kungfupanda",
+            cast: [
+                {
+                    actor: "Jack Black",
+                    role: "Po",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FJackBlack.jpg?alt=media&token=25c7277f-cbed-4c4e-b08e-04c3c16b767e"
+                },
+                {
+                    actor: "Angelina Jolie",
+                    role: "Tigress",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FAngelina_Jolie.jpg?alt=media&token=987239f6-01d0-4195-baea-db2bde6befb9"
+                },
+                {
+                    actor: "Gary Oldman",
+                    role: "Lord Shen",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGaryOldman.jpg?alt=media&token=052421a0-d9c8-4ea8-83ee-ab9eadbf7308"
+                },
+                {
+                    actor: "Dustin Hoffman",
+                    role: "Master Shifu",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FDustinHoffman.jpg?alt=media&token=3f6008db-a14a-4c28-a652-299338dd6ed4"
+                },
+                {
+                    actor: "Jackie Chan",
+                    role: "Monkey",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2Fjackie-chan.jpg?alt=media&token=e1f41f2b-93b6-4f75-ab9b-f0a4a17016b8"
+                },
+            ]
+        },
+        {
+            id: "kungfupanda2",
+            cast: [
+                {
+                    actor: "Jack Black",
+                    role: "Po",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FJackBlack.jpg?alt=media&token=25c7277f-cbed-4c4e-b08e-04c3c16b767e"
+                },
+                {
+                    actor: "Angelina Jolie",
+                    role: "Tigress",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FAngelina_Jolie.jpg?alt=media&token=987239f6-01d0-4195-baea-db2bde6befb9"
+                },
+                {
+                    actor: "Gary Oldman",
+                    role: "Lord Shen",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGaryOldman.jpg?alt=media&token=052421a0-d9c8-4ea8-83ee-ab9eadbf7308"
+                },
+                {
+                    actor: "Dustin Hoffman",
+                    role: "Master Shifu",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FDustinHoffman.jpg?alt=media&token=3f6008db-a14a-4c28-a652-299338dd6ed4"
+                },
+                {
+                    actor: "Jackie Chan",
+                    role: "Monkey",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2Fjackie-chan.jpg?alt=media&token=e1f41f2b-93b6-4f75-ab9b-f0a4a17016b8"
+                },
+            ]
+        },
+        {
+            id: "kungfupanda3",
+            cast: [
+                {
+                    actor: "Jack Black",
+                    role: "Po",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FJackBlack.jpg?alt=media&token=25c7277f-cbed-4c4e-b08e-04c3c16b767e"
+                },
+                {
+                    actor: "Angelina Jolie",
+                    role: "Tigress",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FAngelina_Jolie.jpg?alt=media&token=987239f6-01d0-4195-baea-db2bde6befb9"
+                },
+                {
+                    actor: "Gary Oldman",
+                    role: "Lord Shen",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGaryOldman.jpg?alt=media&token=052421a0-d9c8-4ea8-83ee-ab9eadbf7308"
+                },
+                {
+                    actor: "Dustin Hoffman",
+                    role: "Master Shifu",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FDustinHoffman.jpg?alt=media&token=3f6008db-a14a-4c28-a652-299338dd6ed4"
+                },
+                {
+                    actor: "Jackie Chan",
+                    role: "Monkey",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2Fjackie-chan.jpg?alt=media&token=e1f41f2b-93b6-4f75-ab9b-f0a4a17016b8"
+                },
+            ]
+        },
+        {
+            id: "Journeythemysteriousisland",
+            cast: [
+                {
+                    actor: "Josh Hutcherson",
+                    role: "Sean Anderson",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2Fjosh%20hutcherson.jpg?alt=media&token=4c0a588a-669c-4493-a93e-be436f2e4559"
+                },
+                {
+                    actor: "Dwayne Johnson",
+                    role: "Hank Parsons",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FDJ.jpg?alt=media&token=b886c0b3-a866-4236-9781-0f23877bbed9"
+                },
+                {
+                    actor: "Vanessa Hudgens",
+                    role: "Kailani",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FVanessa_Hudgens.jpg?alt=media&token=c0c0f5bb-037f-40a4-b855-23a6ce345502"
+                },
+                {
+                    actor: "Michael Caine",
+                    role: "Alexander Anderson",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FSir_Michael_Caine.jpg?alt=media&token=2833589c-235c-4ef7-af86-4f553cafa1e4"
+                },
+                {
+                    actor: "Luis Guzmán",
+                    role: "Gabato",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FLuisGuzman.jpg?alt=media&token=eb280591-1ee1-41a5-8c07-7c42162775a0"
+                },
+            ]
+        },
+        {
+            id: "thehobbitanunexpectedjourney",
+            cast: [
+                {
+                    actor: "Ian McKellen",
+                    role: "Gandalf",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FIanMcKellen.jpg?alt=media&token=2f30e654-a7d2-4e0e-a00c-e7c865c3a53a"
+                },
+                {
+                    actor: "Martin Freeman",
+                    role: "Bilbo",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FMartinFreeman.jpg?alt=media&token=c30b9969-4c55-4b33-91fc-c8ee0f179798"
+                },
+                {
+                    actor: "Richard Armitage",
+                    role: "	Thorin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FRichardArmitage.jpg?alt=media&token=d964e8a9-568c-4313-a018-533a9d2b7115"
+                },
+                {
+                    actor: "Ken Stott",
+                    role: "	Balin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FKenStott.jpg?alt=media&token=7309f152-99dd-4511-a98e-b7beb01e88b8"
+                },
+                {
+                    actor: "Graham McTavish",
+                    role: "Dwalin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGrahamMcTavish.jpg?alt=media&token=abc0c459-b770-4a89-913e-9fbd3923bbed"
+                },
+            ]
+        },
+        {
+            id: "thehobbitthebattleofthefivearmies",
+            cast: [
+                {
+                    actor: "Ian McKellen",
+                    role: "Gandalf",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FIanMcKellen.jpg?alt=media&token=2f30e654-a7d2-4e0e-a00c-e7c865c3a53a"
+                },
+                {
+                    actor: "Martin Freeman",
+                    role: "Bilbo",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FMartinFreeman.jpg?alt=media&token=c30b9969-4c55-4b33-91fc-c8ee0f179798"
+                },
+                {
+                    actor: "Richard Armitage",
+                    role: "	Thorin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FRichardArmitage.jpg?alt=media&token=d964e8a9-568c-4313-a018-533a9d2b7115"
+                },
+                {
+                    actor: "Ken Stott",
+                    role: "	Balin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FKenStott.jpg?alt=media&token=7309f152-99dd-4511-a98e-b7beb01e88b8"
+                },
+                {
+                    actor: "Graham McTavish",
+                    role: "Dwalin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGrahamMcTavish.jpg?alt=media&token=abc0c459-b770-4a89-913e-9fbd3923bbed"
+                },
+            ]
+        },
+        {
+            id: "thehobbitthedesolationofsmaug",
+            cast: [
+                {
+                    actor: "Ian McKellen",
+                    role: "Gandalf",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FIanMcKellen.jpg?alt=media&token=2f30e654-a7d2-4e0e-a00c-e7c865c3a53a"
+                },
+                {
+                    actor: "Martin Freeman",
+                    role: "Bilbo",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FMartinFreeman.jpg?alt=media&token=c30b9969-4c55-4b33-91fc-c8ee0f179798"
+                },
+                {
+                    actor: "Richard Armitage",
+                    role: "	Thorin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FRichardArmitage.jpg?alt=media&token=d964e8a9-568c-4313-a018-533a9d2b7115"
+                },
+                {
+                    actor: "Ken Stott",
+                    role: "	Balin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FKenStott.jpg?alt=media&token=7309f152-99dd-4511-a98e-b7beb01e88b8"
+                },
+                {
+                    actor: "Graham McTavish",
+                    role: "Dwalin",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FGrahamMcTavish.jpg?alt=media&token=abc0c459-b770-4a89-913e-9fbd3923bbed"
+                },
+            ]
+        },
+        {
+            id: "thesecretlifeofpets",
+            cast: [
+                {
+                    actor: "Kevin Hart",
+                    role: "Snowball",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FKevinHart.jpg?alt=media&token=524341d9-7945-4adc-96ef-c75af9e58674"
+                },
+                {
+                    actor: "Patton Oswalt",
+                    role: "Max, Max",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2Fpattonoswalt.jpg?alt=media&token=4208dc4d-33b1-4270-9b09-0ff414e008ec"
+                },
+                {
+                    actor: "Tiffany Haddish",
+                    role: "Daisy",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FTiffanyHaddish.jpg?alt=media&token=fb7ddb80-e3f1-4fe9-bd92-ea058c652945"
+                },
+                {
+                    actor: "Eric Stonestreet",
+                    role: "Duke",
+                    photo: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FCasts%2FEricStonestreet.jpg?alt=media&token=16be2b2d-f9b8-4b2d-ba1b-01b5b988cb6d"
+                }
+            ]
+        }
+    ]
 
-    for (i = 0; i < data.length; i++) {
-        db.collection("Content").doc(data[i].id)
-        .set(data[i]).then(result => {
-            console.log("Done")
-        }).catch(error => {
-            console.log(error)
-        })
+
+    for (i = 0; i < cast.length; i++) {
+        db.collection("Content").doc(cast[i].id)
+            .update({
+                cast: cast[i].cast
+            }).then(result => {
+                console.log("Done")
+            }).catch(error => {
+                console.log(error)
+            })
     }
 
-    for (i = 0; i < data.length; i++) {
+    /*for (i = 0; i < data.length; i++) {
         db.collection("Index").doc(data[i].id)
         .set({
             id: data[i].id,
@@ -203,7 +443,7 @@ export function uploadData() {
         }).catch(error => {
             console.log(error)
         })
-    }
+    }*/
 
     /*for (i = 0; i < kuroko.length; i++) {
         var temp

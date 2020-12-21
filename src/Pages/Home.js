@@ -43,7 +43,9 @@ export class Home extends Component {
     state = {
         uid: "",
         data: null,
-        continue: null
+        continue: null,
+        email: null,
+        name: null
     }
 
     constructor() {
@@ -55,6 +57,8 @@ export class Home extends Component {
 
         if (window.Android.getUid()) {
             this.setState({ uid: window.Android.getUid() })
+            this.setState({ email: window.Android.getEmail() })
+            this.setState({ name: window.Android.getName() })
             updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
         }
 
@@ -73,8 +77,8 @@ export class Home extends Component {
     render() {
         if (this.state.data) {
             return (
-                <div>
-                    <MyAppBar uid={this.state.uid} />
+                <div className="w3-animate-bottom" >
+                    <MyAppBar uid={this.state.uid} email={this.state.email} name={this.state.name} />
                     <Carousel />
                     <Categories />
 

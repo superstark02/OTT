@@ -32,7 +32,7 @@ class Adapter extends Component {
 
     componentDidMount() {
         for (var i = 0; i < list.length; i++) {
-            getCollectionQuery("Index", [this.props.id, list[i].title]).then(result => {
+            getCollectionQuery("Index", ["Hollywood", list[i].title]).then(result => {
                 data.push(shuffleArray(result))
                 this.setState({ data: data })
             })

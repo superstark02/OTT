@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
 import "../CSS/Pages/PlayScreen.css"
-import { ButtonBase, IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import { ArrowBackRounded } from '@material-ui/icons'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom'
 import SeasonTabs from '../Components/SeasonTabs'
 import { saveTime } from '../Database/logIn'
 import axios from 'axios'
+import poster from '../Images/logo.jpg'
+import Cast from '../Components/Cast';
 
 export class Adapter extends Component {
 
@@ -115,7 +117,7 @@ export class Adapter extends Component {
                                     ref={this.handlevideoMount}
                                     onTimeUpdate={(e) => { this.setState({ time: e.target.currentTime }) }}
                                     controlsList="nodownload"
-                                    poster={this.state.episode.vidPoster}
+                                    poster={poster}
                                     className="player" >
                                     <track label="English" kind="captions" srclang="en" src={this.state.episode.sub} default />
                                     <source src={this.state.episode.content} type="video/mp4" />
@@ -183,33 +185,15 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
-
+                            
                             {
-                                this.state.related ? (
+                                this.state.show.cast ? (
                                     <div>
-                                        <div className="h7" >
-                                            Related
-                                        </div>
-                                        <div className="ss-container" >
-                                            {
-                                                this.state.related.map(item => {
-                                                    return (
-                                                        <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
-                                                            <a href={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
-                                                                style={{ height: "100%" }}  >
-                                                                <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
-
-                                                                </div>
-                                                            </a>
-                                                        </ButtonBase>
-                                                    )
-                                                })
-                                            }
-                                        </div>
+                                        <Cast data={this.state.show.cast}  />
                                     </div>
-                                ) : (
-                                        <div></div>
-                                    )
+                                ): (
+                                    <div></div>
+                                )
                             }
                         </div>
                     ) : (

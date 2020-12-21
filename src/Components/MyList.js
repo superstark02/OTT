@@ -28,7 +28,7 @@ export class MyList extends Component {
                                         return (
                                             <div style={{ display: "inline-block" }} >
 
-                                                <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
+                                                <ButtonBase className="w3-animate-opacity" style={{ height: "100%", marginRight: "20px" }}>
                                                     <Link to={"/display/" + item.id}
                                                         transition='glide-left'
                                                         style={{ height: "100%" }}  >

@@ -2,24 +2,18 @@ import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
-import { ButtonBase, IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import { useParams } from 'react-router-dom'
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { Link } from "react-tiger-transition";
 import SeasonTabs from '../Components/SeasonTabs'
 import axios from 'axios'
+import Cast from '../Components/Cast';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export class Adapter extends Component {
 
@@ -44,19 +38,6 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        /*getDoc("Content" , this.props.id).then(snap => {
-                    this.setState({ show: snap })
-                if (snap.premium) {
-                    //check if bought
-                    //checkPaymnet(snap.id, series).then(result=>{if(result){setState({link:}; else{setState({link:pay} )})}})
-                    //if yes: link to episode.
-
-                    //if no: link to payment page.
-                    //this.setState({ open: true })
-                    //<Link to={"/play/" + this.state.show.industry + "/" + this.state.show.platform + "/" + this.state.show.genre + "/" + this.state.show.id + "/Season-1/episode-1"} >
-                }
-            })*/
-
         axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name: "Content",
             doc_name: this.props.id
@@ -83,8 +64,8 @@ export class Adapter extends Component {
             <div style={{ color: theme.palette.primary.light }} className="transition-item detail-page" >
                 {
                     this.state.show ? (
-                        <div>
-                            <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
+                        <div className="w3-animate-bottom" >
+                            <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px'}} >
                                 <div className="mute">
                                     <Link to="/" transition='glide-left'  >
                                         <IconButton >
@@ -192,7 +173,7 @@ export class Adapter extends Component {
                                     )
                             }
 
-                            {
+                            {/*
                                 this.state.related ? (
                                     <div>
                                         <div className="h7" >
@@ -218,6 +199,15 @@ export class Adapter extends Component {
                                 ) : (
                                         <div></div>
                                     )
+                            */}
+                            {
+                                this.state.show.cast ? (
+                                    <div>
+                                        <Cast data={this.state.show.cast} />
+                                    </div>
+                                ): (
+                                    <div></div>
+                                )
                             }
                         </div>
                     ) : (

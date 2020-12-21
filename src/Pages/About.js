@@ -5,7 +5,7 @@ import logo from "../Images/logo512.png"
 export class About extends Component {
     render() {
         return (
-            <div>
+            <div className="w3-animate-bottom" >
                 <SubAppBar />
                 <div style={{ padding: "0px 20px" }} >
                     <h2>

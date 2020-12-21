@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SubAppBar from '../Components/SubAppBar'
 import emailjs from 'emailjs-com';
-import axios from 'axios';
 
 export class Feedback extends Component {
 
@@ -27,7 +26,7 @@ export class Feedback extends Component {
         return (
             <div>
                 <SubAppBar />
-                <div style={{ padding: "0px 20px" }} >
+                <div style={{ padding: "0px 20px" }}  className="w3-animate-bottom"  >
                     <h2>
                         Feedback
                     </h2>
