@@ -2,7 +2,43 @@ import React, { Component } from 'react'
 import MyList from '../../Components/MyList'
 import SubAppBar from '../../Components/SubAppBar'
 
+const list = [
+    {
+        title: "ROFL Things",
+        filter: "Comedy"
+    },
+    {
+        title: "Anytime Watch",
+        filter: ["Drama","Series"]
+    },
+    {
+        title: "ROFL Things",
+        filter: "Animation"
+    },
+    {
+        title: "ROFL Things",
+        filter: "Animation"
+    },
+    {
+        title: "ROFL Things",
+        filter: "Animation"
+    },
+    {
+        title: "ROFL Things",
+        filter: "Animation"
+    },
+]
+
 export class Discover extends Component {
+
+    state = {
+        data: null
+    }
+
+    componentDidMount(){
+        
+    }
+
     render() {
         return (
             <div>

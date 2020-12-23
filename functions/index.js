@@ -16,18 +16,24 @@ app.listen(4000, () => { console.log("Listening at " + 4000) })
 
 app.get('/', (req, res) => {
     var data = []
-    getCollectionQuery("Index", ["Comedy", "Series"]).then(snap => {
+    getCollectionQuery("Index", ["Comedy", "Movie"]).then(snap => {
         data.push(shuffleArray(snap))
         getCollectionQuery("Index", ["Action", "Movie"]).then(sna => {
             data.push(shuffleArray(sna))
-            getCollectionQuery("Index", ["Drama", "Series"]).then(sn => {
+            getCollectionQuery("Index", ["Drama", "Movie"]).then(sn => {
                 data.push(shuffleArray(sn))
-                getCollectionQuery("Index", ['Animated', "Movie"]).then(s => {
+                getCollectionQuery("Index", ['Romance', "Movie"]).then(s => {
                     data.push(shuffleArray(s))
                     getCollectionQuery("Index", ['Adventure', "Movie"]).then(s_ => {
                         data.push(shuffleArray(s_))
-                        res.send(data)
-                        return null
+                        getCollectionQuery("Index", ['Family', "Movie"]).then(s__ => {
+                            data.push(shuffleArray(s__))
+                            getCollectionQuery("Index", ['Animated', "Movie"]).then(s__ => {
+                                data.push(shuffleArray(s__))
+                                res.send(data)
+                                return null
+                            })
+                        })
                     })
                 })
             })

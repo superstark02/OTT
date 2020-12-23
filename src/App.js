@@ -14,6 +14,8 @@ import Category from './Pages/Categories/Category';
 import "react-tiger-transition/styles/main.min.css";
 import Discover from './Pages/Categories/Discover';
 import Anime from './Pages/Categories/Anime';
+import Series from './Pages/Categories/Series';
+import ShortFilms from './Pages/Categories/ShortFilms';
 import Signin from './Pages/Signin';
 import Temp from './Pages/Temp';
 
@@ -76,6 +78,26 @@ function App() {
             }
           }} >
           <Anime />
+        </Route>
+
+        <Route exact path='/series'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Series />
+        </Route>
+
+        <Route exact path='/short-films'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <ShortFilms />
         </Route>
 
         <Route exact path='/category/:id'

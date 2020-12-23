@@ -11,32 +11,6 @@ import Loader from 'react-loader-spinner'
 import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
 
-const list = [
-    {
-        title: 'Comedy Series To Watch',
-        filter: ["Comedy", "Series"]
-    },
-    {
-        title: 'Amzing Action',
-        filter: ["Action", "Movie"]
-    },
-    {
-        title: 'Drama Series',
-        filter: ["Drama", "Series"]
-    },
-    {
-        title: 'Fiction Series',
-        filter: 'Fiction'
-    },
-    {
-        title: 'By Netflix',
-        filter: 'Netflix'
-    },
-    {
-        title: 'Animated',
-        filter: 'Animated'
-    }
-]
 
 export class Home extends Component {
 
@@ -90,11 +64,13 @@ export class Home extends Component {
                             )
                     }
 
-                    <MyList title={list[0].title} data={this.state.data[0]} />
-                    <MyList title={list[1].title} data={this.state.data[1]} />
-                    <MyList title={list[2].title} data={this.state.data[2]} />
-                    <MyList title={list[5].title} data={this.state.data[3]} />
+                    <MyList title="Comedy" data={this.state.data[0]} />
+                    <MyList title="Action" data={this.state.data[1]} />
+                    <MyList title="Drama" data={this.state.data[2]} />
+                    <MyList title="Romance" data={this.state.data[3]} />
                     <MyList title="Adventure" data={this.state.data[4]} />
+                    <MyList title="Family" data={this.state.data[5]} />
+                    <MyList title="Animated" data={this.state.data[6]} />
                 </div>
             )
         } else {

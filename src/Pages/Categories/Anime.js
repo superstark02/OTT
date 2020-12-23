@@ -3,7 +3,6 @@ import MyList from '../../Components/MyList'
 import SubAppBar from '../../Components/SubAppBar'
 import getCollectionQuery, { getByWord } from '../../Database/getCollectionQuery'
 import shuffleArray from '../../Database/shuffleArray'
-import axios from 'axios';
 
 const list = [
     {

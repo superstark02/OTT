@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom'
 import "../CSS/Components/Categories.css"
 
 const categories = [
-    {
+    /*{
         img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc1.jpg?alt=media&token=abd87229-51ca-4a8d-9092-b07dea0de5b2",
         title: "DISCOVER",
         to: "/discover"
-    },
+    },*/
     {
         img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc2.jpg?alt=media&token=5f885ece-cea9-4278-9a5b-dad89965491b",
-        title: "HOLLYWOOD",
-        to: "/category/Hollywood"
+        title: "SERIES",
+        to: "/series"
     },
     {
         img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc3.jpg?alt=media&token=90f43aea-da39-469c-9ca0-c17d4fafa892",
-        title: "BOLLYWOOD",
-        to: "/category/Bollywood"
+        title: "SHORT FILMS",
+        to: "/short-films"
     },
     {
         img: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fc4.jpg?alt=media&token=164231b1-8f0e-4ba5-84f4-1efdc44d5b41",

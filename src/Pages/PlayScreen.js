@@ -13,6 +13,8 @@ import { saveTime } from '../Database/logIn'
 import axios from 'axios'
 import poster from '../Images/logo.jpg'
 import Cast from '../Components/Cast';
+//import video from "../Videos/stone.mp4"
+//import subs from "../Videos/sub.vtt"
 
 export class Adapter extends Component {
 
@@ -113,13 +115,15 @@ export class Adapter extends Component {
                                 <video
                                     loop={false}
                                     controls
-                                    autoPlay={true}
+                                    autoPlay
+                                    preload="metadata"
                                     ref={this.handlevideoMount}
                                     onTimeUpdate={(e) => { this.setState({ time: e.target.currentTime }) }}
                                     controlsList="nodownload"
                                     poster={poster}
+                                    crossorigin="anonymous"
                                     className="player" >
-                                    <track label="English" kind="captions" srclang="en" src={this.state.episode.sub} default />
+                                    <text label="English" kind="captions" srclang="en" default />
                                     <source src={this.state.episode.content} type="video/mp4" />
                                 </video>
 
@@ -185,15 +189,15 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
-                            
+
                             {
                                 this.state.show.cast ? (
                                     <div>
-                                        <Cast data={this.state.show.cast}  />
+                                        <Cast data={this.state.show.cast} />
                                     </div>
-                                ): (
-                                    <div></div>
-                                )
+                                ) : (
+                                        <div></div>
+                                    )
                             }
                         </div>
                     ) : (
