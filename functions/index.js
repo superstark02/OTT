@@ -43,6 +43,13 @@ app.get('/', (req, res) => {
     })
 });
 
+app.post('/get-by-query', (req,res)=>{
+    getCollectionQuery("Index", req.body.filter).then(result=>{
+        res.send(shuffleArray(result))
+        return null
+    })
+})
+
 app.post('/get-doc', (req, res) => {
 
     if (req.body.name && req.body.doc_name) {
@@ -85,24 +92,9 @@ app.post('/get-time', (req, res) => {
 })
 
 app.post('/continue-watching', (req, res) => {
-    var list = []
-    var store = []
     if (req.body.uid) {
         getWatching("Users", req.body.uid, "Watching").then(snap=>{
-            store.push(snap.length)
-            for(var i = 0; i < snap.length ; i++){
-                getDoc("Index", snap[i].id).then(sna=>{
-                    list.push({
-                        poster: sna.poster,
-                        id: snap[i].id,
-                        season: snap[i].season,
-                        episode: snap[i].episode
-                    });
-                    if(list.length === store[0]){
-                        res.send(list)
-                    }
-                })
-            }
+            res.send(snap)
         }).catch(e=>{
             console.log(e)
         })
@@ -117,8 +109,10 @@ app.post('/add-watching', (req, res) => {
             id: req.body.series_id,
             episode: req.body.episode,
             season: req.body.season,
+            poster: req.body.poster,
             date: Date.now()
         })
+        cleanCollection(req.body.uid, "Watching");
     } else {
         res.send(null)
     }
@@ -132,7 +126,7 @@ exports.widgets = functions.https.onRequest(app);
 function getWatching(collection , doc, sub_collection){
     return new Promise((resolve, reject) => {
         var data = [];
-        db.collection(collection).doc(doc).collection(sub_collection).orderBy("date")
+        db.collection(collection).doc(doc).collection(sub_collection).orderBy("date", 'desc')
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
@@ -190,7 +184,7 @@ function getEpisode(id, season, episode) {
 function getCollectionQuery(name, filter) {
     return new Promise((resolve, reject) => {
         var data = [];
-        const collection = db.collection(name);
+        const collection = db.collection(name)
         collection.get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
@@ -242,6 +236,24 @@ function getTime(searies_id, season, episode, uid) {
                 reject(reason);
             });
     });
+}
+
+function cleanCollection(uid, collection){
+    var data = []
+    var watching = db.collection("Users").doc(uid).collection(collection)
+
+    watching.orderBy('date','desc').get()
+    .then(snapshot=>{
+        snapshot.forEach(doc=>{
+            data.push(doc.id)
+        })
+
+        if(data.length>5){
+            for(var i = data.length-1; i > 4; i--){
+                watching.doc(data[i]).delete();            
+            }
+        }
+    })
 }
 
 function shuffleArray(array) {

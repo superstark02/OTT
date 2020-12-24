@@ -8,10 +8,10 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import { useParams } from 'react-router-dom'
-import Slide from '@material-ui/core/Slide';
+import getDoc from "../Database/getDoc"
 import { Link } from "react-tiger-transition";
 import SeasonTabs from '../Components/SeasonTabs'
-import axios from 'axios'
+//import axios from 'axios'
 import Cast from '../Components/Cast';
 
 
@@ -38,11 +38,15 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
+        /*axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name: "Content",
             doc_name: this.props.id
         }).then(snap => {
             this.setState({ show: snap.data })
+        })*/
+
+        getDoc("Content",this.props.id).then(result=>{
+            this.setState({show:result})
         })
     }
 

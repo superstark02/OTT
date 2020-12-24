@@ -11,12 +11,13 @@ import Loader from 'react-loader-spinner'
 import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
 
+const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
 export class Home extends Component {
 
     state = {
         uid: "",
-        data: null,
+        data: [],
         continue: null,
         email: null,
         name: null
@@ -29,19 +30,19 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        if (window.Android.getUid()) {
+        /*if (window.Android.getUid()) {
             this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
             updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
-        }
+        }*/
 
         axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result => {
-            this.setState({ data: result.data })
+            this.setState({data:result.data})
         })
 
         axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/continue-watching", {
-            uid: window.Android.getUid()
+            uid: "a"//window.Android.getUid()
         }).then(result => {
             this.setState({ continue: result.data })
         })

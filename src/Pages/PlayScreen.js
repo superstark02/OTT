@@ -13,9 +13,10 @@ import { saveTime } from '../Database/logIn'
 import axios from 'axios'
 import poster from '../Images/logo.jpg'
 import Cast from '../Components/Cast';
+import getDoc from "../Database/getDoc"
 //import video from "../Videos/stone.mp4"
 //import subs from "../Videos/sub.vtt"
-
+const src = "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FTV%2FStrangerThings%2FS1%2F%5BSubtitleTools.com%5D%20Stranger%20Things%20101%20Chapter%20One%20The%20Vanishing%20Of%20Will%20Byers%20By%20GoldBerg_44.vtt?alt=media&token=ad435e56-092a-417b-8da4-7acb8ce4ca50"
 export class Adapter extends Component {
 
     state = {
@@ -36,11 +37,29 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
+        /*axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
             name: "Content",
             doc_name: this.props.id
         }).then(snap => {
             this.setState({ show: snap.data })
+            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
+                uid: window.Android.getUid(),
+                series_id: this.props.id,
+                episode: this.props.episode,
+                season: this.props.season,
+                poster: this.state.show.poster
+            })
+        })*/
+
+        getDoc("Content", this.props.id).then(snap=>{
+            this.setState({show:snap});
+            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
+                uid: "a",//window.Android.getUid(),
+                series_id: this.props.id,
+                episode: this.props.episode,
+                season: this.props.season,
+                poster: this.state.show.poster
+            })
         })
 
         //get time
@@ -48,7 +67,7 @@ export class Adapter extends Component {
             id: this.props.id,
             season: this.props.season,
             episode: this.props.episode,
-            uid: window.Android.getUid()
+            uid: "a"//window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
                 this.setState({ currentTime: snap.data.time })
@@ -62,13 +81,6 @@ export class Adapter extends Component {
                 this.setState({ episode: snap.data })
             })
 
-        })
-
-        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
-            uid: window.Android.getUid(),
-            series_id: this.props.id,
-            episode: this.props.episode,
-            season: this.props.season
         })
 
         this.setState({ episode_id: this.props.episode, season_id: this.props.season, show_id: this.props.id })
@@ -116,14 +128,12 @@ export class Adapter extends Component {
                                     loop={false}
                                     controls
                                     autoPlay
-                                    preload="metadata"
                                     ref={this.handlevideoMount}
                                     onTimeUpdate={(e) => { this.setState({ time: e.target.currentTime }) }}
                                     controlsList="nodownload"
                                     poster={poster}
-                                    crossorigin="anonymous"
                                     className="player" >
-                                    <text label="English" kind="captions" srclang="en" default />
+                                    <track label="English" kind="subtitles" srclang="en" default src={this.state.episode.sub} />
                                     <source src={this.state.episode.content} type="video/mp4" />
                                 </video>
 
