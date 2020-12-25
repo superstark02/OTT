@@ -4,7 +4,6 @@ import { theme } from './Theme/Theme';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Navigation, Route, glide } from "react-tiger-transition";
 import Display from './Pages/Display';
-import FileUpload from './Pages/FileUpload';
 import PlayScreen from './Pages/PlayScreen';
 import SearchPage from './Pages/SearchPage';
 import About from './Pages/About';
@@ -17,7 +16,7 @@ import Anime from './Pages/Categories/Anime';
 import Series from './Pages/Categories/Series';
 import ShortFilms from './Pages/Categories/ShortFilms';
 import Signin from './Pages/Signin';
-import Temp from './Pages/Temp';
+import Bollywood from './Pages/Categories/Bollywood';
 
 glide({
   name: 'glide-left'
@@ -100,7 +99,7 @@ function App() {
           <ShortFilms />
         </Route>
 
-        <Route exact path='/category/:id'
+        <Route exact path='/category/Hollywood'
           screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
           screenProps={{
             style: {
@@ -108,6 +107,16 @@ function App() {
             }
           }} >
           <Category />
+        </Route>
+
+        <Route exact path='/category/Bollywood'
+          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
+          screenProps={{
+            style: {
+              ...screenStyle
+            }
+          }} >
+          <Bollywood />
         </Route>
 
         <Route exact path='/about'
@@ -128,16 +137,6 @@ function App() {
             }
           }} >
           <PlayScreen />
-        </Route>
-
-        <Route exact path='/fileUpload'
-          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
-          screenProps={{
-            style: {
-              ...screenStyle
-            }
-          }} >
-          <FileUpload />
         </Route>
 
         <Route exact path='/search'
@@ -178,16 +177,6 @@ function App() {
             }
           }} >
           <Signin />
-        </Route>
-
-        <Route exact path='/temp'
-          screen // shorthand to wrap children with screen path='/display/:industry/:platform/:genre/:id
-          screenProps={{
-            style: {
-              ...screenStyle
-            }
-          }} >
-          <Temp />
         </Route>
 
       </Navigation>

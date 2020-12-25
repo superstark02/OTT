@@ -3,7 +3,7 @@ import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
 //import { Link } from 'react-router-dom'
 import { Link } from "react-tiger-transition";
-import { FixedSizeList } from 'react-window';
+import getNextData from '../Database/getNextData';
 
 export class MyList extends Component {
 
@@ -11,23 +11,38 @@ export class MyList extends Component {
         data: null
     }
 
+    loadMore = () => {
+        getNextData(this.state.data[this.state.data.length-1].year, this.props.filter).then(result=>{
+            console.log(result)
+            var temp = this.state.data;
+
+            result.forEach(element => {
+                temp.push(element)
+            });
+
+            this.setState({data:temp})
+        })
+    }
+
+    componentDidMount(){
+        this.setState({data: this.props.data})
+    }
+
     render() {
         return (
             <div>
                 {
-                    this.props.data ? (
+                    this.state.data ? (
                         <div>
                             <div className="h7" >
                                 {this.props.title}
                             </div>
 
-
                             <div className="list-container" >
                                 {
-                                    this.props.data.map(item => {
+                                    this.state.data.map(item => {
                                         return (
                                             <div style={{ display: "inline-block" }} >
-
                                                 <ButtonBase className="w3-animate-opacity" style={{ height: "100%", marginRight: "20px" }}>
                                                     <Link to={"/display/" + item.id}
                                                         transition='glide-left'
@@ -37,23 +52,17 @@ export class MyList extends Component {
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>
-                                                {/*<div style={{ margin: "10px 0px", display: "flex" }} >
-                                                    <div>
-                                                        <img src={item.app} className="app-logo" alt="app" width="30px" />
-                                                    </div>
-                                                    <div style={{ marginLeft: "5px" }} >
-                                                        <div>
-                                                            {item.name}
-                                                        </div>
-                                                        <div style={{ fontSize: "10px" }} className="rate" >
-                                                            {item.year}
-                                                        </div>
-                                                    </div>
-                                        </div>*/}
                                             </div>
                                         )
                                     })
                                 }
+                                <div style={{ display: "inline-block" }} >
+                                    <ButtonBase className="w3-animate-opacity" onClick={this.loadMore} style={{ height: "100%", marginRight: "20px" }}>
+                                        <div className="wrap" >
+                                            Load More
+                                        </div>
+                                    </ButtonBase>
+                                </div>
                             </div>
                         </div>
                     ) : (

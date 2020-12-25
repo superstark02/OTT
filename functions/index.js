@@ -17,19 +17,19 @@ app.listen(4000, () => { console.log("Listening at " + 4000) })
 app.get('/', (req, res) => {
     var data = []
     getCollectionQuery("Index", ["Comedy", "Movie"]).then(snap => {
-        data.push(shuffleArray(snap))
+        data.push(snap)
         getCollectionQuery("Index", ["Action", "Movie"]).then(sna => {
-            data.push(shuffleArray(sna))
+            data.push(sna)
             getCollectionQuery("Index", ["Drama", "Movie"]).then(sn => {
-                data.push(shuffleArray(sn))
+                data.push(sn)
                 getCollectionQuery("Index", ['Romance', "Movie"]).then(s => {
-                    data.push(shuffleArray(s))
+                    data.push(s)
                     getCollectionQuery("Index", ['Adventure', "Movie"]).then(s_ => {
-                        data.push(shuffleArray(s_))
+                        data.push(s_)
                         getCollectionQuery("Index", ['Family', "Movie"]).then(s__ => {
-                            data.push(shuffleArray(s__))
+                            data.push(s__)
                             getCollectionQuery("Index", ['Animated', "Movie"]).then(s__ => {
-                                data.push(shuffleArray(s__))
+                                data.push(s__)
                                 res.send(data)
                                 return null
                             })
@@ -43,10 +43,10 @@ app.get('/', (req, res) => {
     })
 });
 
-app.post('/get-by-query', (req,res)=>{
-    getCollectionQuery("Index", req.body.filter).then(result=>{
-        res.send(shuffleArray(result))
-        return null
+app.post('/next-data', (req,res)=>{
+    getNextData("Index", req.body.filter, req.body.last).then(snap=>{
+        res.send(snap);
+        return null;
     })
 })
 
@@ -185,12 +185,45 @@ function getCollectionQuery(name, filter) {
     return new Promise((resolve, reject) => {
         var data = [];
         const collection = db.collection(name)
-        collection.get().then(snapshot => {
+        collection.orderBy('year', 'desc').get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
             }
             else {
                 snapshot.forEach(doc => {
+                    if(data.length === 7){
+                        resolve(data);
+                        return null;
+                    }
+                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
+                        if (notAnime(doc.data().keywords)) {
+                            data.push(doc.data())
+                        }
+                    }
+                });
+                resolve(data)
+            }
+            return "null"
+        }).catch(e => {
+            reject(e)
+        })
+    });
+}
+
+function getNextData(name, filter, last){
+    return new Promise((resolve, reject) => {
+        var data = [];
+        const collection = db.collection(name)
+        collection.orderBy('year', 'desc').startAfter(last).get().then(snapshot => {
+            if (snapshot.empty) {
+                reject(new Error("Empty"))
+            }
+            else {
+                snapshot.forEach(doc => {
+                    if(data.length === 5){
+                        resolve(data);
+                        return null;
+                    }
                     if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
                         if (notAnime(doc.data().keywords)) {
                             data.push(doc.data())
@@ -255,17 +288,6 @@ function cleanCollection(uid, collection){
         }
     })
 }
-
-function shuffleArray(array) {
-    let i = array.length - 1;
-    for (; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
-  }
 
 function search(array, filter) {
     for (var k = 0; k < array.length; k++) {

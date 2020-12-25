@@ -70,7 +70,7 @@ class Adapter extends Component {
 }
 
 
-export default function Category() {
+export default function Bollywood() {
     const { id } = useParams();
 
     return (

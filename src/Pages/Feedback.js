@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import SubAppBar from '../Components/SubAppBar'
 import emailjs from 'emailjs-com';
-import {db} from '../firebase'
+import axios from 'axios';
+import { db } from '../firebase'
 
 export class Feedback extends Component {
 
     state = {
         sent: null,
         temp: []
-    }   
+    }
 
     sendMail = (e) => {
         e.preventDefault();
@@ -24,21 +25,33 @@ export class Feedback extends Component {
             });
     }
 
-    componentDidMount(){
-        var data = []
-        db.collection("Index").orderBy('year').limit(5).get().then(snap=>{
-            snap.forEach(doc=>{
-                data.push(doc.id)
-                console.log(doc.id)
+    componentDidMount() {
+        /*var data = []
+        db.collection("Index").orderBy('year', 'desc').get().then(snap => {
+            snap.forEach(doc => {
+                if (data.length < 9) {
+                    data.push(doc.data())
+                }
             })
-        })
+
+            axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/next-data", {
+                filter: ['Hollywood','Comedy'],
+                last: '2016'
+            }).then(result => {
+                console.log("Data:")
+                console.log(result.data)
+            }).catch(e => {
+                console.log(e)
+            })
+        })*/
+
     }
 
     render() {
         return (
             <div>
                 <SubAppBar />
-                <div style={{ padding: "0px 20px" }}  className="w3-animate-bottom"  >
+                <div style={{ padding: "0px 20px" }} className="w3-animate-bottom"  >
                     <h2>
                         Feedback
                     </h2>

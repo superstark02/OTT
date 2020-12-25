@@ -11,13 +11,13 @@ import Loader from 'react-loader-spinner'
 import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
 
-const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
+//  const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
 export class Home extends Component {
 
     state = {
         uid: "",
-        data: [],
+        data: null,
         continue: null,
         email: null,
         name: null
@@ -38,7 +38,7 @@ export class Home extends Component {
         }*/
 
         axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result => {
-            this.setState({data:result.data})
+            this.setState({ data: result.data })
         })
 
         axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/continue-watching", {
@@ -65,13 +65,13 @@ export class Home extends Component {
                             )
                     }
 
-                    <MyList title="Comedy" data={this.state.data[0]} />
-                    <MyList title="Action" data={this.state.data[1]} />
-                    <MyList title="Drama" data={this.state.data[2]} />
-                    <MyList title="Romance" data={this.state.data[3]} />
-                    <MyList title="Adventure" data={this.state.data[4]} />
-                    <MyList title="Family" data={this.state.data[5]} />
-                    <MyList title="Animated" data={this.state.data[6]} />
+                    <MyList title="Comedy" filter={["Movie","Comedy"]} data={this.state.data[0]} />
+                    <MyList title="Action" filter={["Movie","Action"]} data={this.state.data[1]} />
+                    <MyList title="Drama" filter={["Movie","Drama"]} data={this.state.data[2]} />
+                    <MyList title="Romance" filter={["Movie","Romance"]} data={this.state.data[3]} />
+                    <MyList title="Adventure" filter={["Movie","Adventure"]} data={this.state.data[4]} />
+                    <MyList title="Family" filter={["Movie","Family"]} data={this.state.data[5]} />
+                    <MyList title="Animated" filter={["Movie","Animated"]} data={this.state.data[6]} />
                 </div>
             )
         } else {

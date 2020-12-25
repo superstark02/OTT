@@ -54,7 +54,7 @@ export class Adapter extends Component {
         getDoc("Content", this.props.id).then(snap=>{
             this.setState({show:snap});
             axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
-                uid: "a",//window.Android.getUid(),
+                uid: window.Android.getUid(),
                 series_id: this.props.id,
                 episode: this.props.episode,
                 season: this.props.season,
@@ -67,7 +67,7 @@ export class Adapter extends Component {
             id: this.props.id,
             season: this.props.season,
             episode: this.props.episode,
-            uid: "a"//window.Android.getUid()
+            uid: window.Android.getUid()
         }).then(snap => {
             if (snap.data.time) {
                 this.setState({ currentTime: snap.data.time })
