@@ -65,13 +65,13 @@ export class Home extends Component {
                             )
                     }
 
-                    <MyList title="Comedy" filter={["Movie","Comedy"]} data={this.state.data[0]} />
-                    <MyList title="Action" filter={["Movie","Action"]} data={this.state.data[1]} />
-                    <MyList title="Drama" filter={["Movie","Drama"]} data={this.state.data[2]} />
-                    <MyList title="Romance" filter={["Movie","Romance"]} data={this.state.data[3]} />
-                    <MyList title="Adventure" filter={["Movie","Adventure"]} data={this.state.data[4]} />
-                    <MyList title="Family" filter={["Movie","Family"]} data={this.state.data[5]} />
-                    <MyList title="Animated" filter={["Movie","Animated"]} data={this.state.data[6]} />
+                    <MyList title="Comedy" filter='Comedy' data={this.state.data[0]} />
+                    <MyList title="Action" filter='Action' data={this.state.data[1]} />
+                    <MyList title="Drama" filter='Drama' data={this.state.data[2]} />
+                    <MyList title="Romance" filter='Romance' data={this.state.data[3]} />
+                    <MyList title="Adventure" filter='Adventure' data={this.state.data[4]} />
+                    <MyList title="Family" filter='Family' data={this.state.data[5]} />
+                    <MyList title="Animated" filter='Animated' data={this.state.data[6]} />
                 </div>
             )
         } else {
@@ -82,7 +82,7 @@ export class Home extends Component {
                         color={theme.palette.primary.light}
                         height={50}
                         width={50}
-                        timeout={3000} //3 secs
+                        timeout={10000} //3 secs
                     />
                 </div>
             )

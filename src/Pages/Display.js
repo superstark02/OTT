@@ -4,12 +4,11 @@ import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
 import { IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
 import { useParams } from 'react-router-dom'
 import getDoc from "../Database/getDoc"
-import { Link } from "react-tiger-transition";
+import { Link } from "react-router-dom";
 import SeasonTabs from '../Components/SeasonTabs'
 //import axios from 'axios'
 import Cast from '../Components/Cast';
@@ -25,10 +24,6 @@ export class Adapter extends Component {
         seasons: null,
         link: null,
         open: null,
-    }
-
-    constructor(props) {
-        super(props);
     }
 
     findRelated = (industry, platform, genre) => {
@@ -71,7 +66,7 @@ export class Adapter extends Component {
                         <div className="w3-animate-bottom" >
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px'}} >
                                 <div className="mute">
-                                    <Link to="/" transition='glide-left'  >
+                                    <Link to="/">
                                         <IconButton >
                                             <ArrowBackRounded style={{ color: "white", fontSize: "20px" }} />
                                         </IconButton>

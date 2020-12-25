@@ -46,7 +46,7 @@ export class Anime extends Component {
                 <SubAppBar />
                 {
                     this.state.data ? (
-                        <MyList title="All" data={this.state.data[0]} />
+                        <MyList title="All" data={this.state.data[0]} filter={["Anime","Series"]} />
                     ) : (
                             <div className="wrap" >
                                 Please Wait

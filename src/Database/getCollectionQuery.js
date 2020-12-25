@@ -42,7 +42,6 @@ export function getByWord(name, filter) {
                         data.push(doc.data())
                     }
                 });
-
                 resolve(data)
             }
         })
@@ -58,7 +57,7 @@ export default function getCollectionQuery(name, filter) {
 
         const collection = db.collection(name);
 
-        collection.get().then(snapshot => {
+        collection.orderBy('year','desc').get().then(snapshot => {
             if (snapshot.empty) {
                 reject("Empty")
             }

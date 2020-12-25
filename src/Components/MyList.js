@@ -1,31 +1,39 @@
 import React, { Component } from 'react'
 import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
-//import { Link } from 'react-router-dom'
-import { Link } from "react-tiger-transition";
+import { Link } from 'react-router-dom'
+//import { Link } from "react-tiger-transition";
 import getNextData from '../Database/getNextData';
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import shuffleArray from '../Database/shuffleArray';
 
 export class MyList extends Component {
 
     state = {
-        data: null
+        data: null,
+        nomore: null
     }
 
     loadMore = () => {
-        getNextData(this.state.data[this.state.data.length-1].year, this.props.filter).then(result=>{
-            console.log(result)
-            var temp = this.state.data;
+        getNextData(this.state.data[this.state.data.length - 1].year, this.props.filter).then(result => {
+            if (result.length > 0) {
+                var temp = this.state.data;
 
-            result.forEach(element => {
-                temp.push(element)
-            });
+                result.forEach(element => {
+                    temp.push(element)
+                });
 
-            this.setState({data:temp})
+                this.setState({ data: temp })
+            } else {
+                this.setState({ nomore: true })
+            }
         })
     }
 
-    componentDidMount(){
-        this.setState({data: this.props.data})
+    componentDidMount() {
+        if(this.props.data){
+            this.setState({ data: shuffleArray(this.props.data) })
+        }
     }
 
     render() {
@@ -45,7 +53,6 @@ export class MyList extends Component {
                                             <div style={{ display: "inline-block" }} >
                                                 <ButtonBase className="w3-animate-opacity" style={{ height: "100%", marginRight: "20px" }}>
                                                     <Link to={"/display/" + item.id}
-                                                        transition='glide-left'
                                                         style={{ height: "100%" }}  >
                                                         <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 
@@ -56,13 +63,25 @@ export class MyList extends Component {
                                         )
                                     })
                                 }
-                                <div style={{ display: "inline-block" }} >
-                                    <ButtonBase className="w3-animate-opacity" onClick={this.loadMore} style={{ height: "100%", marginRight: "20px" }}>
-                                        <div className="wrap" >
-                                            Load More
+                                {
+                                    !this.state.nomore ? (
+                                        <div style={{ display: "inline-block" }} >
+                                            <ButtonBase className="w3-animate-opacity" onClick={this.loadMore} style={{
+                                                marginRight: "20px",
+                                                backgroundColor: "grey",
+                                                padding: "10px",
+                                                boxShadow: "0px 5px 10px rgba(0,0,0,0.6)",
+                                                borderRadius: "50%"
+                                            }}>
+                                                <div className="wrap" >
+                                                    <ArrowForwardRoundedIcon />
+                                                </div>
+                                            </ButtonBase>
                                         </div>
-                                    </ButtonBase>
-                                </div>
+                                    ) : (
+                                        <div></div>
+                                    )
+                                }
                             </div>
                         </div>
                     ) : (

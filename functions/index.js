@@ -16,19 +16,19 @@ app.listen(4000, () => { console.log("Listening at " + 4000) })
 
 app.get('/', (req, res) => {
     var data = []
-    getCollectionQuery("Index", ["Comedy", "Movie"]).then(snap => {
+    getCollectionQuery("Index", 'Comedy').then(snap => {
         data.push(snap)
-        getCollectionQuery("Index", ["Action", "Movie"]).then(sna => {
+        getCollectionQuery("Index", 'Action').then(sna => {
             data.push(sna)
-            getCollectionQuery("Index", ["Drama", "Movie"]).then(sn => {
+            getCollectionQuery("Index", 'Drama').then(sn => {
                 data.push(sn)
-                getCollectionQuery("Index", ['Romance', "Movie"]).then(s => {
+                getCollectionQuery("Index", 'Romance').then(s => {
                     data.push(s)
-                    getCollectionQuery("Index", ['Adventure', "Movie"]).then(s_ => {
+                    getCollectionQuery("Index", 'Adventure').then(s_ => {
                         data.push(s_)
-                        getCollectionQuery("Index", ['Family', "Movie"]).then(s__ => {
+                        getCollectionQuery("Index", 'Family').then(s__ => {
                             data.push(s__)
-                            getCollectionQuery("Index", ['Animated', "Movie"]).then(s__ => {
+                            getCollectionQuery("Index", 'Animated').then(s__ => {
                                 data.push(s__)
                                 res.send(data)
                                 return null
@@ -43,8 +43,8 @@ app.get('/', (req, res) => {
     })
 });
 
-app.post('/next-data', (req,res)=>{
-    getNextData("Index", req.body.filter, req.body.last).then(snap=>{
+app.post('/next-data', (req, res) => {
+    getNextData("Index", req.body.filter, req.body.last).then(snap => {
         res.send(snap);
         return null;
     })
@@ -93,9 +93,9 @@ app.post('/get-time', (req, res) => {
 
 app.post('/continue-watching', (req, res) => {
     if (req.body.uid) {
-        getWatching("Users", req.body.uid, "Watching").then(snap=>{
+        getWatching("Users", req.body.uid, "Watching").then(snap => {
             res.send(snap)
-        }).catch(e=>{
+        }).catch(e => {
             console.log(e)
         })
     } else {
@@ -123,7 +123,7 @@ exports.widgets = functions.https.onRequest(app);
 
 
 
-function getWatching(collection , doc, sub_collection){
+function getWatching(collection, doc, sub_collection) {
     return new Promise((resolve, reject) => {
         var data = [];
         db.collection(collection).doc(doc).collection(sub_collection).orderBy("date", 'desc')
@@ -184,21 +184,15 @@ function getEpisode(id, season, episode) {
 function getCollectionQuery(name, filter) {
     return new Promise((resolve, reject) => {
         var data = [];
-        const collection = db.collection(name)
-        collection.orderBy('year', 'desc').get().then(snapshot => {
+        const collection = db.collection('Index')
+        collection.where('keywords','array-contains',filter).orderBy('year', 'desc').limit(7).get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
             }
             else {
                 snapshot.forEach(doc => {
-                    if(data.length === 7){
-                        resolve(data);
-                        return null;
-                    }
-                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
-                        if (notAnime(doc.data().keywords)) {
-                            data.push(doc.data())
-                        }
+                    if (notAnime(doc.data().keywords)) {
+                        data.push(doc.data())
                     }
                 });
                 resolve(data)
@@ -214,38 +208,32 @@ function getNextData(name, filter, last){
     return new Promise((resolve, reject) => {
         var data = [];
         const collection = db.collection(name)
-        collection.orderBy('year', 'desc').startAfter(last).get().then(snapshot => {
+        collection.where('keywords','array-contains',filter).orderBy('year', 'desc').startAfter(last).limit(5).get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
             }
             else {
                 snapshot.forEach(doc => {
-                    if(data.length === 5){
-                        resolve(data);
-                        return null;
-                    }
-                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
-                        if (notAnime(doc.data().keywords)) {
-                            data.push(doc.data())
-                        }
+                    if (notAnime(doc.data().keywords)) {
+                        data.push(doc.data())
                     }
                 });
-                resolve(data)
+                resolve(data);
             }
-            return "null"
+            return null;
         }).catch(e => {
             reject(e)
         })
     });
 }
 
-function addSubDoc(collection,doc,sub_collection,sub_doc,data){
+function addSubDoc(collection, doc, sub_collection, sub_doc, data) {
 
     return new Promise((resolve, reject) => {
 
-        db.collection(collection).doc(doc).collection(sub_collection).doc(sub_doc).set(data).then(result=>{
+        db.collection(collection).doc(doc).collection(sub_collection).doc(sub_doc).set(data).then(result => {
             resolve(1);
-        }).catch(error=>{
+        }).catch(error => {
             reject(error)
         })
     });
@@ -271,22 +259,22 @@ function getTime(searies_id, season, episode, uid) {
     });
 }
 
-function cleanCollection(uid, collection){
+function cleanCollection(uid, collection) {
     var data = []
     var watching = db.collection("Users").doc(uid).collection(collection)
 
-    watching.orderBy('date','desc').get()
-    .then(snapshot=>{
-        snapshot.forEach(doc=>{
-            data.push(doc.id)
-        })
+    watching.orderBy('date', 'desc').get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                data.push(doc.id)
+            })
 
-        if(data.length>5){
-            for(var i = data.length-1; i > 4; i--){
-                watching.doc(data[i]).delete();            
+            if (data.length > 5) {
+                for (var i = data.length - 1; i > 4; i--) {
+                    watching.doc(data[i]).delete();
+                }
             }
-        }
-    })
+        })
 }
 
 function search(array, filter) {

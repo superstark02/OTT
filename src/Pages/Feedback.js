@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import SubAppBar from '../Components/SubAppBar'
 import emailjs from 'emailjs-com';
-import axios from 'axios';
-import { db } from '../firebase'
 
 export class Feedback extends Component {
 
@@ -23,28 +21,6 @@ export class Feedback extends Component {
             }, (error) => {
                 console.log(error.text);
             });
-    }
-
-    componentDidMount() {
-        /*var data = []
-        db.collection("Index").orderBy('year', 'desc').get().then(snap => {
-            snap.forEach(doc => {
-                if (data.length < 9) {
-                    data.push(doc.data())
-                }
-            })
-
-            axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/next-data", {
-                filter: ['Hollywood','Comedy'],
-                last: '2016'
-            }).then(result => {
-                console.log("Data:")
-                console.log(result.data)
-            }).catch(e => {
-                console.log(e)
-            })
-        })*/
-
     }
 
     render() {

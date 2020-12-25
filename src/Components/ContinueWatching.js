@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
-//import { Link } from 'react-router-dom'
-import { Link } from "react-tiger-transition";
+import { Link } from 'react-router-dom'
+//import { Link } from "react-tiger-transition";
 
 export class ContinueWatching extends Component {
 
@@ -29,7 +29,6 @@ export class ContinueWatching extends Component {
 
                                                 <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
                                                     <Link to={"/play/"+ item.id + "/" + item.season + "/" + item.episode}
-                                                        transition='glide-left'
                                                         style={{ height: "100%" }}  >
                                                         <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
 

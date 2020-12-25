@@ -44,9 +44,9 @@ class Adapter extends Component {
             return (
                 <div>
                     <SubAppBar name={this.props.id} />
-                    <MyList title="Series" data={this.state.data[0]} />
-                    <MyList title="Drama" data={this.state.data[2]} />
-                    <MyList title="Comedy" data={this.state.data[3]} />
+                    <MyList title="Series" data={this.state.data[0]} filter={['Movie', 'Series']} />
+                    <MyList title="Drama" data={this.state.data[2]}  filter={['Movie', 'Drama']}  />
+                    <MyList title="Comedy" data={this.state.data[3]} filter={['Movie', 'Comedy']}  />
                 </div>
             )
         }
