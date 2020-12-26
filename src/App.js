@@ -42,7 +42,6 @@ function App() {
           <Route exact path='/short-films' component={ShortFilms} />
 
           <Route exact path='/category/Hollywood' component={Category} />
-
           <Route exact path='/category/Bollywood' component={Bollywood} />
 
           <Route exact path='/about' component={About} />
@@ -56,7 +55,6 @@ function App() {
           <Route exact path='/feedback' component={Feedback} />
 
           <Route exact path='/sign-in' component={Signin} />
-
         </Switch>
       </Router>
     </div>

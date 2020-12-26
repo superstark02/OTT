@@ -1,28 +1,12 @@
 import React, { Component } from 'react'
 import SubAppBar from '../../Components/SubAppBar'
 import { useParams } from 'react-router-dom'
-import getCollectionQuery from '../../Database/getCollectionQuery'
+import { getLatest } from '../../Database/getCollectionQuery'
 import shuffleArray from '../../Database/shuffleArray'
 import MyList from '../../Components/MyList';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-
-const list = [
-    {
-        title: "Series",
-    },
-    {
-        title: "Movie",
-    },
-    {
-        title: "Drama",
-    },
-    {
-        title: "Comedy",
-    }
-]
-
-var data = []
+import axios from 'axios';
 
 class Adapter extends Component {
 
@@ -31,12 +15,13 @@ class Adapter extends Component {
     }
 
     componentDidMount() {
-        for (var i = 0; i < list.length; i++) {
-            getCollectionQuery("Index", ["Hollywood", list[i].title]).then(result => {
-                data.push(shuffleArray(result))
-                this.setState({ data: data })
-            })
-        }
+        axios.get('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/category/Bollywood').then(result=>{
+            this.setState({ data: shuffleArray(result.data) })
+        })
+
+        getLatest("Index",'Bollywood').then(snap=>{
+            this.setState({latest:snap})
+        })
     }
 
     render() {
@@ -44,9 +29,17 @@ class Adapter extends Component {
             return (
                 <div>
                     <SubAppBar name={this.props.id} />
-                    <MyList title="Series" data={this.state.data[0]} filter={['Movie', 'Series']} />
-                    <MyList title="Drama" data={this.state.data[2]}  filter={['Movie', 'Drama']}  />
-                    <MyList title="Comedy" data={this.state.data[3]} filter={['Movie', 'Comedy']}  />
+                    {
+                        this.state.latest ? (
+                            <MyList title="Hollywood Popular" data={this.state.latest} filter={['Movie','Hollywood']} />
+                        ):(
+                            <div></div>
+                        )
+                    }
+                    <MyList title="Series" data={this.state.data[0]} filter='Series' />
+                    <MyList title="Drama" data={this.state.data[1]}  filter='Drama' />
+                    <MyList title="Comedy" data={this.state.data[2]} filter='Comedy' />
+                    <MyList title="Comedy" data={this.state.data[3]} filter='Comedy' />
                 </div>
             )
         }

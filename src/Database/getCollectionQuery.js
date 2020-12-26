@@ -7,7 +7,7 @@ export function getLatest(name, filter) {
         var data = [];
 
         const collection = db.collection(name);
-        collection.where('year', '>', filter).get().then(snapshot => {
+        collection.where('keywords', 'array-contains', filter).orderBy('year','desc').limit(8).get().then(snapshot => {
             if (snapshot.empty) {
                 reject("Empty")
             }
@@ -64,6 +64,10 @@ export default function getCollectionQuery(name, filter) {
             else {
                 snapshot.forEach(doc => {
                     if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1]) ) {
+                        if(data.length > 7){
+                            resolve(data);
+                            return;
+                        }
                         if(notAnime(doc.data().keywords)){
                             data.push(doc.data())
                         }

@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -49,12 +48,10 @@ export default function MyAppBar(props) {
 
     const list = (anchor) => (
         <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
+            style={{width:"60vw"}}
         >
             <List>
                 {
@@ -81,8 +78,8 @@ export default function MyAppBar(props) {
                             <div></div>
                         )
                 }
-                {[
-                    { name: 'Premium', icon: <StarRoundedIcon /> }, { name: "Trending", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
+                {/*[
+                    { name: 'Action', icon: <StarRoundedIcon /> }, { name: "Holywood", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
                     { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
                         <Link to={text.to} >
                             <ListItem button key={text}>
@@ -90,7 +87,7 @@ export default function MyAppBar(props) {
                                 <ListItemText primary={text.name} />
                             </ListItem>
                         </Link>
-                    ))}
+                    ))*/}
                 {
                     props.uid ? (
                         <div onClick={() => {

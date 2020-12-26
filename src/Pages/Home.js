@@ -30,19 +30,19 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        /*if (window.Android.getUid()) {
+        if (window.Android.getUid()) {
             this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
             updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
-        }*/
+        }
 
         axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result => {
             this.setState({ data: result.data })
         })
 
         axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/continue-watching", {
-            uid: "a"//window.Android.getUid()
+            uid: window.Android.getUid()
         }).then(result => {
             this.setState({ continue: result.data })
         })
@@ -65,13 +65,23 @@ export class Home extends Component {
                             )
                     }
 
-                    <MyList title="Comedy" filter='Comedy' data={this.state.data[0]} />
-                    <MyList title="Action" filter='Action' data={this.state.data[1]} />
-                    <MyList title="Drama" filter='Drama' data={this.state.data[2]} />
-                    <MyList title="Romance" filter='Romance' data={this.state.data[3]} />
-                    <MyList title="Adventure" filter='Adventure' data={this.state.data[4]} />
-                    <MyList title="Family" filter='Family' data={this.state.data[5]} />
+                    <MyList title="Best In Comedy" filter='Comedy' data={this.state.data[0]} />
+                    <MyList title="Kick-Ass Action" filter='Action' data={this.state.data[1]} />
+                    <MyList title="Bets In Drama" filter='Drama' data={this.state.data[2]} />
+                    <MyList title="RomComs" filter='Romance' data={this.state.data[3]} />
+                    <MyList title="Lively Adventure" filter='Adventure' data={this.state.data[4]} />
+                    <MyList title="Family And Love" filter='Family' data={this.state.data[5]} />
                     <MyList title="Animated" filter='Animated' data={this.state.data[6]} />
+
+                    {/*<div style={{color:"grey"}} >
+                        <div className="h7" >
+                            Want More!!
+                        </div>
+                        <p style={{padding:"20px"}} >
+                            Stay tuned on the app for latest and entertaining content. If you think that we are short in content, we apologise.
+                            For more content please rate and share the app. 
+                        </p>
+                    </div>*/}
                 </div>
             )
         } else {

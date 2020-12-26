@@ -49,7 +49,8 @@ export function saveTime(time, series_id, season, episode) {
         var uid =  window.Android.getUid();
         if (uid) {
             db.collection("Users").doc(uid).collection("Times").doc(series_id + "-" + season + '-' + episode).set({
-                time: time
+                time: time,
+                date: Date.now()
             })
         }
 

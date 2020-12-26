@@ -3,7 +3,8 @@ import "../CSS/Components/Carousel.css"
 import Slider from 'infinite-react-carousel';
 import thejudge from '../Images/Cover/tj.jpg'
 import opm from '../Images/Cover/tvf.jpg'
-import sg2 from '../Images/Cover/sg2.jpg'
+import sg2 from '../Images/Cover/sg2.jpg';
+import ww from '../Images/Cover/ww84.jpg'
 import { Link } from 'react-router-dom';
 
 const images = [
@@ -19,6 +20,10 @@ const images = [
         image: opm,
         link: "/display/tvftripling"
     },
+    {
+        image: ww,
+        link: "/display/wonderwoman1984"
+    }
 ]
 
 const settings = {

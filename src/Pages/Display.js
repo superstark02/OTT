@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { theme } from "../Theme/Theme"
 import "../CSS/Pages/Display.css"
 import "../CSS/Components/MyList.css"
-import { IconButton } from '@material-ui/core'
+import { Button, IconButton } from '@material-ui/core'
 import { ArrowBackRounded, PlayArrowRounded, VolumeMuteRounded, VolumeUpRounded } from '@material-ui/icons'
 import Loader from 'react-loader-spinner'
 import getSubCollection from '../Database/getSubCollection'
@@ -10,9 +10,11 @@ import { useParams } from 'react-router-dom'
 import getDoc from "../Database/getDoc"
 import { Link } from "react-router-dom";
 import SeasonTabs from '../Components/SeasonTabs'
-//import axios from 'axios'
+import axios from 'axios'
 import Cast from '../Components/Cast';
-
+import MyList from '../Components/MyList'
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import { addSubDoc } from '../Database/addDoc'
 
 export class Adapter extends Component {
 
@@ -24,6 +26,7 @@ export class Adapter extends Component {
         seasons: null,
         link: null,
         open: null,
+        message: ""
     }
 
     findRelated = (industry, platform, genre) => {
@@ -33,15 +36,14 @@ export class Adapter extends Component {
     }
 
     componentDidMount() {
-        /*axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-doc', { //get-doc
-            name: "Content",
-            doc_name: this.props.id
-        }).then(snap => {
-            this.setState({ show: snap.data })
-        })*/
+        getDoc("Content", this.props.id).then(result => {
+            this.setState({ show: result })
 
-        getDoc("Content",this.props.id).then(result=>{
-            this.setState({show:result})
+            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-related', { //get-doc
+                filter: 'Hollywood'
+            }).then(snap => {
+                this.setState({ related: snap.data })
+            })
         })
     }
 
@@ -58,13 +60,25 @@ export class Adapter extends Component {
         this.setState({ open: false })
     }
 
+    addWatchList = () => {
+        if (window.Android.getUid()) {
+            addSubDoc("Users", window.Android.getUid(), 'Watchlist', this.state.show.id, {
+                poster: this.state.show.poster,
+                id: this.state.show
+            })
+        }
+        else {
+            this.setState({ message: "Please Sign In" })
+        }
+    }
+
     render() {
         return (
             <div style={{ color: theme.palette.primary.light }} className="transition-item detail-page" >
                 {
                     this.state.show ? (
                         <div className="w3-animate-bottom" >
-                            <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px'}} >
+                            <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
                                     <Link to="/">
                                         <IconButton >
@@ -158,6 +172,15 @@ export class Adapter extends Component {
                                 </ButtonBase>
                             </div>*/}
 
+                            <div className="wrap" >
+                                <Button className="wrap" onClick={this.addWatchList} style={{ backgroundColor: theme.palette.primary.light, color: theme.palette.primary.dark, width: "80%" }} >
+                                    <AddRoundedIcon style={{ fontSize: "13px", margin: "0px 5px" }} /> ADD TO WATCH LATER
+                                </Button>
+                            </div>
+                            <p className="wrap display-type" >
+                                {this.state.message}
+                            </p>
+
                             <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
                                 {this.state.show.description}
                             </div>
@@ -171,43 +194,28 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
-
-                            {/*
-                                this.state.related ? (
-                                    <div>
-                                        <div className="h7" >
-                                            Related
-                                        </div>
-                                        <div className="ss-container" >
-                                            {
-                                                this.state.related.map(item => {
-                                                    return (
-                                                        <ButtonBase style={{ height: "100%", marginRight: "20px" }}>
-                                                            <a href={"/display/" + item.industry + "/" + item.platform + "/" + item.genre + "/" + item.id}
-                                                                style={{ height: "100%" }}  >
-                                                                <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
-
-                                                                </div>
-                                                            </a>
-                                                        </ButtonBase>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                                ) : (
-                                        <div></div>
-                                    )
-                            */}
                             {
                                 this.state.show.cast ? (
                                     <div>
                                         <Cast data={this.state.show.cast} />
                                     </div>
-                                ): (
-                                    <div></div>
-                                )
+                                ) : (
+                                        <div></div>
+                                    )
                             }
+                            {
+                                this.state.related ? (
+                                    <div>
+                                        <div className="h7" >
+                                            Related
+                                        </div>
+                                        <MyList data={this.state.related} filter='Hollywood' />
+                                    </div>
+                                ) : (
+                                        <div></div>
+                                    )
+                            }
+                            
                         </div>
                     ) : (
                             <div className="wrap" style={{ minHeight: "90vh" }} >

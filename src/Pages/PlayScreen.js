@@ -14,9 +14,12 @@ import axios from 'axios'
 import poster from '../Images/logo.jpg'
 import Cast from '../Components/Cast';
 import getDoc from "../Database/getDoc"
+import { Button } from '@material-ui/core'
+import { Link } from "react-router-dom";
+
 //import video from "../Videos/stone.mp4"
 //import subs from "../Videos/sub.vtt"
-const src = "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FTV%2FStrangerThings%2FS1%2F%5BSubtitleTools.com%5D%20Stranger%20Things%20101%20Chapter%20One%20The%20Vanishing%20Of%20Will%20Byers%20By%20GoldBerg_44.vtt?alt=media&token=ad435e56-092a-417b-8da4-7acb8ce4ca50"
+//const src = "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Hollywood%2FTV%2FStrangerThings%2FS1%2F%5BSubtitleTools.com%5D%20Stranger%20Things%20101%20Chapter%20One%20The%20Vanishing%20Of%20Will%20Byers%20By%20GoldBerg_44.vtt?alt=media&token=ad435e56-092a-417b-8da4-7acb8ce4ca50"
 export class Adapter extends Component {
 
     state = {
@@ -51,8 +54,8 @@ export class Adapter extends Component {
             })
         })*/
 
-        getDoc("Content", this.props.id).then(snap=>{
-            this.setState({show:snap});
+        getDoc("Content", this.props.id).then(snap => {
+            this.setState({ show: snap });
             axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
                 uid: window.Android.getUid(),
                 series_id: this.props.id,
@@ -132,13 +135,15 @@ export class Adapter extends Component {
                                     onTimeUpdate={(e) => { this.setState({ time: e.target.currentTime }) }}
                                     controlsList="nodownload"
                                     poster={poster}
+                                    crossOrigin="anonymous"
                                     className="player" >
-                                    <track label="English" kind="subtitles" srclang="en" default src={this.state.episode.sub} />
+                                    <track label="English" kind="captions" srcLang="en" default src={this.state.episode.sub} />
                                     <source src={this.state.episode.content} type="video/mp4" />
                                 </video>
 
                                 {/*<Player poster={this.state.show.cover} >
                                     <source src={this.state.episode.content} />
+                                    <track label="English" kind="captions" srclang="en" default src={src} />
                                     <BigPlayButton position="center" />
                                     <ControlBar>
                                         <ReplayControl seconds={10} order={1.1} />
@@ -149,7 +154,6 @@ export class Adapter extends Component {
                                         <VolumeMenuButton disabled />
                                     </ControlBar>
                             </Player>*/}
-
                             </div>
 
                             <div style={{ display: "flex", padding: "0px 10px", marginBottom: "20px" }} >
@@ -209,6 +213,19 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
+                            <div className="display-type" style={{ padding: "0px 20px", marginTop: "30px" }} >
+                                Liked The Experience ?<br />
+                                We are new in this industry. We apologise for any inconvenience. As a beginer your feedback
+                                is important for us.
+                                Please let us know if you feel some feature missing or want any particular type of content.
+                            </div>
+                            <div className="wrap" >
+                                <Link to="/feedback" >
+                                    <Button className="wrap" onClick={this.addWatchList} style={{ backgroundColor: theme.palette.primary.dark, color: theme.palette.primary.light, width: "80%", margin: "10px" }} >
+                                        FEEDBACK
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
                     ) : (
                             <div className="wrap" style={{ minHeight: "100vh" }} >

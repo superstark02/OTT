@@ -43,11 +43,57 @@ app.get('/', (req, res) => {
     })
 });
 
-app.post('/next-data', (req, res) => {
-    getNextData("Index", req.body.filter, req.body.last).then(snap => {
-        res.send(snap);
-        return null;
+app.get('/category/Hollywood', (req, res) => {
+    var data = []
+    getCustomQuery('Index', ['Hollywood', 'Series']).then(snap => {
+        data.push(snap)
+        getCustomQuery('Index', ['Hollywood', 'Drama']).then(sna => {
+            data.push(sna)
+            getCustomQuery('Index', ['Hollywood', 'Comedy']).then(sn => {
+                data.push(sn)
+                getCustomQuery('Index', ['Hollywood', 'Action']).then(s => {
+                    data.push(s)
+                    res.send(data)
+                    return null;
+                })
+            })
+        })
     })
+})
+
+app.get('/category/Bollywood', (req, res) => {
+    var data = []
+    getCustomQuery('Index', ['Bollywood', 'Series']).then(snap => {
+        data.push(snap)
+        getCustomQuery('Index', ['Bollywood', 'Drama']).then(sna => {
+            data.push(sna)
+            getCustomQuery('Index', ['Bollywood', 'Comedy']).then(sn => {
+                data.push(sn)
+                getCustomQuery('Index', ['Bollywood', 'Action']).then(s => {
+                    data.push(s)
+                    res.send(data)
+                    return null;
+                })
+            })
+        })
+    })
+})
+
+app.post('/next-data', (req, res) => {
+    if (req.body.filter.length > 2) {
+        getNextData("Index", req.body.filter, req.body.last).then(snap => {
+            res.send(snap);
+            return null;
+        })
+    } else if (req.body.filter.length === 2) {
+        getCustomQueryNext('Index', req.body.filter).then(result => {
+            res.send(result);
+            return null;
+        })
+    }
+    else {
+        res.send(null)
+    }
 })
 
 app.post('/get-doc', (req, res) => {
@@ -113,9 +159,17 @@ app.post('/add-watching', (req, res) => {
             date: Date.now()
         })
         cleanCollection(req.body.uid, "Watching");
+        cleanCollection(req.body.uid, "Times");
     } else {
         res.send(null)
     }
+})
+
+app.post('/get-related', (req, res) => {
+    getCollectionQuery('Index', req.body.filter).then(result=>{
+        res.send(result);
+        return null;
+    })
 })
 
 exports.widgets = functions.https.onRequest(app);
@@ -185,7 +239,7 @@ function getCollectionQuery(name, filter) {
     return new Promise((resolve, reject) => {
         var data = [];
         const collection = db.collection('Index')
-        collection.where('keywords','array-contains',filter).orderBy('year', 'desc').limit(7).get().then(snapshot => {
+        collection.where('keywords', 'array-contains', filter).orderBy('year', 'desc').limit(7).get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
             }
@@ -204,11 +258,11 @@ function getCollectionQuery(name, filter) {
     });
 }
 
-function getNextData(name, filter, last){
+function getNextData(name, filter, last) {
     return new Promise((resolve, reject) => {
         var data = [];
         const collection = db.collection(name)
-        collection.where('keywords','array-contains',filter).orderBy('year', 'desc').startAfter(last).limit(5).get().then(snapshot => {
+        collection.where('keywords', 'array-contains', filter).orderBy('year', 'desc').startAfter(last).limit(5).get().then(snapshot => {
             if (snapshot.empty) {
                 reject(new Error("Empty"))
             }
@@ -221,6 +275,68 @@ function getNextData(name, filter, last){
                 resolve(data);
             }
             return null;
+        }).catch(e => {
+            reject(e)
+        })
+    });
+}
+
+function getCustomQueryNext(name, last) {
+    return new Promise((resolve, reject) => {
+        var data = [];
+        const collection = db.collection(name);
+
+        collection.startAfter(last).orderBy('year', 'desc').get().then(snapshot => {
+            if (snapshot.empty) {
+                reject(new Error("Empty"))
+                return null;
+            }
+            else {
+                snapshot.forEach(doc => {
+                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
+                        if (data.length > 7) {
+                            resolve(data);
+                            return null;
+                        }
+                        if (notAnime(doc.data().keywords)) {
+                            data.push(doc.data())
+                        }
+                    }
+                });
+                resolve(data);
+                return null;
+            }
+        }).catch(e => {
+            reject(e)
+        })
+    });
+}
+
+function getCustomQuery(name, filter) {
+    return new Promise((resolve, reject) => {
+        var data = [];
+        const collection = db.collection(name);
+
+        collection.orderBy('year', 'desc').get().then(snapshot => {
+            if (snapshot.empty) {
+                reject(new Error("Empty"))
+                return null;
+            }
+            else {
+                snapshot.forEach(doc => {
+                    if (search(doc.data().keywords, filter[0]) && search(doc.data().keywords, filter[1])) {
+                        if (data.length > 7) {
+                            resolve(data);
+                            return null;
+                        }
+                        if (notAnime(doc.data().keywords)) {
+                            data.push(doc.data())
+                        }
+                    }
+                });
+                resolve(data);
+                return null;
+            }
         }).catch(e => {
             reject(e)
         })
@@ -294,3 +410,44 @@ function notAnime(array) {
     }
     return true
 }
+
+function similarity(s1, s2) {
+    var longer = s1;
+    var shorter = s2;
+    if (s1.length < s2.length) {
+        longer = s2;
+        shorter = s1;
+    }
+    var longerLength = longer.length;
+    if (longerLength === 0) {
+        return 1.0;
+    }
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+
+function editDistance(s1, s2) {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+
+    var costs = new Array();
+    for (var i = 0; i <= s1.length; i++) {
+      var lastValue = i;
+      for (var j = 0; j <= s2.length; j++) {
+        if (i === 0)
+          costs[j] = j;
+        else {
+          if (j > 0) {
+            var newValue = costs[j - 1];
+            if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+              newValue = Math.min(Math.min(newValue, lastValue),
+                costs[j]) + 1;
+            costs[j - 1] = lastValue;
+            lastValue = newValue;
+          }
+        }
+      }
+      if (i > 0)
+        costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+  }
