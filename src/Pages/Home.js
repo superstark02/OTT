@@ -20,7 +20,8 @@ export class Home extends Component {
         data: null,
         continue: null,
         email: null,
-        name: null
+        name: null,
+        photo: null
     }
 
     constructor() {
@@ -34,6 +35,7 @@ export class Home extends Component {
             this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
+            this.setState({ photo: window.Android.getPhoto() })
             updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
         }
 
@@ -53,7 +55,7 @@ export class Home extends Component {
         if (this.state.data) {
             return (
                 <div className="w3-animate-bottom" >
-                    <MyAppBar uid={this.state.uid} email={this.state.email} name={this.state.name} />
+                    <MyAppBar uid={this.state.uid} photo={this.state.photo} email={this.state.email} name={this.state.name} />
                     <Carousel />
                     <Categories />
 

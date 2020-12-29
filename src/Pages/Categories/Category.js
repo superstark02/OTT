@@ -44,16 +44,16 @@ class Adapter extends Component {
             this.setState({ latest: snap })
         })
 
-        getByWord('Index', 'Robert Downey Jr').then(result=>{
-            this.setState({rdj:result})
+        getByWord('Index', 'Robert Downey Jr').then(result => {
+            this.setState({ rdj: result })
         })
 
-        getByWord('Index', 'Margot Robbie').then(result=>{
-            this.setState({mr:result})
+        getByWord('Index', 'Margot Robbie').then(result => {
+            this.setState({ mr: result })
         })
 
-        getByWord('Index', 'Tom Cruise').then(result=>{
-            this.setState({tc:result})
+        getByWord('Index', 'Tom Cruise').then(result => {
+            this.setState({ tc: result })
         })
     }
 
@@ -73,52 +73,76 @@ class Adapter extends Component {
                     <MyList title="Drama In English" data={this.state.data[1]} filter={['Hollywood','Drama']} />
                     <MyList title="Comedy" data={this.state.data[2]} filter={['Hollywood','Comedy']} />
                 <MyList title="Amazing Action" data={this.state.data[3]} filter={['Hollywood','Action']} />*/}
-                    <div style={{display:"flex"}} >
-                        <div style={{marginLeft:"20px", marginRight:"-10px"}} >
-                            <img src={rdj} width="50px" style={{borderRadius:"2px"}} />
-                        </div>
-                        <div>
-                            <div style={{ color: "grey", margin: "0px 20px", fontSize:"25px" }} >
-                                Movies By
+                    {
+                        this.state.rdj ? (
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img src={rdj} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Robert Downey Jr.
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList data={this.state.rdj} filter="Robert Downey Jr" />
                             </div>
-                            <div className="h7" >
-                                Robert Downey Jr.
-                            </div>
-                        </div>
-                    </div>
-                    <MyList data={this.state.rdj} filter="Robert Downey Jr" />
+                        ) : (
+                                <div></div>
+                            )
+                    }
 
-                    <div style={{display:"flex"}} >
-                        <div style={{marginLeft:"20px", marginRight:"-10px"}} >
-                            <img src={mr} width="50px" style={{borderRadius:"2px"}} />
-                        </div>
-                        <div>
-                            <div style={{ color: "grey", margin: "0px 20px", fontSize:"25px" }} >
-                                Movies By
+                    {
+                        this.state.mr ? (
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img src={mr} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Margot Robbie
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList data={this.state.mr} filter="Margot Robbie" />
                             </div>
-                            <div className="h7" >
-                                Margot Robbie
-                            </div>
-                        </div>
-                    </div>
-                    <MyList data={this.state.mr} filter="Margot Robbie" />
+                        ) : (
+                                <div></div>
+                            )
+                    }
 
-                    <div style={{display:"flex"}} >
-                        <div style={{marginLeft:"20px", marginRight:"-10px"}} >
-                            <img src={tc} width="50px" style={{borderRadius:"2px"}} />
-                        </div>
-                        <div>
-                            <div style={{ color: "grey", margin: "0px 20px", fontSize:"25px" }} >
-                                Movies By
+                    {
+                        this.state.tc ? (
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img src={tc} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Tom Cruise
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList data={this.state.tc} filter="Tom Cruise" />
                             </div>
-                            <div className="h7" >
-                                Tom Cruise
-                            </div>
-                        </div>
-                    </div>
-                    <MyList data={this.state.tc} filter="Tom Cruise" />
+                        ) : (
+                                <div></div>
+                            )
+                    }
 
-                    <MyList title="Comedy In Hollywood" data={this.state.data[3]} filter={['Hollywood','Comedy']} />
+                    <MyList title="Comedy In Hollywood" data={this.state.data[3]} filter={['Hollywood', 'Comedy']} />
                 </div>
             )
         }

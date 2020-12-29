@@ -46,7 +46,7 @@ export class Anime extends Component {
                 <SubAppBar />
                 {
                     this.state.data ? (
-                        <MyList title="All" data={this.state.data[0]} filter={["Anime","Series"]} />
+                        <MyList title="All" data={this.state.data[0]} filter={["Anime", "Series"]} />
                     ) : (
                             <div className="wrap" >
                                 Please Wait
@@ -56,6 +56,9 @@ export class Anime extends Component {
                 {/*<MyList title="Shounen Comedy" filter={["Shounen", "Comedy"]} />
                 <MyList title="Children & Family" filter={["Anime", "Shounen"]} />
                 <MyList title="Slice Of Life" filter={["Anime", "Slice Of Life"]} />*/}
+                <div className="wrap" style={{ color: "grey" }} >
+                    We are working for more content.
+                </div>
             </div>
         )
     }

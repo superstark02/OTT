@@ -1,27 +1,38 @@
 import React, { Component } from 'react'
 import SubAppBar from '../../Components/SubAppBar'
 import { useParams } from 'react-router-dom'
-import { getLatest } from '../../Database/getCollectionQuery'
-import shuffleArray from '../../Database/shuffleArray'
+import { getLatest, getByWord } from '../../Database/getCollectionQuery'
+import aamirphoto from '../../Images/aamir.jpg'
 import MyList from '../../Components/MyList';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import axios from 'axios';
 
 class Adapter extends Component {
 
     state = {
-        data: null
+        data: true,
+        ssr: null,
+        aamir: null,
+        ak: null
     }
 
     componentDidMount() {
-        axios.get('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/category/Bollywood').then(result=>{
-            this.setState({ data: shuffleArray(result.data) })
+        getLatest("Index", 'Bollywood').then(snap => {
+            this.setState({ latest: snap })
         })
 
-        getLatest("Index",'Bollywood').then(snap=>{
-            this.setState({latest:snap})
+        getByWord('Index', 'Aamir Khan').then(result => {
+            this.setState({ aamir: result })
         })
+
+        getByWord('Index', 'Sushant Singh Rajput').then(result => {
+            this.setState({ ssr: result })
+        })
+
+        getByWord('Index', 'Ayushman Khurana').then(result => {
+            this.setState({ ak: result })
+        })
+
     }
 
     render() {
@@ -31,15 +42,52 @@ class Adapter extends Component {
                     <SubAppBar name={this.props.id} />
                     {
                         this.state.latest ? (
-                            <MyList title="Hollywood Popular" data={this.state.latest} filter={['Movie','Hollywood']} />
-                        ):(
-                            <div></div>
-                        )
+                            <MyList title="Bollywood Popular" data={this.state.latest} filter={['Movie', 'Hollywood']} />
+                        ) : (
+                                <div></div>
+                            )
                     }
-                    <MyList title="Series" data={this.state.data[0]} filter='Series' />
-                    <MyList title="Drama" data={this.state.data[1]}  filter='Drama' />
-                    <MyList title="Comedy" data={this.state.data[2]} filter='Comedy' />
-                    <MyList title="Comedy" data={this.state.data[3]} filter='Comedy' />
+                    {
+                        this.state.aamir ? (
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img src={aamirphoto} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Aamir Khan
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList title="" data={this.state.aamir} filter='Aamir Khan' />
+                            </div>
+                        ) : (
+                                <div></div>
+                            )
+                    }
+                    {
+                        this.state.ssr ? (
+                            <MyList title="Sushant Singh Rajput" data={this.state.ssr} filter='Sushant Singh Rajput' />
+                        ) : (
+                                <div></div>
+                            )
+                    }
+                    {
+                        this.state.ak ? (
+                            <MyList title="Ayushman Khurana" data={this.state.ak} filter='Ayushman Khurana' />
+                        ) : (
+                                <div></div>
+                            )
+                    }
+                    {/*<MyList title="Drama" data={this.state.data[1]}  filter='Drama' />
+                    <MyList title="Action" data={this.state.data[3]} filter='Action' />*/}
+                    <div className="wrap" style={{color:"grey"}} >
+                        We are working for more content.
+                    </div>
                 </div>
             )
         }

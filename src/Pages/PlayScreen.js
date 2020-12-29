@@ -215,7 +215,7 @@ export class Adapter extends Component {
                             }
                             <div className="display-type" style={{ padding: "0px 20px", marginTop: "30px" }} >
                                 Liked The Experience ?<br />
-                                We are new in this industry. We apologise for any inconvenience. As a beginer your feedback
+                                We are new in this industry. We apologise for any inconvenience. As a beginner your feedback
                                 is important for us.
                                 Please let us know if you feel some feature missing or want any particular type of content.
                             </div>

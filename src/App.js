@@ -15,6 +15,9 @@ import Series from './Pages/Categories/Series';
 import ShortFilms from './Pages/Categories/ShortFilms';
 import Signin from './Pages/Signin';
 import Bollywood from './Pages/Categories/Bollywood';
+import Categories from './Pages/Categories';
+import ShowCategory from './Pages/ShowCategory';
+import WatchLater from './Pages/WatchLater';
 
 const screenStyle = {
   backgroundColor: theme.palette.primary.dark,
@@ -32,29 +35,26 @@ function App() {
           <Route exact path='/' component={Home} />
 
           <Route exact path='/display/:id' component={Display} />
-
-          <Route exact path='/discover' component={Discover} />
-
-          <Route exact path='/anime' component={Anime} />
-
-          <Route exact path='/series' component={Series} />
-
-          <Route exact path='/short-films' component={ShortFilms} />
-
-          <Route exact path='/category/Hollywood' component={Category} />
-          <Route exact path='/category/Bollywood' component={Bollywood} />
-
-          <Route exact path='/about' component={About} />
-
           <Route exact path='/play/:id/:season/:episode' component={PlayScreen} />
 
+          <Route exact path='/discover' component={Discover} />
+          <Route exact path='/anime' component={Anime} />
+          <Route exact path='/series' component={Series} />
+          <Route exact path='/short-films' component={ShortFilms} />
+
+          <Route exact path='/category' component={Categories} />
+          <Route exact path='/category/Hollywood' component={Category} />
+          <Route exact path='/category/Bollywood' component={Bollywood} />
+          <Route exact path='/category/:id' component={ShowCategory} />
+
+          
           <Route exact path='/search' component={SearchPage} />
 
           <Route exact path='/help' component={Help} />
-
+          <Route exact path='/about' component={About} />
           <Route exact path='/feedback' component={Feedback} />
-
           <Route exact path='/sign-in' component={Signin} />
+          <Route exact path='/watch-later' component={WatchLater} />
         </Switch>
       </Router>
     </div>

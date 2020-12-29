@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -12,25 +11,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme as color } from '../Theme/Theme';
-import { CommentRounded, FolderSpecialRounded, Help, InfoRounded } from '@material-ui/icons';
-import StarRoundedIcon from '@material-ui/icons/StarRounded';
-import { FaBolt, FaPowerOff, FaTheaterMasks, FaUser } from 'react-icons/fa';
+import { CommentRounded, Help, InfoRounded } from '@material-ui/icons';
+import RestoreRoundedIcon from '@material-ui/icons/RestoreRounded';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import PowerSettingsNewRoundedIcon from '@material-ui/icons/PowerSettingsNewRounded';
+import FolderSpecialRoundedIcon from '@material-ui/icons/FolderSpecialRounded';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 
-const useStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: 'auto',
-    },
-});
-
 export default function MyAppBar(props) {
-    const classes = useStyles();
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -51,14 +42,27 @@ export default function MyAppBar(props) {
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{width:"60vw"}}
+            style={{ width: "70vw" }}
         >
             <List>
                 {
                     props.uid ? (
                         <ListItem button key={"signin1"}>
-                            <ListItemIcon><FaUser /></ListItemIcon>
-                            <ListItemText primary={props.name} secondary={props.email} />
+                            <ListItem button key={"signin"}>
+                                <div style={{ display: "flex" }} >
+                                    <div>
+                                        <img alt="user" src={props.photo} style={{ borderRadius: "50%", width: "30px" }} />
+                                    </div>
+                                    <div>
+                                        <div className="h7" >
+                                            {props.name}
+                                        </div>
+                                        <div style={{ margin: "0px 20px" }} >
+                                            {props.email}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ListItem>
                         </ListItem>
                     ) : (
                             <div></div>
@@ -70,31 +74,30 @@ export default function MyAppBar(props) {
                             window.Android.signin();
                         }} >
                             <ListItem button key={"signin"}>
-                                <ListItemIcon><FaUser /></ListItemIcon>
-                                <ListItemText primary="Sign In" />
+                                <ListItemIcon><AccountCircleRoundedIcon /></ListItemIcon>
+                                <ListItemText primary={"SignIn"} secondary={"To access all features."} />
                             </ListItem>
                         </div>
                     ) : (
                             <div></div>
                         )
                 }
-                {/*[
-                    { name: 'Action', icon: <StarRoundedIcon /> }, { name: "Holywood", icon: <FaBolt /> }, { name: 'Channels', icon: <FolderSpecialRounded /> },
-                    { name: 'Genres', icon: <FaTheaterMasks size="20px" /> }].map((text, index) => (
+                {[
+                    { name: 'Watch Later', icon: <RestoreRoundedIcon />, to:"/watch-later" }, { name: 'Categories', icon: <FolderSpecialRoundedIcon />, to:"/category" }].map((text, index) => (
                         <Link to={text.to} >
                             <ListItem button key={text}>
                                 <ListItemIcon>{text.icon}</ListItemIcon>
                                 <ListItemText primary={text.name} />
                             </ListItem>
                         </Link>
-                    ))*/}
+                    ))}
                 {
                     props.uid ? (
                         <div onClick={() => {
                             window.Android.LogOut();
                         }} >
                             <ListItem button key={"signin"} >
-                                <ListItemIcon><FaPowerOff /></ListItemIcon>
+                                <ListItemIcon><PowerSettingsNewRoundedIcon /></ListItemIcon>
                                 <ListItemText primary="Log Out" />
                             </ListItem>
                         </div>

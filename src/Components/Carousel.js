@@ -2,28 +2,28 @@ import React from 'react'
 import "../CSS/Components/Carousel.css"
 import Slider from 'infinite-react-carousel';
 import thejudge from '../Images/Cover/tj.jpg'
-import opm from '../Images/Cover/tvf.jpg'
 import sg2 from '../Images/Cover/sg2.jpg';
 import ww from '../Images/Cover/ww84.jpg'
+import u from '../Images/Cover/6u.jpg'
 import { Link } from 'react-router-dom';
 
 const images = [
     {
-        image: thejudge,
-        link: "/display/thejudge"
+        image: ww,
+        link: "/display/wonderwoman1984"
     },
     {
         image: sg2,
         link: "/display/sacredgames"
     },
     {
-        image: opm,
-        link: "/display/tvftripling"
+        image: thejudge,
+        link: "/display/thejudge"
     },
     {
-        image: ww,
-        link: "/display/wonderwoman1984"
-    }
+        image: u,
+        link: "/display/tvftripling"
+    },
 ]
 
 const settings = {

@@ -63,7 +63,7 @@ app.get('/category/Hollywood', (req, res) => {
 
 app.get('/category/Bollywood', (req, res) => {
     var data = []
-    getCustomQuery('Index', ['Bollywood', 'Series']).then(snap => {
+    getCustomQuery('Index', ['Bollywood', 'Romance']).then(snap => {
         data.push(snap)
         getCustomQuery('Index', ['Bollywood', 'Drama']).then(sna => {
             data.push(sna)
