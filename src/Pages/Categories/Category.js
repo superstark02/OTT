@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import SubAppBar from '../../Components/SubAppBar'
 import { useParams } from 'react-router-dom'
-import { getByWord, getLatest } from '../../Database/getCollectionQuery'
-import shuffleArray from '../../Database/shuffleArray'
+import getCollectionQuery, { getByWord, getLatest } from '../../Database/getCollectionQuery'
 import MyList from '../../Components/MyList';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -11,17 +10,6 @@ import rdj from "../../Images/rdj.jpg"
 import mr from "../../Images/mr.jpg"
 import tc from "../../Images/tc.jpg"
 
-const list = [
-    {
-        title: "Series",
-    },
-    {
-        title: "Drama",
-    },
-    {
-        title: "Comedy",
-    }
-]
 
 var data = []
 
@@ -36,8 +24,8 @@ class Adapter extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/category/Hollywood').then(result => {
-            this.setState({ data: shuffleArray(result.data) })
+        getCollectionQuery("Index",["Hollywood","Comedy"]).then(result=>{
+            this.setState({data:result})
         })
 
         getLatest("Index", 'Hollywood').then(snap => {
@@ -142,7 +130,7 @@ class Adapter extends Component {
                             )
                     }
 
-                    <MyList title="Comedy In Hollywood" data={this.state.data[3]} filter={['Hollywood', 'Comedy']} />
+                    <MyList title="Comedy In Hollywood" data={this.state.data} filter={['Hollywood', 'Comedy']} />
                 </div>
             )
         }

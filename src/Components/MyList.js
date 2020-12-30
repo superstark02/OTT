@@ -3,7 +3,7 @@ import "../CSS/Components/MyList.css"
 import { ButtonBase } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 //import { Link } from "react-tiger-transition";
-import getNextData from '../Database/getNextData';
+import getNextData, {getCustomQueryNext} from '../Database/getNextData';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import shuffleArray from '../Database/shuffleArray';
 
@@ -15,19 +15,31 @@ export class MyList extends Component {
     }
 
     loadMore = () => {
-        getNextData(this.state.data[this.state.data.length - 1].year, this.props.filter).then(result => {
-            if (result.length > 0) {
-                var temp = this.state.data;
-
-                result.forEach(element => {
-                    temp.push(element)
-                });
-
-                this.setState({ data: temp })
-            } else {
-                this.setState({ nomore: true })
-            }
-        })
+        if (this.props.filter.length > 3) {
+            getNextData("Index", this.props.filter, this.state.data[this.state.data.length - 1].year).then(result => {
+                if (result.length > 0) {
+                    var temp = this.state.data;
+                    result.forEach(element => {
+                        temp.push(element)
+                    });
+                    this.setState({ data: temp })
+                } else {
+                    this.setState({ nomore: true })
+                }
+            })
+        } else if (this.props.filter.length === 2) {
+            getCustomQueryNext('Index', this.state.data[this.state.data.length - 1].year, this.props.filter).then(result => {
+                if (result.length > 0) {
+                    var temp = this.state.data;
+                    result.forEach(element => {
+                        temp.push(element)
+                    });
+                    this.setState({ data: temp })
+                } else {
+                    this.setState({ nomore: true })
+                }
+            })
+        }
     }
 
     componentDidMount() {

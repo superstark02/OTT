@@ -6,6 +6,7 @@ import sg2 from '../Images/Cover/sg2.jpg';
 import ww from '../Images/Cover/ww84.jpg'
 import u from '../Images/Cover/6u.jpg'
 import { Link } from 'react-router-dom';
+import Carousel from 'react-bootstrap/Carousel'
 
 const images = [
     {
@@ -28,14 +29,15 @@ const images = [
 
 const settings = {
     arrows: false,
-    autoplay: true,
+    autoplay: false,
+    centerMode: true,
 };
 
-export function Carousel() {
+export function MyCarousel() {
 
     return (
         <div style={{ paddingBottom: "20px" }} >
-            <div style={{ minHeight: "25vh" }} >
+            <div style={{ minHeight: "17vh" }} >
                 <Slider {...settings}>
                     {
                         images.map(item => {
@@ -56,4 +58,4 @@ export function Carousel() {
 }
 
 
-export default Carousel
+export default MyCarousel

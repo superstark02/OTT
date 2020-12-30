@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MyAppBar from '../Components/MyAppBar'
-import Carousel from '../Components/Carousel';
+import MyCarousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
 import { theme } from '../Theme/Theme'
 //import { uploadData } from '../Database/uploadData';
@@ -10,6 +10,7 @@ import axios from 'axios';
 import Loader from 'react-loader-spinner'
 import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
+import getSubCollection from '../Database/getSubCollection'
 
 //  const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
@@ -39,16 +40,17 @@ export class Home extends Component {
             updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
         }
 
+        if( window.Android.getUid()){
+            getSubCollection("Users", window.Android.getUid(), 'Watching').then(result=>{
+                this.setState({ continue: result })
+            })
+        }
+
         axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result => {
             this.setState({ data: result.data })
         })
 
-        axios.post("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/continue-watching", {
-            uid: window.Android.getUid()
-        }).then(result => {
-            this.setState({ continue: result.data })
-        })
-
+               
     }
 
     render() {
@@ -56,7 +58,7 @@ export class Home extends Component {
             return (
                 <div className="w3-animate-bottom" >
                     <MyAppBar uid={this.state.uid} photo={this.state.photo} email={this.state.email} name={this.state.name} />
-                    <Carousel />
+                    <MyCarousel />
                     <Categories />
 
                     {

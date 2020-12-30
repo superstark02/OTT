@@ -46,9 +46,9 @@ export function getTime( searies_id, season, episode) {
 
     return new Promise((resolve, reject) => {
 
-        var uid = window.Android.getUid();
+        var uid = "a"//window.Android.getUid();
 
-        db.collection("Users").doc(uid).collection(searies_id+"-"+season).doc(episode)
+        db.collection("Users").doc(uid).collection("Times").doc(searies_id + "-" + season + "-" + episode)
             .get()
             .then(snapshot => {
                 if(snapshot.exists){

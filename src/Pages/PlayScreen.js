@@ -13,9 +13,10 @@ import { saveTime } from '../Database/logIn'
 import axios from 'axios'
 import poster from '../Images/logo.jpg'
 import Cast from '../Components/Cast';
-import getDoc from "../Database/getDoc"
+import getDoc, { getTime } from "../Database/getDoc"
 import { Button } from '@material-ui/core'
 import { Link } from "react-router-dom";
+import getEpisode from '../Database/getEpisode'
 
 //import video from "../Videos/stone.mp4"
 //import subs from "../Videos/sub.vtt"
@@ -65,25 +66,13 @@ export class Adapter extends Component {
             })
         })
 
-        //get time
-        axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-time', { //get-time
-            id: this.props.id,
-            season: this.props.season,
-            episode: this.props.episode,
-            uid: window.Android.getUid()
-        }).then(snap => {
-            if (snap.data.time) {
-                this.setState({ currentTime: snap.data.time })
-            }
-
-            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-episode', { //get-episode
-                id: this.props.id,
-                season: this.props.season,
-                episode: this.props.episode
-            }).then(snap => {
-                this.setState({ episode: snap.data })
+        getTime(this.props.id, this.props.season, this.props.episode).then(snap=>{
+            if (snap.time) {
+                this.setState({ currentTime: snap.time })
+            }      
+            getEpisode(this.props.id, this.props.season, this.props.episode).then(result=>{
+                this.setState({ episode: result })
             })
-
         })
 
         this.setState({ episode_id: this.props.episode, season_id: this.props.season, show_id: this.props.id })

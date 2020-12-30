@@ -35,10 +35,9 @@ export class Help extends Component {
                     </h2>
                     <p>
                         We dont't beleive that AI chats provide true customer-company relations.
-                        Message us you query or contact us on Insagram and Facebook. <br></br>
                         We will get back to you in no time.
                     </p>
-                    <p className="wrap" >
+                    {/*<p className="wrap" >
                         <div>
                             <Link to="https://www.facebook.com/profile.php?id=100048674124424" >
                                 <Facebook style={{ fontSize: "50px", margin: "10px" }} />
@@ -52,7 +51,7 @@ export class Help extends Component {
                                 <Instagram style={{ fontSize: "50px", margin: "10px" }} />
                             </Link>
                         </div>
-                    </p>
+        </p>*/}
 
                     <div className="wrap" >
                         <div className="width-change" style={{marginTop:"0px"}} >
