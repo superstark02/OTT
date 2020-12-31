@@ -32,16 +32,16 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        if (window.Android.getUid()) {
-            this.setState({ uid: window.Android.getUid() })
+        if (window.Android.getDeviceId()) {
+            /*this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
-            this.setState({ photo: window.Android.getPhoto() })
-            updateUser(window.Android.getUid(), window.Android.getName(), window.Android.getEmail(), window.Android.getDeviceId());
+            this.setState({ photo: window.Android.getPhoto() })*/
+            updateUser(window.Android.getDeviceId());
         }
 
-        if( window.Android.getUid()){
-            getSubCollection("Users", window.Android.getUid(), 'Watching').then(result=>{
+        if( window.Android.getDeviceId()){
+            getSubCollection("Users", window.Android.getDeviceId(), 'Watching').then(result=>{
                 this.setState({ continue: result })
             })
         }

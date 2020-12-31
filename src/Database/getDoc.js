@@ -46,7 +46,7 @@ export function getTime( searies_id, season, episode) {
 
     return new Promise((resolve, reject) => {
 
-        var uid = "a"//window.Android.getUid();
+        var uid = window.Android.getDeviceId();
 
         db.collection("Users").doc(uid).collection("Times").doc(searies_id + "-" + season + "-" + episode)
             .get()

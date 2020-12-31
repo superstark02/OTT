@@ -61,8 +61,8 @@ export class Adapter extends Component {
     }
 
     addWatchList = () => {
-        if (window.Android.getUid()) {
-            addSubDoc("Users", window.Android.getUid(), 'Watchlist', this.state.show.id, {
+        if (window.Android.getDeviceId()) {
+            addSubDoc("Users", window.Android.getDeviceId(), 'Watchlist', this.state.show.id, {
                 poster: this.state.show.poster,
                 id: this.state.show.id
             }).then(e=>{

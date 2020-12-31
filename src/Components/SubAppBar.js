@@ -9,6 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import { theme as color } from '../Theme/Theme';
 import { ArrowBackRounded } from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography';
+import {Link} from "react-router-dom"
 
 
 
@@ -41,14 +42,15 @@ export default function SubAppBar(props) {
                 style={{ backgroundColor: color.palette.primary.dark, color: color.palette.primary.light, padding: "0px 10px" }}
             >
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={() => { window.history.back() }}
-                        edge="start"
-                    >
-                        <ArrowBackRounded />
-                    </IconButton>
+                    <Link to="/" >
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                        >
+                            <ArrowBackRounded />
+                        </IconButton>
+                    </Link>
                     <Typography variant="h6" noWrap >
                         {props.name}
                     </Typography>

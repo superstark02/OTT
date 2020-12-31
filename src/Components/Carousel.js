@@ -23,7 +23,7 @@ const images = [
     },
     {
         image: u,
-        link: "/display/tvftripling"
+        link: "/display/6underground"
     },
 ]
 

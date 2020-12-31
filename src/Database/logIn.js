@@ -29,24 +29,16 @@ export default function LogIn() {
 
 export function updateUser(uid, name, mail, device) {
     return new Promise((resolve, reject) => {
-
-        db.collection("Users").doc(uid).set({
-            name: name,
-            uid: uid,
-            mail: mail
-        }).then(r => {
-            db.collection("Users").doc(uid).collection("Devices").doc(device).set(
-                { device: device }
-            )
+        db.collection("Users").doc(device).set({
+            id: device
         })
-
     });
 }
 
 export function saveTime(time, series_id, season, episode) {
     return new Promise((resolve, reject) => {
 
-        var uid =  window.Android.getUid();
+        var uid =  window.Android.getDeviceId();
         if (uid) {
             db.collection("Users").doc(uid).collection("Times").doc(series_id + "-" + season + '-' + episode).set({
                 time: time,

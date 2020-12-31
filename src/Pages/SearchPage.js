@@ -3,6 +3,7 @@ import { ButtonBase } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import getCollection from '../Database/getCollection'
 import SubAppBar from '../Components/SubAppBar'
+import '../CSS/Pages/Search.css'
 
 var filteredClass = null
 
@@ -41,13 +42,13 @@ export class SearchPage extends Component {
                     />
                 </div>
 
-                <div style={{ display: "flex", flexWrap: "wrap", padding: "10px", justifyContent: 'space-evenly' }} >
+                <div className="grid-container" >
 
                     {
                         filteredClass &&
                         filteredClass.map(item => {
                             return (
-                                <div style={{ width: "fit-content", margin: "10px 0px" }} className="wrap w3-animate-opacity" >
+                                <div style={{margin:"10px 0px"}} className="wrap w3-animate-opacity" >
                                     <ButtonBase style={{ height: "100%" }}>
                                         <Link to={"/display/" + item.id}
                                             style={{ height: "100%" }}  >

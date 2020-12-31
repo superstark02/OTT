@@ -43,7 +43,7 @@ export class Anime extends Component {
     render() {
         return (
             <div>
-                <SubAppBar />
+                <SubAppBar  name='Anime'  />
                 {
                     this.state.data ? (
                         <MyList title="All" data={this.state.data[0]} filter={["Anime", "Series"]} />
