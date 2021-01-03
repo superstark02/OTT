@@ -3,6 +3,8 @@ import SubAppBar from '../../Components/SubAppBar'
 import { useParams } from 'react-router-dom'
 import { getLatest, getByWord } from '../../Database/getCollectionQuery'
 import aamirphoto from '../../Images/aamir.jpg'
+import ak from '../../Images/ayusmank.jpg'
+import ssr from '../../Images/ssr.jpg'
 import MyList from '../../Components/MyList';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -29,7 +31,7 @@ class Adapter extends Component {
             this.setState({ ssr: result })
         })
 
-        getByWord('Index', 'Ayushman Khurana').then(result => {
+        getByWord('Index', 'Ayushmann Khurrana').then(result => {
             this.setState({ ak: result })
         })
 
@@ -42,7 +44,7 @@ class Adapter extends Component {
                     <SubAppBar name={this.props.id} />
                     {
                         this.state.latest ? (
-                            <MyList title="Bollywood Popular" data={this.state.latest} filter={['Movie', 'Hollywood']} />
+                            <MyList title="Bollywood Popular" data={this.state.latest} filter={['Movie', 'Bollywood']} />
                         ) : (
                                 <div></div>
                             )
@@ -52,7 +54,7 @@ class Adapter extends Component {
                             <div>
                                 <div style={{ display: "flex" }} >
                                     <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
-                                        <img src={aamirphoto} width="50px" style={{ borderRadius: "2px" }} />
+                                        <img alt="i" src={aamirphoto} width="50px" style={{ borderRadius: "2px" }} />
                                     </div>
                                     <div>
                                         <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
@@ -71,22 +73,54 @@ class Adapter extends Component {
                     }
                     {
                         this.state.ssr ? (
-                            <MyList title="Sushant Singh Rajput" data={this.state.ssr} filter='Sushant Singh Rajput' />
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img alt="i" src={ssr} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Sushant Singh Rajput
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList title="" data={this.state.ssr} filter='Sushant Singh Rajput' />
+                            </div>
                         ) : (
                                 <div></div>
                             )
                     }
                     {
                         this.state.ak ? (
-                            <MyList title="Ayushman Khurana" data={this.state.ak} filter='Ayushman Khurana' />
+                            <div>
+                                <div style={{ display: "flex" }} >
+                                    <div style={{ marginLeft: "20px", marginRight: "-10px" }} >
+                                        <img alt="i" src={ak} width="50px" style={{ borderRadius: "2px" }} />
+                                    </div>
+                                    <div>
+                                        <div style={{ color: "grey", margin: "0px 20px", fontSize: "25px" }} >
+                                            Movies By
+                                        </div>
+                                        <div className="h7" >
+                                            Ayushman Khurana
+                                        </div>
+                                    </div>
+                                </div>
+                                <MyList title="" data={this.state.ak} filter='Ayushman Khurana' />
+                            </div>
                         ) : (
                                 <div></div>
                             )
                     }
                     {/*<MyList title="Drama" data={this.state.data[1]}  filter='Drama' />
                     <MyList title="Action" data={this.state.data[3]} filter='Action' />*/}
-                    <div className="wrap" style={{color:"grey"}} >
-                        We are working for more content.
+                    <div className="wrap" style={{ color: "grey", marginBottom: "20px" }} >
+                        <p>
+                            We are working for more content.
+                        </p>
                     </div>
                 </div>
             )

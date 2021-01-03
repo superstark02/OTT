@@ -18,6 +18,7 @@ import Bollywood from './Pages/Categories/Bollywood';
 import Categories from './Pages/Categories';
 import ShowCategory from './Pages/ShowCategory';
 import WatchLater from './Pages/WatchLater';
+import Plans from './Pages/MyPlans';
 
 const screenStyle = {
   backgroundColor: theme.palette.primary.dark,
@@ -55,6 +56,7 @@ function App() {
           <Route exact path='/feedback' component={Feedback} />
           <Route exact path='/sign-in' component={Signin} />
           <Route exact path='/watch-later' component={WatchLater} />
+          <Route exact path='/plans' component={Plans} />
         </Switch>
       </Router>
     </div>

@@ -47,6 +47,7 @@ export class Feedback extends Component {
                             <textarea name="message" required placeholder="Type your feedback here.." />
                         </div>
                         <div>
+                            <input type="hidden" name="type" style={{ backgroundColor: "white", color: "black" }} value="Feedback" />
                             <input type="submit" style={{ backgroundColor: "white", color: "black" }} value="Send" />
                         </div>
                     </form>

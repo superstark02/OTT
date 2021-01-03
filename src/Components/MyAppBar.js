@@ -16,6 +16,7 @@ import RestoreRoundedIcon from '@material-ui/icons/RestoreRounded';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import PowerSettingsNewRoundedIcon from '@material-ui/icons/PowerSettingsNewRounded';
 import FolderSpecialRoundedIcon from '@material-ui/icons/FolderSpecialRounded';
+import WidgetsRoundedIcon from '@material-ui/icons/WidgetsRounded';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -83,7 +84,9 @@ export default function MyAppBar(props) {
                         )
                 }
                 {[
-                    { name: 'Watch Later', icon: <RestoreRoundedIcon />, to:"/watch-later" }, { name: 'Categories', icon: <FolderSpecialRoundedIcon />, to:"/category" }].map((text, index) => (
+                    { name: 'Watch Later', icon: <RestoreRoundedIcon />, to:"/watch-later" }, 
+                    { name: 'Categories', icon: <FolderSpecialRoundedIcon />, to:"/category" },
+                    { name: 'Plans', icon: <WidgetsRoundedIcon />, to:"/plans" }].map((text, index) => (
                         <Link to={text.to} >
                             <ListItem button key={text}>
                                 <ListItemIcon>{text.icon}</ListItemIcon>

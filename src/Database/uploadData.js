@@ -12,7 +12,7 @@ export function uploadData() {
             name: "Article 15",
             country: "India",
             app: "",
-            poster: "",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FArticle15%2Fa15.jpg?alt=media&token=1e2c8339-a852-436f-bbbc-e318188f4ce6",
             year: "2019",
             keywords: ["Movie", "Bollywood", "Crime", "Drama", "Ayushmann Khurrana"],
             genre: "Crime/Drama",
@@ -27,7 +27,7 @@ export function uploadData() {
             name: "Badhaai ho",
             country: "India",
             app: "",
-            poster: "",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FBadhaiho%2Fbh.jpg?alt=media&token=b55facdd-617a-458f-9a4f-fbb3f344f4fd",
             year: "2018",
             keywords: ["Movie", "Bollywood", "Comedy", "Drama", "Ayushmann Khurrana"],
             genre: "Drama/Comedy",
@@ -38,35 +38,50 @@ export function uploadData() {
             trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FBadhaiho%2F%E2%80%98Badhaai%20Ho%E2%80%99%20Official%20Trailer%20_%20Ayushmann%20Khurrana%2C%20Sanya%20Malhotra%20_%20Director%20Amit%20Sharma.mp4?alt=media&token=7bcbe441-f2d3-4e8f-8d8f-19209b44f5ad"
         },
         {
-            id: "detectivebyomkeshbakshy!",
+            id: "detectivebyomkeshbakshy",
             name: "Detective Byomkesh Bakshy!",
             country: "India",
             app: "",
-            poster: "",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FDetective%20Byomkesh%20Bakshy%2Fdbb.jpg?alt=media&token=17281665-b886-4c28-a393-b8046da55a60",
             year: "2015",
-            keywords: ["Movie", "Bollywood", "Mystery", "Bollywood"],
+            keywords: ["Movie", "Bollywood", "Mystery", "Bollywood", "Sushant Singh Rajput", "Crime"],
             genre: "Mystery/Bollywood",
             leng: "2h 19m",
             rate: "0",
             season: 0,
             description: "Byomkesh, fresh out of college, agrees to investigate the disappearance of Bhuvan, a chemist. Assisted by Bhuvan's son Ajit, Byomkesh links the case to a larger conspiracy that will unsettle Calcutta.",
-            trailer:""
+            trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FDetective%20Byomkesh%20Bakshy%2FDetective%20Byomkesh%20Bakshy%20_%20Official%20Trailer%20_%20Sushant%20Singh%20Rajput%20(1).mp4?alt=media&token=179a48f3-efa2-4cac-85c0-64205b3b3bec"
         },
         {
-            id: "article15",
-            name: "Article 15",
+            id: "kaipoche",
+            name: "Kai Po Che!",
             country: "India",
             app: "",
-            poster: "",
-            year: "2019",
-            keywords: ["Movie", "Bollywood", "Crime", "Drama"],
-            genre: "Crime/Drama",
-            leng: "2h 20m",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FKaiPoChe%2Fkpc.jpg?alt=media&token=b4931426-7d1d-4e8d-8094-7e4b1087fca2",
+            year: "2013",
+            keywords: ["Movie", "Bollywood", "Sport", "Drama", "Sushant Singh Rajput"],
+            genre: "Sport/Drama",
+            leng: "2h 10m",
             rate: "0",
             season: 0,
-            description: "",
-            trailer:""
+            description: "Three friends start an academy to train aspiring cricketers. But before they realise their goals, they experience an earthquake, an unstable political situation and communal riots.",
+            trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FKaiPoChe%2Fkpc.mp4?alt=media&token=3abfbfec-4a30-4984-b222-be1377e42267"
         },
+        {
+            id: "tarezameenpar",
+            name: "Tare Zameen Par",
+            country: "India",
+            app: "",
+            poster: "https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FTareZameenPar%2Ftzp.jpg?alt=media&token=b91654c8-a9b6-4715-9ea7-bbfaa22bea32",
+            year: "2007",
+            keywords: ["Movie", "Bollywood", "Drama", "Musical", "Aamir Khan"],
+            genre: "Drama/Musical",
+            leng: "2h 45m",
+            rate: "0",
+            season: 0,
+            description: "Ishaan is criticised by his parents for his poor academic performance and is sent away to a boarding school. Ram, an art teacher, however, realises he has dyslexia and helps him uncover his potential.",
+            trailer:"https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/Bollywood%2FMovies%2FTareZameenPar%2Ftzp.mp4?alt=media&token=bacfa227-5cb2-4c65-8ff8-fc508788958c"
+        }
         
     ]
 
@@ -92,7 +107,7 @@ export function uploadData() {
     ]
 
 
-    /*for (i = 0; i < data.length; i++) {
+    for (i = 0; i < data.length; i++) {
         db.collection("Content").doc(data[i].id)
             .set({
                 id: data[i].id,
@@ -126,15 +141,15 @@ export function uploadData() {
             }).catch(error => {
                 console.log(error)
             })
-    }*/
+    }
 
-    for (i = 0; i < data.length; i++) {
+    /*for (i = 0; i < data.length; i++) {
         db.collection("Content").doc(data[i].id).collection('Season-1').doc('episode-01').set({
             content: "",
         }).then(e=>{
             console.log("Done")
         })
-    }
+    }*/
 
     /*for (i = 0; i < episodes.length; i++) {
         var temp

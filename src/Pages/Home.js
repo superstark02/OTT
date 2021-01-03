@@ -10,9 +10,12 @@ import axios from 'axios';
 import Loader from 'react-loader-spinner'
 import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
-import getSubCollection from '../Database/getSubCollection'
+import { getWatching } from '../Database/getSubCollection'
+import "../CSS/Pages/Home.css"
+import { ButtonBase } from '@material-ui/core';
+import {Link} from 'react-router-dom'
 
-//  const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
+//const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
 export class Home extends Component {
 
@@ -32,7 +35,7 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        if (window.Android.getDeviceId()) {
+        if(window.Android.getDeviceId()) {
             /*this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
@@ -41,7 +44,7 @@ export class Home extends Component {
         }
 
         if( window.Android.getDeviceId()){
-            getSubCollection("Users", window.Android.getDeviceId(), 'Watching').then(result=>{
+            getWatching("Users", window.Android.getDeviceId(), 'Watching').then(result=>{
                 this.setState({ continue: result })
             })
         }
@@ -50,7 +53,7 @@ export class Home extends Component {
             this.setState({ data: result.data })
         })
 
-               
+
     }
 
     render() {
@@ -68,6 +71,19 @@ export class Home extends Component {
                                 <div></div>
                             )
                     }
+
+                    <Link to="/plans" >
+                        <ButtonBase className="wrap" style={{ padding: "0px 10px", margin: "20px 0px" }} >
+                            <div className="plans-button" >
+                                <div style={{ fontSize: "20px" }} >
+                                    NETFLIX FOR &#8377;10
+                                    </div>
+                                    <div>
+                                    Get affordable subscriptions
+                                    </div>
+                                </div>
+                        </ButtonBase>
+                    </Link>
 
                     <MyList title="Best In Comedy" filter='Comedy' data={this.state.data[0]} />
                     <MyList title="Kick-Ass Action" filter='Action' data={this.state.data[1]} />

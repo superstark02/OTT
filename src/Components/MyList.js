@@ -26,6 +26,8 @@ export class MyList extends Component {
                 } else {
                     this.setState({ nomore: true })
                 }
+            }).catch(e=>{
+                this.setState({ nomore: true })
             })
         } else if (this.props.filter.length === 2) {
             getCustomQueryNext('Index', this.state.data[this.state.data.length - 1].year, this.props.filter).then(result => {
@@ -38,6 +40,8 @@ export class MyList extends Component {
                 } else {
                     this.setState({ nomore: true })
                 }
+            }).catch(e=>{
+                this.setState({ nomore: true })
             })
         }
     }
