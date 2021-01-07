@@ -19,6 +19,7 @@ import Categories from './Pages/Categories';
 import ShowCategory from './Pages/ShowCategory';
 import WatchLater from './Pages/WatchLater';
 import Plans from './Pages/MyPlans';
+import CrossPlatform from './Pages/CrossPlatform';
 
 const screenStyle = {
   backgroundColor: theme.palette.primary.dark,
@@ -39,6 +40,7 @@ function App() {
           <Route exact path='/play/:id/:season/:episode' component={PlayScreen} />
 
           <Route exact path='/discover' component={Discover} />
+          <Route exact path='/cross-platform' component={CrossPlatform} />
           <Route exact path='/anime' component={Anime} />
           <Route exact path='/series' component={Series} />
           <Route exact path='/short-films' component={ShortFilms} />

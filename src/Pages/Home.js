@@ -14,6 +14,7 @@ import { getWatching } from '../Database/getSubCollection'
 import "../CSS/Pages/Home.css"
 import { ButtonBase } from '@material-ui/core';
 import {Link} from 'react-router-dom'
+import BottomNavBar from '../Components/BottomNavBar';
 
 //const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
@@ -35,11 +36,11 @@ export class Home extends Component {
 
     componentDidMount() {
 
-        if(window.Android.getDeviceId()) {
-            /*this.setState({ uid: window.Android.getUid() })
+        /*if(window.Android.getDeviceId()) {
+            this.setState({ uid: window.Android.getUid() })
             this.setState({ email: window.Android.getEmail() })
             this.setState({ name: window.Android.getName() })
-            this.setState({ photo: window.Android.getPhoto() })*/
+            this.setState({ photo: window.Android.getPhoto() })
             updateUser(window.Android.getDeviceId());
         }
 
@@ -47,7 +48,7 @@ export class Home extends Component {
             getWatching("Users", window.Android.getDeviceId(), 'Watching').then(result=>{
                 this.setState({ continue: result })
             })
-        }
+        }*/
 
         axios.get("https://us-central1-project-ott-d883c.cloudfunctions.net/widgets").then(result => {
             this.setState({ data: result.data })
@@ -112,7 +113,7 @@ export class Home extends Component {
                         color={theme.palette.primary.light}
                         height={50}
                         width={50}
-                        timeout={10000} //3 secs
+                        timeout={100000} //3 secs
                     />
                 </div>
             )

@@ -184,7 +184,7 @@ export class Plans extends Component {
                         </div>
                     </div>
                     <div style={{ padding: "30px 0px", textAlign: "center", color: "grey" }} >
-                        Happy Binge Watching!!!
+                        <a href="https://www.hotstar.com/in/tv/triples/1260048875" >Happy Binge Watching!!!</a>
                     </div>
                 </div>
             </div>
