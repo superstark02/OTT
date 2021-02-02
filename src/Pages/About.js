@@ -41,7 +41,7 @@ export class About extends Component {
                         Optimized content to reduce complexity and delay in accessing content.
                     </p>
                     <div className="wrap" >
-                        <img alt="i" src="https://mymosaic.in/static/media/search.56b1f1e3.png" style={{ filter: "drop-shadow(0px 10px 10px rgba(0,0,0,0.2))", borderRadius: "10px", marginBottom:"30px" }} width="70%" />
+                        <img alt="i" src="https://5.imimg.com/data5/AZ/ZI/MM/SELLER-48457887/magnifying-glass-available-in-100mm-90mm-75mm-63mm-sizes--250x250.jpg" style={{ borderRadius: "10px", marginBottom:"30px" }} width="40%" />
                     </div>
 
                     <h4>

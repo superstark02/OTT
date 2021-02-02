@@ -20,6 +20,8 @@ import ShowCategory from './Pages/ShowCategory';
 import WatchLater from './Pages/WatchLater';
 import Plans from './Pages/MyPlans';
 import CrossPlatform from './Pages/CrossPlatform';
+import Temp from './Pages/Temp';
+import Wrapper from './Pages/Wrapper';
 
 const screenStyle = {
   backgroundColor: theme.palette.primary.dark,
@@ -34,7 +36,7 @@ function App() {
     <div style={screenStyle} >
       <Router >
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Wrapper} />
 
           <Route exact path='/display/:id' component={Display} />
           <Route exact path='/play/:id/:season/:episode' component={PlayScreen} />
@@ -59,6 +61,7 @@ function App() {
           <Route exact path='/sign-in' component={Signin} />
           <Route exact path='/watch-later' component={WatchLater} />
           <Route exact path='/plans' component={Plans} />
+          <Route exact path='/temp' component={Temp} />
         </Switch>
       </Router>
     </div>

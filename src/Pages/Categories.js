@@ -55,9 +55,10 @@ export class Categories extends Component {
                                                     style={{
                                                         backgroundImage: "url(" + item.image + ")",
                                                         height: "35vw", width: "40vw",
-                                                        textTransform: "uppercase"
+                                                        textTransform: "uppercase",
+                                                        padding:"0px"
                                                     }} >
-                                                    <div className="wrap" style={{height: "35vw", width: "40vw",backgroundColor:"rgba(0,0,0,0.3)"}} >
+                                                    <div className="wrap" style={{height: "100%", width: "100%",backgroundColor:"rgba(0,0,0,0.3)"}} >
                                                         {item.name}
                                                     </div>
                                                 </div>

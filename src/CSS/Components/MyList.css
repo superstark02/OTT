@@ -16,6 +16,10 @@
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5) ;
     background-size: cover;
     background-position: center;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px;
+    align-items: flex-end;
 }
 
 .logo{

@@ -70,8 +70,8 @@ export class MyList extends Component {
                                                 <ButtonBase className="w3-animate-opacity" style={{ height: "100%", marginRight: "20px" }}>
                                                     <Link to={"/display/" + item.id}
                                                         style={{ height: "100%" }}  >
-                                                        <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
-
+                                                        <div className="list-item" style={{ backgroundImage: "url(" + item.poster + ")" }} >
+                                                            <img width="20px" src={item.app} />
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>

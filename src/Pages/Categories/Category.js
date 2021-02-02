@@ -5,7 +5,6 @@ import getCollectionQuery, { getByWord, getLatest } from '../../Database/getColl
 import MyList from '../../Components/MyList';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import axios from 'axios';
 import rdj from "../../Images/rdj.jpg"
 import mr from "../../Images/mr.jpg"
 import tc from "../../Images/tc.jpg"

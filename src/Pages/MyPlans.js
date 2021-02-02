@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import SubAppBar from '../Components/SubAppBar'
 import emailjs from 'emailjs-com';
 import '../CSS/Pages/MyPlans.css'
+import { Button } from '@material-ui/core';
+import { theme } from '../Theme/Theme';
+import { WhatsApp } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const nicon = "https://spng.pngfind.com/pngs/s/55-550764_netflix-n-logo-logo-n-de-netflix-hd.png"
 const picon = "https://www.mediaplaynews.com/wp-content/uploads/2018/04/Prime-Video-Stacked.jpg"
@@ -47,7 +51,6 @@ export class Plans extends Component {
     render() {
         return (
             <div>
-                <SubAppBar />
                 <div className="w3-animate-bottom"  >
                     <h2 style={{ padding: "0px 20px" }}>
                         Plans
@@ -84,8 +87,15 @@ export class Plans extends Component {
                                 )
                         }
                         <p>
-                            Or Contact Us through WhatsApp (+91 99101 97 196)
+                            Or Contact Us through WhatsApp ( +91 99101 97196 )
                         </p>
+                        {/*<div className="wrap" style={{ margin: "20px 0px" }} >
+                            <div>
+                                <a href="https://wa.me/919910197196" >
+                                    <input type="submit" value="WhatsApp Us" className="wrap" style={{backgroundColor:theme.palette.primary.light, color:theme.palette.primary.dark,width:"100%"}} />
+                                </a>
+                            </div>
+                        </div>*/}
                     </div>
                     <div className="wrap" >
                         <table className="plans-table" cellSpacing="0" >
@@ -184,7 +194,7 @@ export class Plans extends Component {
                         </div>
                     </div>
                     <div style={{ padding: "30px 0px", textAlign: "center", color: "grey" }} >
-                        <a href="https://www.hotstar.com/in/tv/triples/1260048875" >Happy Binge Watching!!!</a>
+                        <Link to="/temp" >Happy Binge Watching!!!</Link>
                     </div>
                 </div>
             </div>

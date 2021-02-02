@@ -69,7 +69,7 @@ export default function MyAppBar(props) {
                             <div></div>
                         )
                 }
-                {
+                {/*
                     !props.uid ? (
                         <div onClick={() => {
                             window.Android.signin();
@@ -82,8 +82,8 @@ export default function MyAppBar(props) {
                     ) : (
                             <div></div>
                         )
-                }
-                {[
+                */}
+                {/*[
                     { name: 'Watch Later', icon: <RestoreRoundedIcon />, to:"/watch-later" }, 
                     { name: 'Categories', icon: <FolderSpecialRoundedIcon />, to:"/category" },
                     { name: 'Plans', icon: <WidgetsRoundedIcon />, to:"/plans" }].map((text, index) => (
@@ -107,9 +107,9 @@ export default function MyAppBar(props) {
                     ) : (
                             <div></div>
                         )
-                }
+                    */}
             </List>
-            <Divider />
+
             <List>
                 {[{ name: 'About', icon: <InfoRounded />, to: "/about" }, { name: "Help", icon: <Help />, to: "/help" },
                 { name: "Feedback", icon: <CommentRounded />, to: "/feedback" }].map((text, index) => (
@@ -145,7 +145,7 @@ export default function MyAppBar(props) {
                         MOSAIC
                     </Typography>
 
-                    <Link to="/search" style={{ color: "inherit" }} >
+                        <Link to="/search" style={{ color: "inherit" }} >
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
