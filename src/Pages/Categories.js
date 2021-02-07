@@ -6,8 +6,11 @@ import action from '../Images/Genres/action.jpg'
 import comedy from '../Images/Genres/comdey.jpg'
 import romance from '../Images/Genres/romance.png'
 import drama from '../Images/Genres/drama.jpg'
-import fantasy from '../Images/Genres/fantasy.jpg'
+import fantasy from '../Images/Genres/fantasy.png'
 import adventure from '../Images/Genres/adventure.jpg'
+import MyList from '../Components/MyList'
+import { getByWord } from '../Database/getCollectionQuery'
+import Footer from '../Components/Footer'
 
 const genres = [
     {
@@ -37,6 +40,32 @@ const genres = [
 ]
 
 export class Categories extends Component {
+
+    state = {
+        data: null,
+        drama: null,
+        action: null,
+        romance: null
+    }
+
+    componentDidMount(){
+        getByWord("Index", "Comedy").then(snap=>{
+            this.setState({data:snap})
+        })
+
+        getByWord("Index", "Drama").then(snap=>{
+            this.setState({drama:snap})
+        })
+
+        getByWord("Index", "Action").then(snap=>{
+            this.setState({action:snap})
+        })
+
+        getByWord("Index", "Action").then(snap=>{
+            this.setState({romance:snap})
+        })
+    }
+
     render() {
         return (
             <div>
@@ -69,12 +98,20 @@ export class Categories extends Component {
                             })
                         }
                     </div>
-                    <div style={{padding:"20px", color:"grey", textAlign:"center"}} className="wrap" >
-                        Want more genre, shows, and movies? Don't worry, we are working day and night, arranging more 
-                        content to ensure that you
-                        enjoy your binge watching to the fullest.
-                    </div>
+                    {
+                        this.state.data && this.state.drama && this.state.action && this.state.romance ? (
+                            <div>
+                                <MyList title="Comedy" filter='Comedy' data={this.state.data} />
+                                <MyList title="Action" filter='Action' data={this.state.action} />
+                                <MyList title="Drama" filter='Drama' data={this.state.drama} />
+                                <MyList title="Romance" filter='Romance' data={this.state.romance} />
+                            </div>
+                        ) : (
+                            <div></div>
+                        )
+                    }
                 </div>
+                <Footer/>
             </div>
         )
     }

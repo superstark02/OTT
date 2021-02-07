@@ -12,6 +12,7 @@ import { theme } from '../Theme/Theme';
 import Home from '../Pages/Home';
 import Categories from '../Pages/Categories';
 import Apps from '../Pages/Apps';
+import Temp from '../Pages/Temp copy';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -126,7 +127,7 @@ export default function BottomNavBar(props) {
         <Categories />
       </TabPanel>
       <TabPanel value={value} index={3}>
-
+        <Temp/>
       </TabPanel>
     </div>
   );

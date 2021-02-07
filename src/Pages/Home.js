@@ -5,17 +5,10 @@ import { theme } from '../Theme/Theme'
 //import { uploadData } from '../Database/uploadData';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import MyList from '../Components/MyList';
-import axios from 'axios';
 import Loader from 'react-loader-spinner'
 import { getByWord } from '../Database/getCollectionQuery'
-import { updateUser } from "../Database/logIn"
 import ContinueWatching from '../Components/ContinueWatching';
-import { getWatching } from '../Database/getSubCollection'
 import "../CSS/Pages/Home.css"
-import { ButtonBase } from '@material-ui/core';
-import { Link } from 'react-router-dom'
-import MyPlans from './MyPlans'
-import BottomNavBar from '../Components/BottomNavBar';
 
 //const list = ["Comedy", "Action", "Drama", "Romance", "Adventure", "Family", "Animated"]
 
@@ -28,11 +21,6 @@ export class Home extends Component {
         email: null,
         name: null,
         photo: null
-    }
-
-    constructor() {
-        super();
-        //uploadData();
     }
 
     componentDidMount() {

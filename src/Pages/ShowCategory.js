@@ -16,7 +16,7 @@ export class ShowCategory extends Component {
     render() {
         return (
             <div>
-                <SubAppBar />
+                <SubAppBar name={this.props.match.params.id} />
                 <div style={{ display: "flex", flexWrap: "wrap", padding: "10px", justifyContent: 'space-evenly' }} >
 
                     {
@@ -27,8 +27,8 @@ export class ShowCategory extends Component {
                                     <ButtonBase style={{ height: "100%" }}>
                                         <Link to={"/display/" + item.id}
                                             style={{ height: "100%" }}  >
-                                            <div className="list-item wrap" style={{ backgroundImage: "url(" + item.poster + ")" }} >
-
+                                            <div className="list-item" style={{ backgroundImage: "url(" + item.poster + ")" }} >
+                                                <img width="30px" src={item.app} />
                                             </div>
                                         </Link>
                                     </ButtonBase>

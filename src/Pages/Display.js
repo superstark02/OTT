@@ -15,6 +15,7 @@ import Cast from '../Components/Cast';
 import MyList from '../Components/MyList'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { addSubDoc } from '../Database/addDoc'
+import { getByWord } from '../Database/getCollectionQuery'
 
 export class Adapter extends Component {
 
@@ -39,10 +40,8 @@ export class Adapter extends Component {
         getDoc("Content", this.props.id).then(result => {
             this.setState({ show: result })
 
-            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/get-related', { //get-doc
-                filter: 'Hollywood'
-            }).then(snap => {
-                this.setState({ related: snap.data })
+            getByWord("Index", "Movie").then(snap=>{
+                this.setState({related:snap})
             })
         })
     }
@@ -65,7 +64,7 @@ export class Adapter extends Component {
             addSubDoc("Users", window.Android.getDeviceId(), 'Watchlist', this.state.show.id, {
                 poster: this.state.show.poster,
                 id: this.state.show.id
-            }).then(e=>{
+            }).then(e => {
                 this.setState({ message: "Successfully Added" })
             })
         }
@@ -183,6 +182,27 @@ export class Adapter extends Component {
                                 {this.state.message}
                             </p>
 
+                            <div className="ott-rent" >
+                                <img alt="i" src={this.state.show.app} width="60px" style={{ borderRadius: "5px", marginRight: "5px" }} ></img>
+                                <div>
+                                    <div className="display-type" >
+                                        Available On VOOT
+                                    </div>
+                                    <div>
+                                        Rent For A Day
+                                    </div>
+                                    <div className="rate" >
+                                        &#8377;20
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="wrap" >
+                                <Button className="wrap" onClick={this.addWatchList} style={{ backgroundColor: theme.palette.primary.light, color: theme.palette.primary.dark, width: "80%" }} >
+                                    RENT
+                                </Button>
+                            </div>
+
                             <div style={{ padding: '20px', textAlign: "center" }} className="display-type" >
                                 {this.state.show.description}
                             </div>
@@ -217,7 +237,7 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
-                            
+
                         </div>
                     ) : (
                             <div className="wrap" style={{ minHeight: "90vh" }} >

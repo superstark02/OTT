@@ -65,3 +65,15 @@
     padding: 10px 30px;
     background-image: linear-gradient(to bottom right, #07B001, #ADF28D);;
 }
+
+.ott-rent{
+    display: flex;
+    padding: 0px 40px;
+    padding-bottom: 25px;
+}
+
+.rate{
+    width: fit-content;
+    border-radius: 2px;
+    color: white;
+}

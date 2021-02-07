@@ -71,7 +71,7 @@ export class MyList extends Component {
                                                     <Link to={"/display/" + item.id}
                                                         style={{ height: "100%" }}  >
                                                         <div className="list-item" style={{ backgroundImage: "url(" + item.poster + ")" }} >
-                                                            <img width="20px" src={item.app} />
+                                                            <img alt="i" width="20px" src={item.app} />
                                                         </div>
                                                     </Link>
                                                 </ButtonBase>

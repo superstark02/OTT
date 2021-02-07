@@ -22,6 +22,7 @@ import Plans from './Pages/MyPlans';
 import CrossPlatform from './Pages/CrossPlatform';
 import Temp from './Pages/Temp';
 import Wrapper from './Pages/Wrapper';
+import AppDisplay from './Pages/AppDisplay';
 
 const screenStyle = {
   backgroundColor: theme.palette.primary.dark,
@@ -46,6 +47,7 @@ function App() {
           <Route exact path='/anime' component={Anime} />
           <Route exact path='/series' component={Series} />
           <Route exact path='/short-films' component={ShortFilms} />
+          <Route exact path='/app/:id' component={AppDisplay} />
 
           <Route exact path='/category' component={Categories} />
           <Route exact path='/category/Hollywood' component={Category} />
