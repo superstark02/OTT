@@ -10,19 +10,19 @@ import Carousel from 'react-bootstrap/Carousel'
 
 const images = [
     {
-        image: ww,
+        image: "https://static.abplive.com/wp-content/uploads/sites/2/2021/01/07142145/kaagaz.jpg",
         link: "/display/wonderwoman1984"
     },
     {
-        image: sg2,
+        image: "https://assets.thehansindia.com/h-upload/2020/10/02/1002913-khaali-peeli-movie-review.webp",
         link: "/display/sacredgames"
     },
     {
-        image: thejudge,
+        image: "https://m.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/11/27/Pictures/_919e3394-d34b-11e7-a032-ea4e291afd66.jpg",
         link: "/display/thejudge"
     },
     {
-        image: u,
+        image: "https://www.thenewsminute.com/sites/default/files/styles/news_detail/public/KGF-chapter2.jpg?itok=wpYqmIzZ",
         link: "/display/6underground"
     },
 ]
@@ -43,8 +43,8 @@ export function MyCarousel() {
                         images.map(item => {
                             return (
                                 <Link to={item.link} >
-                                    <div className="wrap" style={{ paddingBottom: "20px" }} >
-                                        <img alt="i" src={item.image} width="100%" style={{ borderRadius: "5px", boxShadow: "0px 10px 20px rgba(0,0,0,0.5) " }} />
+                                    <div className="wrap" style={{ paddingBottom: "20px", backgroundImage:item.image, backgroundSize:"cover", backgroundPosition:"center" }} >
+                                        
                                     </div>
                                 </Link>
                             )

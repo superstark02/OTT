@@ -129,7 +129,16 @@ export function uploadData() {
 }
 
 
-
+export function temp(){
+    db.collection("Content").get().then(snap=>{
+        snap.forEach(doc=>{
+            if(doc.data().app==="https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2Fzee5.png?alt=media&token=1d42762f-4b58-4da3-9418-72fa6383a83d"){
+                db.collection("Content").doc(doc.id).update({appName:"ZEE 5"})
+                console.log(doc.id)
+            }
+        })
+    })
+}
 
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MyCarousel from '../Components/Carousel';
 import Categories from '../Components/Categories';
 import { theme } from '../Theme/Theme'
-//import { uploadData } from '../Database/uploadData';
+import { temp } from '../Database/uploadData';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import MyList from '../Components/MyList';
 import Loader from 'react-loader-spinner'
@@ -47,6 +47,7 @@ export class Home extends Component {
         getByWord("Index", "Comedy").then(snap=>{
             this.setState({data:snap})
         })
+        //temp();
 
     }
 
@@ -87,11 +88,10 @@ export class Home extends Component {
                     <MyList title="Best In Comedy" filter='Comedy' data={this.state.data} />
                     <div style={{ color: "grey" }} >
                         <div className="h7" >
-                            Sorry, App Under Development
+                            Note : Demo App 1.3
                         </div>
                         <p style={{ padding: "20px" }} >
-                            Stay tuned on the app for latest and entertaining content. If you think that we are short in content, we apologise.
-                            For more content please rate and share the app.
+                            This is not a full representation of the app. Images and logo are not owned by MOSAIC.  
                         </p>
                     </div>
                     <div style={{ height: "60px" }} >

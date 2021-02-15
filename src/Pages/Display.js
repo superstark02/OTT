@@ -10,12 +10,11 @@ import { useParams } from 'react-router-dom'
 import getDoc from "../Database/getDoc"
 import { Link } from "react-router-dom";
 import SeasonTabs from '../Components/SeasonTabs'
-import axios from 'axios'
 import Cast from '../Components/Cast';
-import MyList from '../Components/MyList'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { addSubDoc } from '../Database/addDoc'
 import { getByWord } from '../Database/getCollectionQuery'
+import Related from '../Components/Related'
 
 export class Adapter extends Component {
 
@@ -27,7 +26,8 @@ export class Adapter extends Component {
         seasons: null,
         link: null,
         open: null,
-        message: ""
+        message: "",
+        app: null
     }
 
     findRelated = (industry, platform, genre) => {
@@ -40,8 +40,12 @@ export class Adapter extends Component {
         getDoc("Content", this.props.id).then(result => {
             this.setState({ show: result })
 
-            getByWord("Index", "Movie").then(snap=>{
-                this.setState({related:snap})
+            getByWord("Index", "Movie").then(snap => {
+                this.setState({ related: snap })
+            })
+
+            getDoc("Apps", result.appName).then(snap => {
+                this.setState({ app: snap })
             })
         })
     }
@@ -105,7 +109,7 @@ export class Adapter extends Component {
                                     muted={this.state.mute}
                                     style={{ height: "100%" }}
                                     className="cover-image">
-                                    <source src={this.state.show.trailer} className="cover-image" />
+                                    <source src="https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FTrailer.mp4?alt=media&token=99b2a070-7249-4e9e-aa4f-b38665721851" className="cover-image" />
                                 </video>
                             </div>
                             <div className="wrap" style={{ marginBottom: "30px" }} >
@@ -186,7 +190,7 @@ export class Adapter extends Component {
                                 <img alt="i" src={this.state.show.app} width="60px" style={{ borderRadius: "5px", marginRight: "5px" }} ></img>
                                 <div>
                                     <div className="display-type" >
-                                        Available On VOOT
+                                        Available On {this.state.show.appName}
                                     </div>
                                     <div>
                                         Rent For A Day
@@ -198,7 +202,7 @@ export class Adapter extends Component {
                             </div>
 
                             <div className="wrap" >
-                                <Button className="wrap" onClick={this.addWatchList} style={{ backgroundColor: theme.palette.primary.light, color: theme.palette.primary.dark, width: "80%" }} >
+                                <Button className="wrap" style={{ backgroundColor: theme.palette.primary.light, color: theme.palette.primary.dark, width: "80%" }} >
                                     RENT
                                 </Button>
                             </div>
@@ -225,13 +229,47 @@ export class Adapter extends Component {
                                         <div></div>
                                     )
                             }
+
+                            {
+                                this.state.app ? (
+                                    <div style={{ backgroundColor: "black", padding: "20px", marginBottom: "20px" }} >
+                                        <div style={{ display: "flex" }} >
+                                            <div style={{ marginRight: "20px" }}>
+                                                <img src={this.state.app.image} width="100px" style={{ borderRadius: "10px" }} />
+                                            </div>
+                                            <div>
+                                                <div style={{ fontSize: "20px" }} >
+                                                    {this.state.app.name}
+                                                </div>
+                                                <div style={{ margin: "10px 0px" }} >
+                                                    <a href={this.state.app.ps} style={{ marginRight: "10px" }} >
+                                                        <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png" ></img>
+                                                    </a>
+                                                    <a href={this.state.app.as}>
+                                                        <img style={{ borderRadius: "10px" }} width="100px" src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred_2x.png" ></img>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    Plans: {this.state.app.plans}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="display-type" style={{ marginTop: "10px" }} >
+                                            {this.state.app.description}
+                                        </div>
+                                    </div>
+                                ) : (
+                                        <div></div>
+                                    )
+                            }
                             {
                                 this.state.related ? (
                                     <div>
                                         <div className="h7" >
                                             Related
                                         </div>
-                                        <MyList data={this.state.related} filter='Hollywood' />
+                                        <Related data={this.state.related} filter='Bollywood' />
                                     </div>
                                 ) : (
                                         <div></div>
@@ -303,6 +341,7 @@ export class Adapter extends Component {
                             )
                     }
                 </Dialog>*/}
+
             </div>
         )
     }

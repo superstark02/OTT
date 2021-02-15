@@ -42,7 +42,7 @@ const apps2 = [
     },
     {
         image: "https://play-lh.googleusercontent.com/mNX-Fl-1cgwBzuF8m8YFcaF7GGNUQAl5gLtH7eJNrYSZHYnw1GIVgTXSQT5K7OEM_1aE",
-        link: "/app/YUPPTV"
+        link: "/app/YUPP TV"
     },
     {
         image: "https://static-s.aa-cdn.net/img/gp/20600004914162/qUBOlpmISAJAhgFQqjnCU27tm0sUDdj6vjdYpJ6vBi2e65gh7n0oWCivWuUasAmKga7s=s300",

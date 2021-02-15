@@ -17,6 +17,7 @@ import getDoc, { getTime } from "../Database/getDoc"
 import { Button } from '@material-ui/core'
 import { Link } from "react-router-dom";
 import getEpisode from '../Database/getEpisode'
+import Footer from '../Components/Footer'
 
 //import video from "../Videos/stone.mp4"
 //import subs from "../Videos/sub.vtt"
@@ -29,7 +30,7 @@ export class Adapter extends Component {
         show: null,
         related: null,
         seasons: null,
-        episode: null,
+        episode: "null",
         time: null,
         duration: null,
 
@@ -53,17 +54,6 @@ export class Adapter extends Component {
                 season: this.props.season,
                 poster: this.state.show.poster
             })
-        })*/
-
-        getDoc("Content", this.props.id).then(snap => {
-            this.setState({ show: snap });
-            axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
-                uid: window.Android.getDeviceId(),
-                series_id: this.props.id,
-                episode: this.props.episode,
-                season: this.props.season,
-                poster: this.state.show.poster
-            })
         })
 
         getTime(this.props.id, this.props.season, this.props.episode).then(snap=>{
@@ -74,6 +64,21 @@ export class Adapter extends Component {
                 this.setState({ episode: result })
             })
         })
+        
+        */
+
+        getDoc("Content", this.props.id).then(snap => {
+            this.setState({ show: snap });
+            /*axios.post('https://us-central1-project-ott-d883c.cloudfunctions.net/widgets/add-watching', {
+                uid: window.Android.getDeviceId(),
+                series_id: this.props.id,
+                episode: this.props.episode,
+                season: this.props.season,
+                poster: this.state.show.poster
+            })*/
+        })
+
+        
 
         this.setState({ episode_id: this.props.episode, season_id: this.props.season, show_id: this.props.id })
     }
@@ -96,7 +101,7 @@ export class Adapter extends Component {
     }
 
     componentCleanup = () => {
-        saveTime(this.state.time, this.state.show_id, this.state.season_id, this.state.episode_id).then(r => { })
+        //saveTime(this.state.time, this.state.show_id, this.state.season_id, this.state.episode_id).then(r => { })
     }
 
     componentWillUnmount() {
@@ -107,7 +112,7 @@ export class Adapter extends Component {
         return (
             <div style={{ color: theme.palette.primary.light }} >
                 {
-                    this.state.show && this.state.episode ? (
+                    this.state.show ? (
                         <div>
                             <div className="wrap" style={{ overflow: "hidden", paddingBottom: '30px' }} >
                                 <div className="mute">
@@ -126,8 +131,8 @@ export class Adapter extends Component {
                                     poster={poster}
                                     crossOrigin="anonymous"
                                     className="player" >
-                                    <track label="English" kind="captions" srcLang="en" default src={this.state.episode.sub} />
-                                    <source src={this.state.episode.content} type="video/mp4" />
+                                    {/*<track label="English" kind="captions" srcLang="en" default src={this.state.episode.sub} />*/}
+                                    <source src="https://firebasestorage.googleapis.com/v0/b/project-ott-d883c.appspot.com/o/AppData%2FMOVIE.mp4?alt=media&token=07a337b6-ef8c-424c-bb69-20057c06e3b7" type="video/mp4" />
                                 </video>
 
                                 {/*<Player poster={this.state.show.cover} >
@@ -230,7 +235,7 @@ export class Adapter extends Component {
                             </div>
                         )
                 }
-
+            <Footer/>
             </div>
         )
     }

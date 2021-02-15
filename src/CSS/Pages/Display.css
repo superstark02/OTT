@@ -77,3 +77,12 @@
     border-radius: 2px;
     color: white;
 }
+
+.rent-button{
+    flex-direction: column;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+    padding: 10px 30px;
+    background-image: linear-gradient(to bottom right, #07B001, #ADF28D);;
+}
